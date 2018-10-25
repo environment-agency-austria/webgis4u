@@ -1,0 +1,28 @@
+{
+  "name": "webgis4u",
+  "version": "0.0.1",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/**"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/environment-agency-austria/webgis4u.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/environment-agency-austria/webgis4u/issues"
+  },
+  "homepage": "https://github.com/environment-agency-austria/webgis4u#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.4.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-config-oceanjs": "^0.1.0",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1"
+  }
+}
