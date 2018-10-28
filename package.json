@@ -8,7 +8,8 @@
     "test:coverage": "jest --coverage",
     "start": "webpack --watch --mode development",
     "build": "webpack -p",
-    "lint": "eslint src/**"
+    "lint": "eslint src/**",
+    "prepublishOnly": "yarn build"
   },
   "repository": {
     "type": "git",
