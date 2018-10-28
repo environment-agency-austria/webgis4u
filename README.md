@@ -12,7 +12,7 @@ This is the boilerplate code for the upcoming webgis4u project. Please update th
     * [Visual Studio Code](https://code.visualstudio.com/)
     * [node.js](https://nodejs.org/en/) (LTS version is recommended)
     * [yarn](https://yarnpkg.com/lang/en/) via `npm install -g yarn`
-1. Create a GitHub account and get assigned to the environment-agency-austria organization by @thomas-eaa
+1. Create a GitHub account and get assigned to the environment-agency-austria organization by [@thomas-eaa](https://github.com/thomas-eaa)
 2. Clone the repo locally by running `git clone https://github.com/environment-agency-austria/webgis4u.git`
 3. Install the recommended Visual Studio Code plugins (eslint, gitflow, GitLens)
 4. Install dependencies via `yarn` (without parameters)
@@ -35,6 +35,7 @@ Or create a showcase website with documentation and publish it to github pages :
 * `yarn test:watch` - starts jest in watch mode. Runs the affected unit tests when changes in the source are detected.
 * `yarn test:coverage` - runs the unit tests and reports the code coverage in the console window and in coverage/lcov-report/index.html
 * `yarn lint` - manually runs the linter
+* `npm publish` - publish the package to npm. 
 
 ## Preconfigured tools
 ### [Babel 7.1](https://babeljs.io)
