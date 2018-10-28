@@ -1,4 +1,4 @@
-# webigs4u
+# webgis4u
 [![npm](https://img.shields.io/npm/v/webgis4u.svg)](https://www.npmjs.com/package/webgis4u)
 [![GitHub license](https://img.shields.io/github/license/environment-agency-austria/webgis4u.svg)](https://github.com/environment-agency-austria/webgis4u/blob/master/LICENSE)
 [![travis](https://travis-ci.com/environment-agency-austria/webgis4u.svg?branch=master)](https://travis-ci.com/environment-agency-austria/webgis4u)
