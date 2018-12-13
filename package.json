@@ -40,5 +40,8 @@
     "jest": "^23.6.0",
     "webpack": "^4.23.1",
     "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "ol": "^5.3.0"
   }
 }
