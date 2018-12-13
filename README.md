@@ -64,8 +64,9 @@ Keeps track of the code coverage in the project.
 ### [Greenkeeper](https://badges.greenkeeper.io/environment-agency-austria/webgis4u.svg)
 Automatically tests dependency updates inside the valid version range based on package.json and creates GitHub issues if any errors occur.
 
-
+### API Documentation
+The API documentation can be found [here](https://environment-agency-austria.github.io/webgis4u/).
 
 
 ### Module and Naming Conventions
-The naming convention is intended to work the same as the one established by OpenLayers. Have a look [here](https://openlayers.org/en/latest/doc/tutorials/background.html#module-and-naming-conventions)
+The naming convention is intended to work the same as the one established by OpenLayers. Have a look [here](https://openlayers.org/en/latest/doc/tutorials/background.html#module-and-naming-conventions).
