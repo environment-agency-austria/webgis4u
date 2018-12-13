@@ -1,3 +1,6 @@
 {
-  "extends": ["oceanjs"]
+  "extends": ["oceanjs"],
+  "rules": {
+    "import/prefer-default-export": false
+  }
 }

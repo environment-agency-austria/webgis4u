@@ -35,7 +35,7 @@ Or create a showcase website with documentation and publish it to github pages :
 * `yarn test:watch` - starts jest in watch mode. Runs the affected unit tests when changes in the source are detected.
 * `yarn test:coverage` - runs the unit tests and reports the code coverage in the console window and in coverage/lcov-report/index.html
 * `yarn lint` - manually runs the linter
-* `npm publish` - publish the package to npm. 
+* `npm publish` - publish the package to npm.
 
 ## Preconfigured tools
 ### [Babel 7.1](https://babeljs.io)
@@ -63,3 +63,9 @@ Keeps track of the code coverage in the project.
 
 ### [Greenkeeper](https://badges.greenkeeper.io/environment-agency-austria/webgis4u.svg)
 Automatically tests dependency updates inside the valid version range based on package.json and creates GitHub issues if any errors occur.
+
+
+
+
+### Module and Naming Conventions
+The naming convention is intended to work the same as the one established by OpenLayers. Have a look [here](https://openlayers.org/en/latest/doc/tutorials/background.html#module-and-naming-conventions)
