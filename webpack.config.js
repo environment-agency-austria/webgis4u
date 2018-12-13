@@ -2,11 +2,21 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+/**
+ * Source directory
+ */
+const dirSource = path.resolve(__dirname, 'src');
+const dirNameDist = 'build';
+/**
+ * Distribution directory
+ */
+const dirDist = path.resolve(__dirname, dirNameDist);
+
 module.exports = {
   entry: './src/index.js',
   devtool: 'source-map',
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: dirDist,
     filename: 'index.js',
     libraryTarget: 'commonjs2',
   },
@@ -14,7 +24,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js)$/,
-        include: path.resolve(__dirname, 'src'),
+        include: dirSource,
         exclude: /(node_modules|bower_components|build|coverage)/,
         use: {
           loader: 'babel-loader',
@@ -26,7 +36,7 @@ module.exports = {
     extensions: ['.js', '.json'],
   },
   plugins: [
-    new CleanWebpackPlugin(['build/*']),
+    new CleanWebpackPlugin([`${dirNameDist}/*`]),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
