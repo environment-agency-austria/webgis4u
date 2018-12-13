@@ -2,5 +2,5 @@
  * @module webgis4u
  */
 
-export * from './ol/source';
+export * from './ol';
 export * from './util';
