@@ -1,22 +1,16 @@
-/**
- * @module webgis4u/ol/source/basemap/Overlay
- */
-
 import WMTS from 'ol/source/WMTS';
-
 import { urlsPng, tileGrid, projection } from './common';
 
 /**
  * The basemap.at overlay layer as predefined ol.source.WMTS source.
  *
  * @extends {ol.source.WMTS}
- * @memberOf ugis.ol.source.basemap
- *
- * @example
- * var myWMTSOverlaySource = new ugis.ol.source.basemap.Overlay();
- *
+ * @memberof module:webgis4u/ol/source/basemap
  */
 class Overlay extends WMTS {
+  /**
+   * Constructor
+   */
   constructor() {
     super({
       projection,

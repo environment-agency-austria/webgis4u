@@ -1,7 +1,3 @@
-/**
- * @module webgis4u/ol/source/basemap/Color
- */
-
 import WMTS from 'ol/source/WMTS';
 import { urlsPng, tileGrid, projection } from './common';
 
@@ -9,9 +5,12 @@ import { urlsPng, tileGrid, projection } from './common';
  * Layer source for the Basemap.at tile server.
  *
  * @extends {ol.source.WMTS}
- * @memberOf ugis.ol.source.basemap
+ * @memberof module:webgis4u/ol/source/basemap
  */
 class Color extends WMTS {
+  /**
+   * Constructor
+   */
   constructor() {
     super({
       projection,

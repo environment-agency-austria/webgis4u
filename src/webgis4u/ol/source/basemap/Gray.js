@@ -1,19 +1,11 @@
-/**
- * @module webgis4u/ol/source/basemap/Gray
- */
-
 import WMTS from 'ol/source/WMTS';
-
 import { urlsPng, tileGrid, projection } from './common';
 
 /**
  * The basemap.at gray layer as predefined ol.source.WMTS source.
  *
  * @extends {ol.source.WMTS}
- * @memberOf ugis.ol.source.basemap
- *
- * @example
- * var myWMTSGraySource = new ugis.ol.source.basemap.Gray();
+ * @memberof module:webgis4u/ol/source/basemap
  */
 class Gray extends WMTS {
   /**

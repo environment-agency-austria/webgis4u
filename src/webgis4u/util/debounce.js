@@ -3,14 +3,16 @@
  */
 
 /**
- * @returns A function, that, as long as it continues to be invoked, will not
- * be triggered. The function will be called after it stops being called for
- * N milliseconds. If `immediate` is passed, trigger the function on the
- * leading edge, instead of the trailing.
  *
- * @param {Function} func
- * @param {number} wait
- * @param {boolean} immediate
+ * Creates a function that will not be called, as long as it continues to be invoked
+ * within `wait` milliseconds.
+ *
+ * @param {Function} func The function that should be debounced
+ * @param {number} wait The time in milliseconds that must pass before `func` is called
+ * @param {boolean} immediate If true, `func` is called on the leading edge instead of the trailing.
+ *
+ * @returns {Function} A function, that, as long as it continues to be invoked, will not
+ * be triggered.
  */
 export function debounce(func, wait, immediate) {
   let timeout;
