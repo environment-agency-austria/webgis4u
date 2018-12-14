@@ -24,10 +24,11 @@ function groupNumber(number) {
 
 /**
  * Formats a number. In the case no number is provided 'NaN' is returned.
+ *
  * @param {number} number The number to format.
  * @param {decimals} [decimals] The optional number of decimals.
+ *
  * @returns {string} The formated number as text.
- * @memberOf ugis.util
  */
 export function formatNumber(number, decimals) {
   const _number = Number(number).toFixed(decimals);

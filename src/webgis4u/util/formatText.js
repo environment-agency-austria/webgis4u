@@ -14,10 +14,9 @@ const regex = /{(\d+)}/g;
  * @param  {...any} args The values that are inserted at the placeholders
  *
  * @returns {string} The result as string
- * @memberOf ugis.util
  *
  * @example
- * ugis.util.formatText('{0} is dead, but {1} is alive!', 'ASP',
+ * formatText('{0} is dead, but {1} is alive!', 'ASP',
  * 'ASP.NET'); => 'ASP is dead, but ASP.NET is alive!
  */
 export function formatText(format, ...args) {
