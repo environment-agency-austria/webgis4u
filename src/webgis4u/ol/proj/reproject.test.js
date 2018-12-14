@@ -1,6 +1,6 @@
 import * as proj from 'ol/proj';
 import Point from 'ol/geom/Point';
-import LineString from 'ol/geom/Linestring';
+import LineString from 'ol/geom/LineString';
 
 import { reproject } from './reproject';
 import { EPSG31287_ID } from './epsg31287';
