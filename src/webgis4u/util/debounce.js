@@ -22,7 +22,7 @@ export function debounce(func, wait, immediate) {
     /**
      * Calls the passed `func` with the passed `context` and `arguments`
      */
-    const call = () => func.apply(context, ...passedArguments);
+    const call = () => func.apply(context, passedArguments);
 
     /**
      * Callback to be invoked later
