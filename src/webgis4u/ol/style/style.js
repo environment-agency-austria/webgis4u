@@ -1,3 +1,7 @@
+/**
+ * @module webgis4u/ol/style/style
+ */
+
 import Stroke from 'ol/style/Stroke';
 import Fill from 'ol/style/Fill';
 import Style from 'ol/style/Style';
@@ -6,11 +10,12 @@ import Circle from 'ol/style/Circle';
 import * as color from './color';
 
 /**
+ * Creates a new point style
  *
- * @param {number} width
- * @param {*} radius
- * @param {*} strokeColor
- * @param {*} fillColor
+ * @param {number} width Width
+ * @param {number} radius Radius
+ * @param {ol.Color} strokeColor Stroke color
+ * @param {ol.Color} fillColor Fill color
  */
 export function getPointStyle(width, radius, strokeColor, fillColor) {
   return new Style({
@@ -48,11 +53,11 @@ export function getPointStyle(width, radius, strokeColor, fillColor) {
 
 
 /**
- * Gets the style.
+ * Creates an array of new styles
  *
  * @param {type} width The width in pixel.
  * @param {type} width The radius in pixel.
- * @param {type} color The color.
+ * @param {ol.Color} color The color.
  * @param {Array.number} lineDash the lindash.
  *
  * @returns {Array<Style>} An array containing styles.
