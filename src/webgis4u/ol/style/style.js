@@ -1,7 +1,7 @@
 import Stroke from 'ol/style/Stroke';
 import Fill from 'ol/style/Fill';
 import Style from 'ol/style/Style';
-import Icon from 'ol/style/Icon';
+// import Icon from 'ol/style/Icon';
 import Circle from 'ol/style/Circle';
 import * as color from './color';
 
