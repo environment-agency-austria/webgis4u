@@ -6,6 +6,7 @@ module.exports = {
   source: {
     include: ['src'],
     includePattern: '.+\\.js(doc|x)?$',
+    excludePattern: '.+\\.test.js$',
   },
   sourceType: 'module',
   opts: {
