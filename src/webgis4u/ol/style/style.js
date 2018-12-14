@@ -5,7 +5,7 @@
 import Stroke from 'ol/style/Stroke';
 import Fill from 'ol/style/Fill';
 import Style from 'ol/style/Style';
-// import Icon from 'ol/style/Icon';
+import Icon from 'ol/style/Icon';
 import Circle from 'ol/style/Circle';
 import * as color from './color';
 
@@ -33,23 +33,24 @@ export function getPointStyle(width, radius, strokeColor, fillColor) {
 /**
  * Gets an icon style based on an image.
  *
- * @param {string} src The image url or base64 encoded image.
- * @param {number} anchorX The anchorX.
+ * @param {string} src The image url or base64 encoded image
+ * @param {number} anchorX The anchorX
  * @param {number} anchorY The anchorY
+ * @param {number} opacity The opacity
  *
- * @returns {Style} The icon style.
+ * @returns {Style} The icon style
  */
-// function getIconStyle(src, anchorX, anchorY, opacity) {
-//   return new Style({
-//     image: new Icon(/** @type {olx.style.IconOptions} */({
-//       src,
-//       opacity,
-//       anchor: [anchorX, anchorY],
-//       anchorXUnits: 'fraction',
-//       anchorYUnits: 'fraction',
-//     })),
-//   });
-// }
+export function getIconStyle(src, anchorX, anchorY, opacity) {
+  return new Style({
+    image: new Icon(/** @type {olx.style.IconOptions} */({
+      src,
+      opacity,
+      anchor: [anchorX, anchorY],
+      anchorXUnits: 'fraction',
+      anchorYUnits: 'fraction',
+    })),
+  });
+}
 
 
 /**

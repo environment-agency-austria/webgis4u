@@ -14,16 +14,16 @@ describe('webgis4u/ol/style/style ', () => {
 
   it('should return style (getPointStyle)', () => {
     const pointStyle = style.getPointStyle(3, 10, [255, 0, 0, 0.8], [255, 255, 255, 0.2]);
-    expect(pointStyle).not.toBeNull();
+    expect(pointStyle).toBeDefined();
   });
 
-  it('check return style (getStyle)', () => {
+  it('should return style (getStyle)', () => {
     const styled = style.getStyle(3, 10, [255, 0, 0, 0.8], [255, 255, 255, 0.2]);
-    expect(styled).not.toBeNull();
+    expect(styled).toBeDefined();
   });
 
-  it('check return style (getStyleDashed)', () => {
-    const styled = style.getStyle(3, 10, [255, 0, 0, 0.8], [255, 255, 255, 0.2], 12);
-    expect(styled).not.toBeNull();
+  it('should return style (getIconStyle)', () => {
+    const styled = style.getIconStyle('an image source', 0.5, 0.5, 0.5);
+    expect(styled).toBeDefined();
   });
 });
