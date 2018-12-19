@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "webgis4u/*": ["../src/webgis4u/*"],
+    }
+  },
+  "exclude": [
+    "build",
+    "coverage",
+  ]
+}
