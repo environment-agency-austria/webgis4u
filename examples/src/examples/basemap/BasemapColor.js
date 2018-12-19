@@ -3,7 +3,7 @@ import source from 'raw-loader!./BasemapColor.src';
 /**
  * The name of the example
  */
-const name = 'Exmaple 1';
+const name = 'Basemap (Color)';
 
 /**
  * Loads the example module
