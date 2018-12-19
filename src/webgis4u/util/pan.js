@@ -5,21 +5,32 @@
 import { getSize } from 'ol/extent';
 
 /**
+ * @typedef PanOptions
+ * @property {ol.coordinate.Coordinate} delta The delta pan factor
+ * @property {ol.Map} map The map
+ * @property {olx.animation.AnimateOptions} [animationOptions] Additional options for an animation
+ */
+
+/**
  * Pans the displayed map extent with the deltaX and deltyY factor of the currently displayed map
- * @param {number} deltaX The deltaX pan factor
- * @param {number} deltaY The deltaY pan factor
- * @param {ol.Map} map The map
+ * @param {PanOptions} options The options for the interaction
  *
  * @example
  * //move the map 30% left and 40% upward.
- * pan(-0.3, 0.4, myMap);
+ * pan({delta: [-0.3, 0.4], map: myMap});
  */
-export function pan(deltaX, deltaY, map) {
-  const mapSize = getSize(map.getView().calculateExtent(map.getSize()));
-  const cC = map.getView().getCenter();
-  const newCenter = [cC[0] + mapSize[0] * deltaX, cC[1] + mapSize[1] * deltaY];
+export function pan(options) {
+  const {
+    delta, map, animationOptions,
+  } = options;
+  const view = map.getView();
 
-  map.getView().animate({
-    center: map.getView().constrainCenter(newCenter),
+  const mapSize = getSize(view.calculateExtent(map.getSize()));
+  const cC = view.getCenter();
+  const newCenter = [cC[0] + mapSize[0] * delta[0], cC[1] + mapSize[1] * delta[1]];
+
+  view.animate({
+    ...animationOptions,
+    center: view.constrainCenter(newCenter),
   });
 }

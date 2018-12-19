@@ -107,7 +107,10 @@ class PanBar extends Control {
    * @private
    */
   pan(deltaX, deltaY) {
-    pan(deltaX, deltaY, this.getMap());
+    pan({
+      delta: [deltaX, deltaY],
+      map: this.getMap(),
+    });
   }
 
   /**
