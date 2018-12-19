@@ -4,7 +4,7 @@ import TileLayer from 'ol/layer/Tile';
 import TileSource from 'ol/source/Tile';
 import { createXYZ } from 'ol/tilegrid';
 
-import { disposeMap, tileLoadFunction } from '../../../../test-utils/ol';
+import { disposeMap, tileLoadFunction } from '../../../../test/utils/ol';
 
 import PanBar from './PanBar';
 

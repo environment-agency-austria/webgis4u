@@ -1,4 +1,4 @@
-import { createMap, disposeMap } from '../../../test-utils/ol';
+import { createMap, disposeMap } from '../../../test/utils/ol';
 
 import { pan } from './pan';
 
