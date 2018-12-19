@@ -3,9 +3,13 @@
  */
 
 import Control from 'ol/control/Control';
-import { listen, EventType } from 'ol/events';
+import { listen } from 'ol/events';
+import EventType from 'ol/events/EventType';
 
 import { pan } from '../../util/pan';
+
+import { CSS_CONTROL_DEFAULT, CSS_CONTROL_UNSELECTABLE } from './common';
+import './PanBar.scss';
 
 /**
  * @typedef Options
@@ -39,6 +43,8 @@ function createElement(tagName, cssClass) {
   return el;
 }
 
+const CSS_CLASS = 'ugis-ctrl-panbar';
+
 /**
  * Control for panning
  *
@@ -50,14 +56,14 @@ class PanBar extends Control {
    */
   delta = 0.4;
 
-  constructor(opt_options) {
-    const options = opt_options || {};
+  constructor(options) {
+    const opts = options || {};
 
-    const element = createElement('div', 'ugis-ctrl-panbar');
+    const element = createElement('div', `${CSS_CLASS} ${CSS_CONTROL_DEFAULT} ${CSS_CONTROL_UNSELECTABLE}`);
 
     super({
       element,
-      target: options.target,
+      target: opts.target,
     });
 
     this.setupDom(element);
@@ -82,15 +88,15 @@ class PanBar extends Control {
 
     // Set up the DOM
     rootElement.appendChild(pU);
-    rootElement.appendChild(pD);
     rootElement.appendChild(pL);
     rootElement.appendChild(pR);
+    rootElement.appendChild(pD);
 
     // Add the event listeners
-    listen(pU, EventType.CLICK, this.handlePanUp, this);
-    listen(pD, EventType.CLICK, this.handlePanDown, this);
-    listen(pL, EventType.CLICK, this.handlePanLeft, this);
-    listen(pR, EventType.CLICK, this.handlePanRight, this);
+    listen(pU, EventType.CLICK, this.handlePanUp);
+    listen(pD, EventType.CLICK, this.handlePanDown);
+    listen(pL, EventType.CLICK, this.handlePanLeft);
+    listen(pR, EventType.CLICK, this.handlePanRight);
   }
 
   /**

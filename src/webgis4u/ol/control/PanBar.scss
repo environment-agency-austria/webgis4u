@@ -1,0 +1,86 @@
+.ugis-ctrl-panbar {
+  $control-size: 16px;
+
+  bottom: 1.5em;
+  left: .5em;
+
+  .ugis-ctrl-pan-up, .ugis-ctrl-pan-down,
+  .ugis-ctrl-pan-left, .ugis-ctrl-pan-right {
+    cursor: pointer;
+    width: $control-size;
+    height: $control-size;
+  }
+
+  .ugis-ctrl-pan-up,
+  .ugis-ctrl-pan-down,
+  .ugis-ctrl-pan-right {
+    margin-left: $control-size;
+  }
+
+  .ugis-ctrl-pan-left { float: left; }
+  .ugis-ctrl-pan-right { float: right; }
+  .ugis-ctrl-pan-down { clear: both; }
+}
+
+/* Begin: embeded PanbarControl */
+
+/* embedded map panbar */
+.ugis-embedded-map {
+  .ugis-ctrl-panbar {
+    position:absolute;
+    left: 20px;
+    top: 20px;
+    // background: url("./src/main/images/panbar-embedded.png") no-repeat scroll left top;
+    height: 55px;
+    width: 55px;
+  }
+
+  .ugis-ctrl-pan-up {
+    left: 21px;
+    top: 5px;
+  }
+
+  .ugis-ctrl-pan-down {
+    left: 21px;
+    top: 37px;
+  }
+  .ugis-ctrl-pan-left {
+    left: 5px;
+    top: 21px;
+  }
+  .ugis-ctrl-pan-right {
+    left: 37px;
+    top: 21px;
+  }
+}
+/* End: embeded PanbarControl */
+
+/* large map panbar */
+.ugis-large-map {
+  .ugis-ctrl-panbar {
+    position:absolute;
+    left: 50px;
+    top: 60px;
+    // background: url("./src/main/images/panbar-large.png") no-repeat scroll left top;
+    height: 66px;
+    width: 66px;
+  }
+
+  .ugis-ctrl-pan-up {
+    left: 25px;
+    top: 6px;
+  }
+  .ugis-ctrl-pan-down {
+    left: 25px;
+    top: 44px;
+  }
+  .ugis-ctrl-pan-left {
+    left: 6px;
+    top: 25px;
+  }
+
+  .ugis-ctrl-pan-right {
+    left: 44px;
+    top: 25px;
+  }
+}
