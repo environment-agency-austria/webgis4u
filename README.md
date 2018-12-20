@@ -26,4 +26,4 @@ see your changes immediately:
 * `project/ $ yarn start` (or whatever command you use to start the project locally)
 
 ## Contribute
-If you are intereseted in contributing be sure to check out the information on [how to contribute](./CONTRIBUTING.md) as it provides useful information on the current project setup.
+If you are intereseted in contributing be sure to check out the information on [how to contribute](./.github/CONTRIBUTING.md) as it provides useful information on the current project setup.
