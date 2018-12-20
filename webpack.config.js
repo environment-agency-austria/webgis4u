@@ -25,7 +25,7 @@ module.exports = {
       {
         test: /\.(js)$/,
         include: dirSource,
-        exclude: /(node_modules|bower_components|build|coverage)/,
+        exclude: /(node_modules|bower_components|coverage)/,
         use: {
           loader: 'babel-loader',
         },
