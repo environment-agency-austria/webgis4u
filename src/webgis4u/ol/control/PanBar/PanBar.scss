@@ -1,0 +1,51 @@
+@import '../common';
+
+/**
+ * Styling for control 'PanBar'
+ */
+.#{$controlPrefix}-panbar {
+  @mixin position-sizerelated($image-size, $control-padding-size, $click-size) {
+    height: $image-size;
+    width: $image-size;
+    padding: $control-padding-size;
+
+    &-pan {
+      width: $click-size;
+      height: $click-size;
+
+      &-up, &-down {
+        margin-left: (($image-size / 2) - $control-padding-size) - ($click-size / 2);
+      }
+    }
+  }
+
+  position:absolute;
+  bottom: 1.5em;
+  left: .5em;
+  background: url("./panbar-embedded.png") no-repeat scroll left top;
+  @include position-sizerelated(55px, 4px, 16px);
+
+  &-pan {
+    cursor: pointer;
+
+    &-left { float: left; }
+    &-right { float: right; }
+    &-down { clear: both; }
+  }
+
+  /* Begin: embedded PanbarControl */
+  .ugis-embedded-map & {
+    left: 20px;
+    top: 20px;
+  }
+  /* End: Map (embedded) */
+
+  /* Begin: Map (large) */
+  .ugis-large-map & {
+    left: 50px;
+    top: 60px;
+    background: url("./panbar-large.png") no-repeat scroll left top;
+    @include position-sizerelated(66px, 4px, 20px);
+  }
+  /* End: Map (large) */
+}

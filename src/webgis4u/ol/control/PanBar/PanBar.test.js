@@ -1,12 +1,13 @@
-import { disposeMap, createMap } from '../../../../test/utils/ol';
-import { pan } from '../../util/pan';
+import { disposeMap, createMap } from '../../../../../test/utils/ol';
+import { pan } from '../../../util/pan';
 
-import PanBar from './PanBar';
+import { CSS_CONTROL_PREFIX } from '../common';
+import PanBar from '../PanBar';
 
-jest.mock('../../util/pan');
+jest.mock('../../../util/pan');
 
 describe('webgis4u/ol/control/PanBar', () => {
-  const CSS_CLASS_PREFIX = '.ugis-ctrl';
+  const CSS_CLASS = `.${CSS_CONTROL_PREFIX}-panbar`;
   let map;
   let panBar;
 
@@ -29,7 +30,7 @@ describe('webgis4u/ol/control/PanBar', () => {
 
   it('should render', () => {
     map.renderSync();
-    const rootElement = map.getTarget().querySelectorAll(`${CSS_CLASS_PREFIX}-panbar`);
+    const rootElement = map.getTarget().querySelectorAll(CSS_CLASS);
     expect(rootElement.length).toBe(1);
   });
 
@@ -40,7 +41,7 @@ describe('webgis4u/ol/control/PanBar', () => {
   });
 
   describe('interaction', () => {
-    const CSS_PREFIX = `${CSS_CLASS_PREFIX}-pan`;
+    const CSS_PAN_PREFIX = `${CSS_CLASS}-pan`;
 
     /**
      * Simulates a click event
@@ -56,19 +57,19 @@ describe('webgis4u/ol/control/PanBar', () => {
 
     // Test cases for unexpected
     const testCases = [
-      ['up', `${CSS_PREFIX}-up`, (x, y) => {
+      ['up', `${CSS_PAN_PREFIX}-up`, (x, y) => {
         expect(x).toBe(0);
         expect(y).toBeGreaterThan(0);
       }],
-      ['down', `${CSS_PREFIX}-down`, (x, y) => {
+      ['down', `${CSS_PAN_PREFIX}-down`, (x, y) => {
         expect(x).toBe(0);
         expect(y).toBeLessThan(0);
       }],
-      ['right', `${CSS_PREFIX}-right`, (x, y) => {
+      ['right', `${CSS_PAN_PREFIX}-right`, (x, y) => {
         expect(x).toBeGreaterThan(0);
         expect(y).toBe(0);
       }],
-      ['left', `${CSS_PREFIX}-left`, (x, y) => {
+      ['left', `${CSS_PAN_PREFIX}-left`, (x, y) => {
         expect(x).toBeLessThan(0);
         expect(y).toBe(0);
       }],

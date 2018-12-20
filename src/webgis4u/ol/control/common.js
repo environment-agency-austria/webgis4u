@@ -7,3 +7,8 @@ export const CSS_CONTROL_DEFAULT = 'ol-control';
  * that can't be selected
  */
 export const CSS_CONTROL_UNSELECTABLE = 'ol-unselectable';
+
+/**
+ * Prefix used for controls
+ */
+export const CSS_CONTROL_PREFIX = 'webgis4u-control';

@@ -8,8 +8,8 @@ import EventType from 'ol/events/EventType';
 
 import { pan } from '../../util/pan';
 
-import { CSS_CONTROL_DEFAULT, CSS_CONTROL_UNSELECTABLE } from './common';
-import './PanBar.scss';
+import { CSS_CONTROL_DEFAULT, CSS_CONTROL_UNSELECTABLE, CSS_CONTROL_PREFIX } from './common';
+import './PanBar/PanBar.scss';
 
 /**
  * @typedef Options
@@ -43,7 +43,10 @@ function createElement(tagName, cssClass) {
   return el;
 }
 
-const CSS_CLASS = 'ugis-ctrl-panbar';
+/**
+ * The root CSS class
+ */
+const CSS_CLASS = `${CSS_CONTROL_PREFIX}-panbar`;
 
 /**
  * Control for panning
@@ -78,13 +81,13 @@ class PanBar extends Control {
    */
   setupDom(rootElement) {
     const tag = 'div';
-    const className = 'ugis-ctrl-pan';
+    const className = `${CSS_CLASS}-pan`;
 
     // Create elements
-    const pU = createElement(tag, `${className}-up`);
-    const pD = createElement(tag, `${className}-down`);
-    const pL = createElement(tag, `${className}-left`);
-    const pR = createElement(tag, `${className}-right`);
+    const pU = createElement(tag, `${className} ${className}-up`);
+    const pD = createElement(tag, `${className} ${className}-down`);
+    const pL = createElement(tag, `${className} ${className}-left`);
+    const pR = createElement(tag, `${className} ${className}-right`);
 
     // Set up the DOM
     rootElement.appendChild(pU);
