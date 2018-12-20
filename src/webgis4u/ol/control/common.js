@@ -1,4 +1,8 @@
 /**
+ * @module webgis4u/ol/control/common
+ */
+
+/**
  * The default CSS class that OL uses for controls
  */
 export const CSS_CONTROL_DEFAULT = 'ol-control';

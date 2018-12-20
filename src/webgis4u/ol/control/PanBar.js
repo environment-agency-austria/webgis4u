@@ -8,7 +8,7 @@ import EventType from 'ol/events/EventType';
 
 import { pan } from '../../util/pan';
 
-import { CSS_CONTROL_DEFAULT, CSS_CONTROL_UNSELECTABLE, CSS_CONTROL_PREFIX } from './common';
+import { CSS_CONTROL_UNSELECTABLE, CSS_CONTROL_PREFIX } from './common';
 import './PanBar/PanBar.scss';
 
 /**
@@ -36,9 +36,9 @@ Object.freeze(PanDirectionEnum);
  */
 function createElement(tagName, cssClass) {
   const el = document.createElement(tagName);
-  if (cssClass) {
-    el.className = cssClass;
-  }
+  // if (cssClass) {
+  el.className = cssClass;
+  // }
 
   return el;
 }
@@ -62,7 +62,7 @@ class PanBar extends Control {
   constructor(options) {
     const opts = options || {};
 
-    const element = createElement('div', `${CSS_CLASS} ${CSS_CONTROL_DEFAULT} ${CSS_CONTROL_UNSELECTABLE}`);
+    const element = createElement('div', `${CSS_CLASS} ${CSS_CONTROL_UNSELECTABLE}`);
 
     super({
       element,
