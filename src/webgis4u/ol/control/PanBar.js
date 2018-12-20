@@ -12,7 +12,8 @@ import { CSS_CONTROL_UNSELECTABLE, CSS_CONTROL_PREFIX } from './common';
 import './PanBar/PanBar.scss';
 
 /**
- * @typedef Options
+ * @typedef PanBarConstructorOptions
+ * @property {*} target The target
  */
 
 /**
@@ -59,6 +60,10 @@ class PanBar extends Control {
    */
   delta = 0.4;
 
+  /**
+   * Constructor
+   * @param {PanBarConstructorOptions} options The options
+   */
   constructor(options) {
     const opts = options || {};
 
