@@ -48,16 +48,29 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         },
-      },
-      {
+      }, {
+        // Transpile imported scss files
         test: /\.scss$/,
         use: [
           // creates style nodes from JS strings
           { loader: 'style-loader' },
           // translates CSS into CommonJS
           { loader: 'css-loader' },
+          // resolve relative urls
+          { loader: 'resolve-url-loader' },
           // compiles Sass to CSS
           { loader: 'sass-loader' },
+        ],
+      }, {
+        // Transpile imported image files
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
         ],
       },
     ],
