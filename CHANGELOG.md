@@ -6,3 +6,4 @@ All notable changes to this project will be documented in this file.
 * Added [`basemap`](./src/webgis4u/ol/source/basemap.js) as a source - for more information, see [basemap.at](https://www.basemap.at/)
 * Added following controls:
   * [`PanBar`](./src/webgis4u/ol/control/PanBar.js)
+  * [`LayerCheckbox`](./src/webgis4u/ol/control/LayerCheckbox.js)
