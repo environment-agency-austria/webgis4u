@@ -6,6 +6,7 @@ import Control from 'ol/control/Control';
 import { listen } from 'ol/events';
 import EventType from 'ol/events/EventType';
 
+import { createElement } from '../../util/dom/createElement';
 import { pan } from '../../util/pan';
 
 import { CSS_CONTROL_UNSELECTABLE, CSS_CONTROL_PREFIX } from './common';
@@ -28,21 +29,6 @@ const PanDirectionEnum = {
   Left: 4,
 };
 Object.freeze(PanDirectionEnum);
-
-
-/**
- * create Element
- * @param {string} tagName The tag name
- * @param {string} cssClass CSS class
- */
-function createElement(tagName, cssClass) {
-  const el = document.createElement(tagName);
-  // if (cssClass) {
-  el.className = cssClass;
-  // }
-
-  return el;
-}
 
 /**
  * The root CSS class
@@ -67,7 +53,10 @@ class PanBar extends Control {
   constructor(options) {
     const opts = options || {};
 
-    const element = createElement('div', `${CSS_CLASS} ${CSS_CONTROL_UNSELECTABLE}`);
+    const element = createElement({
+      tag: 'div',
+      cssClass: `${CSS_CLASS} ${CSS_CONTROL_UNSELECTABLE}`,
+    });
 
     super({
       element,
@@ -89,10 +78,10 @@ class PanBar extends Control {
     const className = `${CSS_CLASS}-pan`;
 
     // Create elements
-    const pU = createElement(tag, `${className} ${className}-up`);
-    const pD = createElement(tag, `${className} ${className}-down`);
-    const pL = createElement(tag, `${className} ${className}-left`);
-    const pR = createElement(tag, `${className} ${className}-right`);
+    const pU = createElement({ tag, cssClass: `${className} ${className}-up` });
+    const pD = createElement({ tag, cssClass: `${className} ${className}-down` });
+    const pL = createElement({ tag, cssClass: `${className} ${className}-left` });
+    const pR = createElement({ tag, cssClass: `${className} ${className}-right` });
 
     // Set up the DOM
     rootElement.appendChild(pU);
