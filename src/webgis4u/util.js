@@ -6,3 +6,4 @@ export * from './util/debounce';
 export * from './util/formatNumber';
 export * from './util/formatText';
 export * from './util/pan';
+export * from './util/string';
