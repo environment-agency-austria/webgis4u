@@ -72,7 +72,8 @@ class LayerCheckbox extends Control {
    * @inheritdoc
    */
   setMap(map) {
-    const keys = Object.keys(map);
+    const { layerMap } = this;
+    const keys = Object.keys(layerMap);
 
     // First remove previous added interactions
     if (this.oldMap) {
@@ -88,7 +89,7 @@ class LayerCheckbox extends Control {
     // Add new interactions if map is available
     if (!map) { return; }
     keys.forEach((key) => {
-      this.addInteraction(key, map[key]);
+      this.addInteraction(key, layerMap[key]);
     });
   }
 
@@ -133,10 +134,12 @@ class LayerCheckbox extends Control {
 
     // Look for the element
     const e = document.getElementById(key);
-    if (!e) { return; }
+    if (e) {
+      // Remove the listener
+      e.removeEventListener('click', listener, false);
+    }
 
     // Remove the listener
-    e.removeEventListener('click', listener, false);
     delete this.listeners[key];
   }
 }
