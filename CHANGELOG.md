@@ -7,3 +7,4 @@ All notable changes to this project will be documented in this file.
 * Added following controls:
   * [`PanBar`](./src/webgis4u/ol/control/PanBar.js)
   * [`LayerCheckbox`](./src/webgis4u/ol/control/LayerCheckbox.js)
+  * [`LayerRadioButton`](./src/webgis4u/ol/control/LayerRadioButton.js)
