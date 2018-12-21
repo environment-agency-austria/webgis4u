@@ -43,18 +43,6 @@ describe('webgis4u/ol/control/PanBar', () => {
   describe('interaction', () => {
     const CSS_PAN_PREFIX = `${CSS_CLASS}-pan`;
 
-    /**
-     * Simulates a click event
-     * @param {HTMLElement} element
-     */
-    const simulateClick = (element) => {
-      const event = new Event('mock');
-      const { listener } = element.ol_lm.click[0];
-
-      listener(event);
-    };
-
-
     // Test cases for unexpected
     const testCases = [
       ['up', `${CSS_PAN_PREFIX}-up`, (x, y) => {
@@ -83,7 +71,7 @@ describe('webgis4u/ol/control/PanBar', () => {
       expect(clickableElement.length).toBe(1);
 
       // Simulate the click
-      simulateClick(clickableElement[0]);
+      clickableElement[0].dispatchEvent(new Event('click'));
       expect(pan).toHaveBeenCalledTimes(1);
 
       // Check if pan was called with the right parameters
