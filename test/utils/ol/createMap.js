@@ -1,9 +1,7 @@
 import Map from 'ol/Map';
 import View from 'ol/View';
-import TileLayer from 'ol/layer/Tile';
-import TileSource from 'ol/source/Tile';
-import { createXYZ } from 'ol/tilegrid';
 
+import { createLayers } from './createLayers';
 import { tileLoadFunction } from './tileLoadFunction';
 
 /**
@@ -19,14 +17,7 @@ export const createMap = (mapConfig) => {
 
   const map = new Map({
     target,
-    layers: [
-      new TileLayer({
-        source: new TileSource({
-          projection: 'EPSG:3857',
-          tileGrid: createXYZ(),
-        }),
-      }),
-    ],
+    layers: createLayers({ count: 1 }),
     view: new View({
       center: [0, 0],
       zoom: 0,
