@@ -16,7 +16,7 @@ import Layer from 'ol/layer/Layer';
  */
 
 /**
- * @typedef AbstractLayerRelatedControlOptions
+ * @typedef LayerRelatedControlOptions
  * @type {object}
  * @property {*} controlOptions
  * @property {LayerMap} layerMapOptions
@@ -59,9 +59,16 @@ class AbstractLayerRelatedControl extends Control {
   layerMap;
 
   /**
-   * Creates a new LayerCheckbox
+   * @returns The layers from the map as an array
+   */
+  get layersFromMap() {
+    return Object.entries(this.layerMap);
+  }
+
+  /**
+   * Creates a new abstract layer related control
    *
-   * @param {AbstractLayerRelatedControlOptions} options
+   * @param {LayerRelatedControlOptions} options
    * The options
    */
   constructor(options) {
@@ -150,7 +157,7 @@ class AbstractLayerRelatedControl extends Control {
    * Handles the layer interaction
    * @param {LayerActionEventArgs} e The event arguments
    */
-  handleLayerInteraction(e) {
+  handleLayerInteraction() {
     throw new Error('Not implemented');
   }
 }

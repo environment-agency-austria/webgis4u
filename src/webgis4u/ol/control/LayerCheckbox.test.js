@@ -47,8 +47,6 @@ describe('webgis4u/ol/control/LayerCheckbox', () => {
     map = null;
     control = null;
     // Remove the mock element from the mock DOM
-    // const hangingMockElement = document.getElementById(mockElementId);
-    // document.getElementById(mockElementId).parentElement.innerHTML = '';
     document.getElementsByTagName('html')[0].innerHTML = '';
     mockElement = null;
   });
