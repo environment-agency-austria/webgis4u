@@ -1,4 +1,8 @@
 /**
+ * @fileoverview
+ * Exposes [basemap.at]{@link https://www.basemap.at/} as a layer
+ * source for [openlayers]{@link http://openlayers.org/}
+
  * @module webgis4u/ol/source/basemap
  */
 
