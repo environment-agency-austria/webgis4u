@@ -3,7 +3,7 @@
  */
 
 import { createElement } from '../../util/dom/createElement';
-import AbstractLayerRelatedControl from './AbstractLayerRelatedControl';
+import AbstractLayerRelatedElementControl from './AbstractLayerRelatedElementControl';
 
 /**
  * @typedef LayerCheckboxOptions
@@ -13,9 +13,9 @@ import AbstractLayerRelatedControl from './AbstractLayerRelatedControl';
 /**
  * Control to control layer visibility
  *
- * @extends {module:webgis4u/ol/control/AbstractLayerRelatedControl~AbstractLayerRelatedControl}
+ * @extends {module:webgis4u/ol/control/AbstractLayerRelatedElementControl~AbstractLayerRelatedElementControl}
  */
-class LayerCheckbox extends AbstractLayerRelatedControl {
+class LayerCheckbox extends AbstractLayerRelatedElementControl {
   /**
    * Creates a new LayerCheckbox
    *

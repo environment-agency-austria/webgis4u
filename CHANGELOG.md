@@ -8,3 +8,4 @@ All notable changes to this project will be documented in this file.
   * [`PanBar`](./src/webgis4u/ol/control/PanBar.js)
   * [`LayerCheckbox`](./src/webgis4u/ol/control/LayerCheckbox.js)
   * [`LayerRadioButton`](./src/webgis4u/ol/control/LayerRadioButton.js)
+  * [`LegendVisibility`](./src/webgis4u/ol/control/LegendVisibility.js)
