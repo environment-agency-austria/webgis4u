@@ -31,10 +31,19 @@ import Layer from 'ol/layer/Layer';
  */
 
 /**
- * @typedef LayerActionAddedOptions
+ * @typedef UnregisterListenerOptions
+ * @type {object}
+ * @property {string} key The identifier for the layer
+ * @property {Function} listener The listener related to the layer identifier
+ */
+
+/**
+ * @typedef RegisterListenerOptions
+ * @type {UnregisterListenerOptions}
  * @property {ol.layer.Layer} layer The layer for which the event was added
  * @property {HTMLElement} element The element for which the event was added
  */
+
 
 /**
  * Control to control layer interactivity
@@ -123,23 +132,31 @@ class AbstractLayerRelatedControl extends Control {
     if (!layer || !(layer instanceof Layer)) { return; }
 
     // Look for the element
-    const e = document.getElementById(key);
-    if (!e) { return; }
+    const element = document.getElementById(key);
+    if (!element) { return; }
 
     // Create an event listener for the element
     /**
      * Event listener
      */
     const listener = (originalEvent) => {
-      this.handleLayerInteraction({ originalEvent, key, layer, element: e });
+      this.handleLayerInteraction({ originalEvent, key, layer, element });
     };
-    e.addEventListener('click', listener, false);
-    this.listeners[key] = listener;
 
-    this.onLayerInteractionAdded({
+    // Prepare the layer interaction options
+    const layerInteractionOptions = {
+      element,
+      listener,
       layer,
-      element: e,
-    });
+      key,
+    };
+
+    // Store the created listener
+    this.listeners[key] = listener;
+    // Register the listener
+    this.registerListener(layerInteractionOptions);
+    // And call added
+    this.onLayerInteractionAdded(layerInteractionOptions);
   }
 
   /**
@@ -153,12 +170,7 @@ class AbstractLayerRelatedControl extends Control {
     const listener = this.listeners[key];
     if (!listener) { return; }
 
-    // Look for the element
-    const e = document.getElementById(key);
-    if (e) {
-      // Remove the listener
-      e.removeEventListener('click', listener, false);
-    }
+    this.unregisterListener({ key, listener });
 
     // Remove the listener
     delete this.listeners[key];
@@ -176,9 +188,25 @@ class AbstractLayerRelatedControl extends Control {
 
   /**
    * Called when an layer interaction was added
-   * @param {LayerActionAddedOptions} options The options
+   * @param {RegisterListenerOptions} options The options
    */
   onLayerInteractionAdded() { }
+
+  /**
+   * Registers the listener
+   * @param {RegisterListenerOptions} options
+   *
+   * @abstract
+   */
+  registerListener() { }
+
+  /**
+   * Unregisters the listener
+   * @param {UnregisterListenerOptions} options
+   *
+   * @abstract
+   */
+  unregisterListener() { }
 }
 
 export default AbstractLayerRelatedControl;
