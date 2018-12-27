@@ -2,8 +2,6 @@
  * @module webgis4u/ol/control/LayerCheckbox
  */
 
-import Layer from 'ol/layer/Layer';
-
 import { createElement } from '../../util/dom/createElement';
 import AbstractLayerRelatedControl from './AbstractLayerRelatedControl';
 
