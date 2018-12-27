@@ -18,23 +18,6 @@ describe('webgis4u/ol/control/LayerRadioButton', () => {
     control = new LayerRadioButton(options);
     map.addControl(control);
   };
-  /**
-   * Set up the control for use with layers
-   */
-  const setupControlForLayer = (options) => {
-    const defaultOptions = {};
-    defaultOptions[mockElement1Id] = map.getLayers().item(0);
-    defaultOptions[mockElement2Id] = map.getLayers().item(1);
-
-    const o = {
-      ...defaultOptions,
-      ...options,
-    };
-
-    setupControl({
-      layerMapOptions: o,
-    });
-  };
 
   beforeEach(() => {
     // Prepare mock elements
@@ -65,31 +48,6 @@ describe('webgis4u/ol/control/LayerRadioButton', () => {
     setupControl({});
     expect(map.getControls().getArray()).toContain(control);
   });
-
-  describe('should register', () => {
-    it('for layer', () => {
-      setupControlForLayer();
-      const registeredListeners = Object.keys(control.listeners);
-      expect(registeredListeners.length).toBe(2);
-    });
-
-    it('and re-register', () => {
-      setupControlForLayer();
-      control.setMap(map);
-
-      const registeredListeners = Object.keys(control.listeners);
-      expect(registeredListeners.length).toBe(2);
-    });
-
-    it('and unregister', () => {
-      setupControlForLayer();
-      control.setMap(null);
-
-      const registeredListeners = Object.keys(control.listeners);
-      expect(registeredListeners.length).toBe(0);
-    });
-  });
-
 
   describe('shoud interact', () => {
     let layer1;
