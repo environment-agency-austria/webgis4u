@@ -1,12 +1,12 @@
 /**
- * @module webgis4u/ol/control/LayerCheckbox
+ * @module webgis4u/ol/control/LegendVisibility
  */
 
 import { createElement } from '../../util/dom/createElement';
 import AbstractLayerRelatedControl from './AbstractLayerRelatedControl';
 
 /**
- * @typedef LayerVisibilityOptions
+ * @typedef LegendVisibilityOptions
  * @type {module:webgis4u/ol/control/AbstractLayerRelatedControl~LayerRelatedControlOptions}
  * @property {string} styleValueVisible The value when the layer is visible
  * @property {string} styleValueHidden The value when the layer is not visible
@@ -17,21 +17,25 @@ import AbstractLayerRelatedControl from './AbstractLayerRelatedControl';
  *
  * @extends {module:webgis4u/ol/control/AbstractLayerRelatedControl~AbstractLayerRelatedControl}
  */
-class LayerVisibility extends AbstractLayerRelatedControl {
+class LegendVisibility extends AbstractLayerRelatedControl {
   /**
-   *
+   * The value used as display style when the layer is visible
+   * @type {string}
+   * @private
    */
   styleValueVisible = 'block';
 
   /**
-   *
+   * The value used as display style when the layer is not visible
+   * @type {string}
+   * @private
    */
   styleValueHidden = 'none';
 
   /**
    * Creates a new LayerCheckbox
    *
-   * @param {LayerVisibilityOptions} options
+   * @param {LegendVisibilityOptions} options
    * The options
    */
   constructor(options) {
@@ -108,4 +112,4 @@ class LayerVisibility extends AbstractLayerRelatedControl {
   }
 }
 
-export default LayerVisibility;
+export default LegendVisibility;
