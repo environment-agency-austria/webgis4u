@@ -93,5 +93,20 @@ describe('webgis4u/ol/control/LayerRadioButton', () => {
       expect(layer1.setVisible).toBeCalledWith(expected);
       expect(layer2.setVisible).toBeCalledWith(!expected);
     });
+
+    it('and ignore unset layers', () => {
+      // Setup and unset the layer map entries
+      setupWithMockLayer();
+      control.layerMap[mockElement1Id] = null;
+      control.layerMap[mockElement2Id] = undefined;
+
+      // Simulate the click event
+      mockElement1.checked = true;
+      mockElement1.dispatchEvent(new Event('click'));
+
+      // Check result
+      expect(layer1.setVisible).not.toBeCalled();
+      expect(layer2.setVisible).not.toBeCalled();
+    });
   });
 });
