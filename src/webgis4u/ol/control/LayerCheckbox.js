@@ -13,7 +13,7 @@ import AbstractLayerRelatedControl from './AbstractLayerRelatedControl';
 /**
  * Control to control layer visibility
  *
- * @extends {module:ol.control.Control}
+ * @extends {module:webgis4u/ol/control/AbstractLayerRelatedControl~AbstractLayerRelatedControl}
  */
 class LayerCheckbox extends AbstractLayerRelatedControl {
   /**
