@@ -156,6 +156,8 @@ class AbstractLayerRelatedControl extends Control {
   /**
    * Handles the layer interaction
    * @param {LayerActionEventArgs} e The event arguments
+   *
+   * @abstract
    */
   handleLayerInteraction() {
     throw new Error('Not implemented');
