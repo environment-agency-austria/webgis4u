@@ -16,20 +16,6 @@ describe('webgis4u/ol/control/LayerCheckbox', () => {
     control = new LayerCheckbox(options);
     map.addControl(control);
   };
-  /**
-   * Set up the control for use with layers
-   */
-  const setupControlForLayer = (options) => {
-    const defaultOptions = {};
-    defaultOptions[mockElementId] = map.getLayers().item(0);
-
-    const o = {
-      ...defaultOptions,
-      ...options,
-    };
-
-    setupControl(o);
-  };
 
   beforeEach(() => {
     // Prepare a mock element and append it
@@ -47,8 +33,6 @@ describe('webgis4u/ol/control/LayerCheckbox', () => {
     map = null;
     control = null;
     // Remove the mock element from the mock DOM
-    // const hangingMockElement = document.getElementById(mockElementId);
-    // document.getElementById(mockElementId).parentElement.innerHTML = '';
     document.getElementsByTagName('html')[0].innerHTML = '';
     mockElement = null;
   });
@@ -56,90 +40,6 @@ describe('webgis4u/ol/control/LayerCheckbox', () => {
   it('should contain control', () => {
     setupControl();
     expect(map.getControls().getArray()).toContain(control);
-  });
-
-  describe('should register', () => {
-    it('for layer', () => {
-      setupControlForLayer();
-      const registeredListeners = Object.keys(control.listeners);
-      expect(registeredListeners.length).toBe(1);
-    });
-
-    it('and re-register', () => {
-      setupControlForLayer();
-      control.setMap(map);
-
-      const registeredListeners = Object.keys(control.listeners);
-      expect(registeredListeners.length).toBe(1);
-    });
-
-    it('and unregister', () => {
-      setupControlForLayer();
-      control.setMap(null);
-
-      const registeredListeners = Object.keys(control.listeners);
-      expect(registeredListeners.length).toBe(0);
-    });
-
-    describe('only with valid layers', () => {
-      /**
-       * Set up control without a valid layer
-       */
-      const setupWithNonLayer = (value) => {
-        const options = {};
-        options[mockElementId] = value;
-        setupControlForLayer(options);
-      };
-
-      const testCases = [
-        ['null', null],
-        ['undefined', undefined],
-        ['number (0)', 0],
-        ['string ("something")', 'something'],
-      ];
-
-      test.each(testCases)('and not %s', (name, value) => {
-        setupWithNonLayer(value);
-        const registeredListeners = Object.keys(control.listeners);
-        expect(registeredListeners.length).toBe(0);
-      });
-    });
-  });
-
-  describe('with non-existend HTML IDs', () => {
-    it('should not register listeners', () => {
-      // Set up with an ID that does not exist
-      setupControlForLayer({
-        'mock-nonexisting-id': map.getLayers().item(0),
-      });
-
-      const registeredListeners = Object.keys(control.listeners);
-      expect(registeredListeners.length).toBe(1);
-    });
-
-    it('should not remove event listeners', () => {
-      // Set up with an ID that does not exist
-      setupControlForLayer({
-        'mock-nonexisting-id': map.getLayers().item(0),
-      });
-      control.setMap(map);
-
-      const registeredListeners = Object.keys(control.listeners);
-      expect(registeredListeners.length).toBe(1);
-    });
-
-    it('should not remove HTML event listeners', () => {
-      setupControlForLayer();
-      // Make the element no longer available by its ID
-      document.getElementById(mockElementId).parentElement.innerHTML = '';
-      expect(document.getElementById(mockElementId)).toBe(null);
-
-      // Re set the map
-      control.setMap(map);
-
-      const registeredListeners = Object.keys(control.listeners);
-      expect(registeredListeners.length).toBe(0);
-    });
   });
 
   describe('shoud interact', () => {
