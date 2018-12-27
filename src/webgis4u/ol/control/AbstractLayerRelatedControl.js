@@ -31,6 +31,12 @@ import Layer from 'ol/layer/Layer';
  */
 
 /**
+ * @typedef LayerActionAddedOptions
+ * @property {ol.layer.Layer} layer The layer for which the event was added
+ * @property {HTMLElement} element The element for which the event was added
+ */
+
+/**
  * Control to control layer interactivity
  *
  * @extends {module:ol.control.Control}
@@ -129,6 +135,11 @@ class AbstractLayerRelatedControl extends Control {
     };
     e.addEventListener('click', listener, false);
     this.listeners[key] = listener;
+
+    this.onLayerInteractionAdded({
+      layer,
+      element: e,
+    });
   }
 
   /**
@@ -162,6 +173,12 @@ class AbstractLayerRelatedControl extends Control {
   handleLayerInteraction() {
     throw new Error('Not implemented');
   }
+
+  /**
+   * Called when an layer interaction was added
+   * @param {LayerActionAddedOptions} options The options
+   */
+  onLayerInteractionAdded() { }
 }
 
 export default AbstractLayerRelatedControl;

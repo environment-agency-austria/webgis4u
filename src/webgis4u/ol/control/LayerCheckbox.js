@@ -36,20 +36,17 @@ class LayerCheckbox extends AbstractLayerRelatedControl {
     });
   }
 
-  addInteraction(key, layer) {
-    super.addInteraction(key, layer);
-
-    // Check if a valid layer was passed
-    if (!layer || !(layer instanceof Layer)) { return; }
-
-    // Look for the element
-    const e = document.getElementById(key);
-    if (!e) { return; }
-
-    // Update the element checked state accordingly
+  /**
+   * @inheritdoc
+   */
+  onLayerInteractionAdded({ element, layer }) {
+    const e = element;
     e.checked = layer.getVisible();
   }
 
+  /**
+   * @inheritdoc
+   */
   handleLayerInteraction(e) {
     const { layer, element } = e;
     layer.setVisible(element.checked);
