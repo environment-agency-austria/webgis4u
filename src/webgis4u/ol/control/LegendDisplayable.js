@@ -1,5 +1,5 @@
 /**
- * @module webgis4u/ol/control/LegendVisibility
+ * @module webgis4u/ol/control/LegendDisplayable
  */
 
 import { createElement } from '../../util/dom/createElement';
