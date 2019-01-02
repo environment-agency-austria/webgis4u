@@ -20,7 +20,7 @@ import AbstractLayerRelatedControl from './AbstractLayerRelatedControl';
 class LegendDisplayable extends AbstractLayerRelatedControl {
   /**
    * The value used as display style when the layer is visible
-   * @type {string}
+   * @type {object}
    * @private
    */
   styleIsDisplayable = {
@@ -30,7 +30,7 @@ class LegendDisplayable extends AbstractLayerRelatedControl {
 
   /**
    * The value used as display style when the layer is not visible
-   * @type {string}
+   * @type {object}
    * @private
    */
   styleIsNotDisplayable = {
