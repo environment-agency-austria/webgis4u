@@ -21,6 +21,7 @@ import { hasValue } from '../string/hasValue';
 export function createElement(options) {
   const {
     tag, cssClass,
+    width, height,
   } = options;
 
   // Check if a valid tag was passed
@@ -33,6 +34,10 @@ export function createElement(options) {
 
   // Add css class
   if (cssClass) { e.className = cssClass; }
+
+  // Set the size
+  if (typeof (height) === 'string') { e.style.width = width; }
+  if (typeof (height) === 'string') { e.style.height = height; }
 
   return e;
 }
