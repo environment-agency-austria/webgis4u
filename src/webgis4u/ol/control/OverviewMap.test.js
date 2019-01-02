@@ -5,7 +5,6 @@ import OverviewMap from './OverviewMap';
 describe('webgis4u/ol/control/OverviewMap', () => {
   const mockOverviewMapWrapperId = 'mock-overview-map-wrapper';
   let mockOverviewMapWrapper;
-  let mockElement2;
   let map;
   let control;
   let layers;
@@ -21,7 +20,7 @@ describe('webgis4u/ol/control/OverviewMap', () => {
   beforeEach(() => {
     // Prepare mock elements
     mockOverviewMapWrapper = document.createElement('div');
-    mockOverviewMapWrapper.id = mockOverviewMapWrapper;
+    mockOverviewMapWrapper.id = mockOverviewMapWrapperId;
     // ...and append them
     document.getElementsByTagName('body')[0].appendChild(mockOverviewMapWrapper);
     // Prepare layers
@@ -37,7 +36,6 @@ describe('webgis4u/ol/control/OverviewMap', () => {
     // Remove the mock element from the mock DOM
     document.getElementsByTagName('html')[0].innerHTML = '';
     mockOverviewMapWrapper = null;
-    mockElement2 = null;
   });
 
   it('should contain control', () => {
