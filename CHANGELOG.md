@@ -18,4 +18,5 @@ All notable changes to this project will be documented in this file.
     * [`getMapChildElementByClassName`](./src/webgis4u/util/ol/getMapChildElementByClassName.js):
     * [`pan`](./src/webgis4u/util/o#l/pan.js):
   * [`string`](./src/webgis4u/util/string.js):
+    * [`formatNumber`](./src/webgis4u/util/string/formatNumber.js):
     * [`formatText`](./src/webgis4u/util/string/formatText.js):
