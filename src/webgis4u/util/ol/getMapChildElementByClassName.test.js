@@ -1,13 +1,6 @@
 import { disposeMap, createMap, createLayers } from '../../../../test/utils/ol';
 import { getMapChildElementByClassName } from './getMapChildElementByClassName';
 
-/**
- * @typedef {Object} DebounceSetupResult
- * @property {Function} mockFunction The mock function
- * @property {number} wait The time with which the debounce function was called
- * @property {Function} debouncedFunction The debounced function
- */
-
 describe('webgis4u/util/ol/getMapChildElementByClassName', () => {
   let mapWrapper;
   let map;

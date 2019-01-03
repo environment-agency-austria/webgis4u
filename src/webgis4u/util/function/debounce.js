@@ -1,5 +1,5 @@
 /**
- * @module webgis4u/util/debounce
+ * @module webgis4u/util/function/debounce
  */
 
 /**
