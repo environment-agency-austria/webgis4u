@@ -1,5 +1,5 @@
 /**
- * @module webgis4u/util/formatText
+ * @module webgis4u/util/string/formatText
  */
 
 /**
