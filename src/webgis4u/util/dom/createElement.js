@@ -36,7 +36,7 @@ export function createElement(options) {
   if (cssClass) { e.className = cssClass; }
 
   // Set the size
-  if (typeof (height) === 'string') { e.style.width = width; }
+  if (typeof (width) === 'string') { e.style.width = width; }
   if (typeof (height) === 'string') { e.style.height = height; }
 
   return e;

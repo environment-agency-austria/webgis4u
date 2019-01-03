@@ -52,4 +52,48 @@ describe('webgis4u/util/dom/createElement', () => {
       expect(e.className).toBe('');
     });
   });
+
+  // ==================================================
+  // Option: width
+  // ==================================================
+  describe('options [width]', () => {
+    it('should be set', () => {
+      const width = '20px';
+      const e = setup({ width });
+      expect(e.style.width).toBe(width);
+    });
+
+    const testCasesOmit = [
+      ['undefined', undefined],
+      ['null', null],
+      ['string ("")', ''],
+    ];
+
+    test.each(testCasesOmit)('for (%s)', (name, width) => {
+      const e = setup({ width });
+      expect(e.style.width).toBe('');
+    });
+  });
+
+  // ==================================================
+  // Option: height
+  // ==================================================
+  describe('options [height]', () => {
+    it('should be set', () => {
+      const height = '20px';
+      const e = setup({ height });
+      expect(e.style.height).toBe(height);
+    });
+
+    const testCasesOmit = [
+      ['undefined', undefined],
+      ['null', null],
+      ['string ("")', ''],
+    ];
+
+    test.each(testCasesOmit)('for (%s)', (name, height) => {
+      const e = setup({ height });
+      expect(e.style.height).toBe('');
+    });
+  });
 });
