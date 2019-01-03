@@ -6,7 +6,7 @@ import {
   EPSG31256_ID,
   EPSG32632_ID,
   EPSG32633_ID,
-} from './epsg31287';
+} from './austria';
 
 describe('webgis4u/ol/proj/epsg31287', () => {
   it('check EPSG:4326', () => {

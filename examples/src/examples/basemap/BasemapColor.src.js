@@ -4,7 +4,7 @@ import TileLayer from 'ol/layer/Tile';
 import * as proj from 'ol/proj';
 import * as extent from 'ol/extent';
 
-import { EPSG31287_ID } from 'webgis4u/ol/proj/epsg31287';
+import { EPSG31287_ID } from 'webgis4u/ol/proj/austria';
 import Color from 'webgis4u/ol/source/basemap/Color';
 
 const EPSG3857_ID = 'EPSG:3857';

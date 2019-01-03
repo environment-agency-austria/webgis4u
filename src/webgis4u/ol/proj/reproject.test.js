@@ -3,7 +3,7 @@ import Point from 'ol/geom/Point';
 import LineString from 'ol/geom/LineString';
 
 import { reproject } from './reproject';
-import { EPSG31287_ID } from './epsg31287';
+import { EPSG31287_ID } from './austria';
 
 describe('webgis4u/ol/proj/reproject', () => {
   const epsg3857Projection = proj.get('EPSG:3857');

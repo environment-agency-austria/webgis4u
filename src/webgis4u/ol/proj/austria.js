@@ -1,6 +1,6 @@
 /**
  * @fileoverview EPSG projections relevant to the austrian area
- * @module webgis4u/ol/proj/epsg31287
+ * @module webgis4u/ol/proj/austria
  */
 
 import proj4 from 'proj4';
