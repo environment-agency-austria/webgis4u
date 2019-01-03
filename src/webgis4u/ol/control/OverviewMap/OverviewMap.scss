@@ -1,0 +1,11 @@
+@import '../common';
+
+/**
+ * Styling for control 'OverviewMap'
+ */
+.#{$controlPrefix}-overviewmap {
+  .ol-viewport {
+    box-sizing: border-box;
+    border: 1px solid black;
+  }
+}
