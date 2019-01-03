@@ -19,6 +19,7 @@ import * as extent from 'ol/extent';
 
 
 import { createElement } from '../../util/dom/createElement';
+import { getMapChildElementByClassName } from '../../util/ol/getMapChildElementByClassName';
 import { EPSG31287_ID } from '../proj/epsg31287';
 
 import { CSS_CONTROL_PREFIX } from './common';
@@ -33,13 +34,6 @@ import './OverviewMap/OverviewMap.scss';
  */
 
 /**
- * @typedef GetMapChildElementByClassNameOptions
- * @type {object}
- * @property {ol.Map} map The map
- * @property {string} className The class name
- */
-
-/**
  * Style used for the feature overlay
  */
 const defaultStyle = new Style({
@@ -48,23 +42,6 @@ const defaultStyle = new Style({
     width: 1,
   }),
 });
-
-/**
- * Retruns an element selected by its class name
- * @param {GetMapChildElementByClassNameOptions} options The options
- *
- * @returns {HTMLElement|null} The first HTML element that fits the class selector or null
- */
-function getMapChildElementByClassName(options) {
-  const { map, className } = options;
-  if (!map) { return null; }
-
-  const olMapEl = map.getTargetElement();
-  const ovEls = olMapEl.getElementsByClassName(className);
-  if (ovEls.length < 1) { return null; }
-
-  return ovEls[0];
-}
 
 /**
  * Control offering navigation via an overview map
