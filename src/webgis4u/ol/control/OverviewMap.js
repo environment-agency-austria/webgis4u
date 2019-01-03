@@ -44,11 +44,13 @@ const defaultStyle = new Style({
 });
 
 /**
+ * The root CSS class
+ */
+export const CSS_CLASS = `${CSS_CONTROL_PREFIX}-overviewmap`;
+/**
  * Control offering navigation via an overview map
  */
 class OverviewMap extends Control {
-  rootClass = `${CSS_CONTROL_PREFIX}-overviewmap`;
-
   extent = [99E3, 279E3, 695E3, 582E3];
 
   projection = proj.get(EPSG31287_ID);
@@ -171,7 +173,7 @@ class OverviewMap extends Control {
    */
   setMap(map) {
     if (this.oldMap) {
-      this.oldMap_.getView().un('propertychange', this.handleViewPropertyChanged);
+      this.oldMap.getView().un('propertychange', this.handleViewPropertyChanged);
       this.element.innerText = '';
     }
     this.disposeOverviewMap();
@@ -185,7 +187,7 @@ class OverviewMap extends Control {
     const view = map.getView();
 
     const overviewMapDiv = this.controlTarget
-      || getMapChildElementByClassName({ map, className: this.rootClass });
+      || getMapChildElementByClassName({ map, className: CSS_CLASS });
 
     // Create the overview map
     this.overviewMap = this.createOverviewMap({
