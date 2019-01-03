@@ -14,3 +14,4 @@ All notable changes to this project will be documented in this file.
 * Added utils:
   * [`ol`](./src/webgis4u/util/ol.js):
     * [`getMapChildElementByClassName`](./src/webgis4u/util/ol/getMapChildElementByClassName.js):
+    * [`pan`](./src/webgis4u/util/ol/pan.js):

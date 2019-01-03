@@ -4,3 +4,4 @@
  */
 
 export * from './ol/getMapChildElementByClassName';
+export * from './ol/pan';

@@ -1,5 +1,5 @@
 /**
- * @module webgis4u/util/pan
+ * @module webgis4u/util/ol/pan
  */
 
 import { getSize } from 'ol/extent';
