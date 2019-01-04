@@ -19,4 +19,5 @@ All notable changes to this project will be documented in this file.
     * [`pan`](./src/webgis4u/util/o#l/pan.js):
   * [`string`](./src/webgis4u/util/string.js):
     * [`formatNumber`](./src/webgis4u/util/string/formatNumber.js):
+    * [`formatUnitValue`](./src/webgis4u/util/string/formatUnitValue.js):
     * [`formatText`](./src/webgis4u/util/string/formatText.js):
