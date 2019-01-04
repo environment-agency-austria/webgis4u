@@ -28,6 +28,7 @@ import { EPSG31287_ID } from '../proj/austria';
 export const MeasurementTypeEnum = {
   /** Area */
   Area: 'area',
+  /** Distance */
   Distance: 'distance',
 };
 
@@ -48,6 +49,19 @@ function GetClassForType(measurementType) {
     case MeasurementTypeEnum.Distance: return 'LineString';
     default: throw new Error('Unsupported type');
   }
+}
+
+/**
+ * @param {MeasurementTypeEnum} value The value
+ * @returns {MeasurementTypeEnum} The passed value or the default type
+ */
+function getMeasurementTypeOrDefault(value) {
+  const keys = Object.keys(MeasurementTypeEnum);
+  const result = keys.find(key => MeasurementTypeEnum[key] === value);
+
+  return (result)
+    ? value
+    : DFEAULT_MEASUREMENT_TYPE;
 }
 
 /**
@@ -96,6 +110,9 @@ class Measure extends Control {
       source,
       style: getStyle(3, 6, SELECT_STROKE, SELECT_FILL, this.lineDash),
     });
+
+    const initialMeasurementType = options && options.type;
+    this.measurementType_ = getMeasurementTypeOrDefault(initialMeasurementType);
   }
 
   /**
@@ -108,12 +125,7 @@ class Measure extends Control {
    * @param {MeasurementTypeEnum} value The type
    */
   set measurementType(value) {
-    if (MeasurementTypeEnum[value]) {
-      this.measurementType_ = value;
-    } else {
-      this.measurementType_ = DFEAULT_MEASUREMENT_TYPE;
-    }
-
+    this.measurementType_ = getMeasurementTypeOrDefault(value);
     this.addInteraction(this.measurementType_);
   }
 
@@ -213,17 +225,27 @@ class Measure extends Control {
     });
 
     this.oldMap_.addInteraction(this.draw);
+    this.draw.on('drawstart', this.onDrawStart);
+    this.draw.on('drawend', this.onDrawEnd);
+  }
 
-    this.draw.on('drawstart', (evt) => {
-      // set sketch
-      this.sketch = evt.feature;
-      this.toggleElement(true);
-    });
+  /**
+   * Event handler for the draw start event
+   * @private
+   */
+  onDrawStart = (evt) => {
+    // set sketch
+    this.sketch = evt.feature;
+    this.toggleElement(true);
+  }
 
-    this.draw.on('drawend', () => {
-      // unset sketch
-      this.sketch = null;
-    });
+  /**
+   * Event handler for the draw end event
+   * @private
+   */
+  onDrawEnd = () => {
+    // unset sketch
+    this.sketch = null;
   }
 
   /**
