@@ -4,5 +4,6 @@
  */
 
 export * from './string/formatNumber';
+export * from './string/formatUnitValue';
 export * from './string/formatText';
 export * from './string/hasValue';

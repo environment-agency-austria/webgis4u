@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
   * [`LayerRadioButton`](./src/webgis4u/ol/control/LayerRadioButton.js)
   * [`LegendDisplayable`](./src/webgis4u/ol/control/LegendDisplayable.js)
   * [`LegendVisibility`](./src/webgis4u/ol/control/LegendVisibility.js)
+  * [`Measure`](./src/webgis4u/ol/control/Measure.js)
   * [`OverviewMap`](./src/webgis4u/ol/control/OverviewMap.js)
 * Added utils:
   * [`function`](./src/webgis4u/util/function.js):
@@ -19,4 +20,5 @@ All notable changes to this project will be documented in this file.
     * [`pan`](./src/webgis4u/util/o#l/pan.js):
   * [`string`](./src/webgis4u/util/string.js):
     * [`formatNumber`](./src/webgis4u/util/string/formatNumber.js):
+    * [`formatUnitValue`](./src/webgis4u/util/string/formatUnitValue.js):
     * [`formatText`](./src/webgis4u/util/string/formatText.js):
