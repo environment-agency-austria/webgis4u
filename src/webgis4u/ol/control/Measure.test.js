@@ -1,17 +1,20 @@
+import LineString from 'ol/geom/LineString';
+import Polygon from 'ol/geom/Polygon';
+
 import { disposeMap, createMap, createLayers } from '../../../../test/utils/ol';
 
 import Measure, { MeasurementTypeEnum, CSS_CLASS as MeasureCssClass } from './Measure';
 
 import * as moduleFormatUnitValue from '../../util/string/formatUnitValue';
-
+import * as moduleReproject from '../proj/reproject';
 
 describe('webgis4u/ol/control/OverviewMap', () => {
-  // let mockOverviewMapWrapper;
   let map;
   let control;
   let layers;
 
   const spyFormatUnitValue = jest.spyOn(moduleFormatUnitValue, 'formatUnitValue');
+  const spyReproject = jest.spyOn(moduleReproject, 'reproject');
   /**
    * Set up the control
    */
@@ -21,10 +24,7 @@ describe('webgis4u/ol/control/OverviewMap', () => {
   };
 
   beforeEach(() => {
-    // Prepare mock elements
-    // Prepare layers
     layers = createLayers({ count: 1 });
-    // Prepare map
     map = createMap({ layers });
   });
 
@@ -32,10 +32,7 @@ describe('webgis4u/ol/control/OverviewMap', () => {
     disposeMap(map);
     map = null;
     control = null;
-    // Remove the mock element from the mock DOM
     document.getElementsByTagName('html')[0].innerHTML = '';
-    // mockOverviewMapWrapper = null;
-    //
   });
 
   describe('should contain control', () => {
@@ -94,7 +91,7 @@ describe('webgis4u/ol/control/OverviewMap', () => {
 
     it('should not toggle if no element', () => {
       setupControl();
-      control.element.parentNode.removeChild(control.element);
+      control.element = null;
       control.toggleElement(true);
       expect(1).toBe(1);
     });
@@ -112,6 +109,77 @@ describe('webgis4u/ol/control/OverviewMap', () => {
       spyFormatUnitValue.mockImplementationOnce(() => '15 m');
       const result = control.displayLength(15);
       expect(result).toBe('L&auml;nge: 15 m');
+    });
+  });
+
+  describe('updateMeasurement', () => {
+    it('should do nothing if sketch is null', () => {
+      setupControl();
+      control.sketch = null;
+      control.updateMeasurement();
+      expect(1).toBe(1);
+      control.handleMeasurementShouldUpdate();
+      expect(1).toBe(1);
+    });
+    it('should do nothing if sketch geometry is null', () => {
+      setupControl();
+      control.sketch = {
+        getGeometry: jest.fn(),
+      };
+      control.updateMeasurement();
+      expect(1).toBe(1);
+    });
+    it('should update for Polygon', () => {
+      setupControl();
+      control.sketch = {
+        getGeometry: jest.fn(() => new Polygon([], 'XY')),
+      };
+      spyReproject.mockImplementationOnce(() => ({
+        getArea: jest.fn(() => 15),
+        getLength: jest.fn(() => 15),
+      }));
+
+      control.updateMeasurement();
+
+      expect(control.element.innerHTML).toBe('Fläche: 15,00 m<sup>2</sup>');
+    });
+    it('should update for LineString', () => {
+      setupControl();
+      control.sketch = {
+        getGeometry: jest.fn(() => new LineString([], 'XY')),
+      };
+      spyReproject.mockImplementationOnce(() => ({
+        getArea: jest.fn(() => 15),
+        getLength: jest.fn(() => 15),
+      }));
+
+      control.updateMeasurement();
+
+      expect(control.element.innerHTML).toBe('Länge: 15,00 m');
+    });
+  });
+
+  describe('draw event handlers', () => {
+    it('should unset sketch on draw end', () => {
+      setupControl();
+      control.onDrawEnd();
+      expect(control.sketch).toBeNull();
+    });
+
+    it('should set sketch on draw start', () => {
+      const mockFeature = jest.fn();
+      setupControl();
+      control.onDrawStart({ feature: mockFeature });
+      expect(control.sketch).toBe(mockFeature);
+    });
+  });
+
+  describe('addInteraction', () => {
+    it('should fail on invalid interaction type', () => {
+      setupControl();
+      expect(() => {
+        control.addInteraction('mock-type');
+      }).toThrow();
     });
   });
 });

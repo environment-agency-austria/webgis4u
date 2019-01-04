@@ -157,12 +157,8 @@ class Measure extends Control {
 
     this.oldMap_ = map;
     if (map) {
-      try {
-        this.measurementType = this.measurementType;
-        this.oldMap_.addLayer(this.vector);
-      } catch (e) {
-        console.log(e);
-      }
+      this.measurementType = this.measurementType;
+      this.oldMap_.addLayer(this.vector);
       this.oldMap_.on('pointermove', this.handleMeasurementShouldUpdate);
     }
 
