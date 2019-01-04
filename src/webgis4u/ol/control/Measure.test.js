@@ -3,7 +3,7 @@ import Polygon from 'ol/geom/Polygon';
 
 import { disposeMap, createMap, createLayers } from '../../../../test/utils/ol';
 
-import Measure, { MeasurementTypeEnum, CSS_CLASS as MeasureCssClass } from './Measure';
+import Measure, { MeasurementTypeEnum } from './Measure';
 
 import * as moduleFormatUnitValue from '../../util/string/formatUnitValue';
 import * as moduleReproject from '../proj/reproject';
