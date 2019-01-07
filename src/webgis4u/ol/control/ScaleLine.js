@@ -5,6 +5,7 @@
 import Control from 'ol/control/Control';
 
 import { createElement } from '../../util/dom/createElement';
+import { convertUnitValue } from '../../util/number/convertUnitValue';
 import { getScale } from '../util/getScale';
 import { CSS_CONTROL_PREFIX } from './common';
 
@@ -24,6 +25,7 @@ const ScaleLineUnits = {
  * @type {string}
  */
 const CSS_CLASS = `${CSS_CONTROL_PREFIX}-scaleline`;
+const CSS_CLASS_SCALE = `${CSS_CONTROL_PREFIX}-scale`;
 const CSS_CLASS_SCALEBAR = `${CSS_CONTROL_PREFIX}-scalebar`;
 
 /**
@@ -164,6 +166,11 @@ class ScaleLine extends Control {
     element.setAttribute('data-visible', isVisible);
   }
 
+  /**
+   * Updates the element
+   *
+   * @private
+   */
   updateElement = () => {
     const viewState = this.getMap().getView();
     if (viewState === null) {
@@ -176,22 +183,22 @@ class ScaleLine extends Control {
 
     const units = this.units_;
 
-
     const scale = getScale(this.getMap());
     const { formated } = scale;
     let { resolution } = scale;
     const nominalCount = this.minWidth_ * resolution;// pointResolution;
     let unit = '';
     if (units === ScaleLineUnits.METRIC) {
-      if (nominalCount < 1) {
-        unit = 'mm';
-        resolution *= 1000;
-      } else if (nominalCount < 1000) {
-        unit = 'm';
-      } else {
-        unit = 'km';
-        resolution /= 1000;
-      }
+      const { unit: targetUnit } = convertUnitValue({
+        value: nominalCount,
+        units: [
+          { abbreviation: 'mm', factor: 0.001 },
+          { abbreviation: 'm', fallback: true },
+          { abbreviation: 'km', factor: 1000 },
+        ],
+      });
+      unit = targetUnit.abbreviation;
+      resolution /= targetUnit.factor;
     } else {
       console.log('Invalid units in scale line');
     }
@@ -202,7 +209,7 @@ class ScaleLine extends Control {
     let length;
     let size;
 
-    while (true) {
+    do {
       length = LEADING_DIGITS[i % 3]
               * (10 ** Math.floor(i / 3));
       size = Math.round(length / resolution);
@@ -211,14 +218,16 @@ class ScaleLine extends Control {
         this.toggleElement(false);
         this.renderedVisible_ = false;
         return;
-      } if (size >= this.minWidth_) {
-        break;
       }
+      if (size >= this.minWidth_) { break; }
+      // eslint-disable-next-line no-plusplus
       ++i;
-    }
-
+    } while (true);
 
     const html = length + unit;
+    console.error('this are the values', {
+      length, size, html,
+    });
 
     // draw the scalebar
     if (this.renderedHTML_ !== html) {
@@ -244,7 +253,7 @@ class ScaleLine extends Control {
   }
 
   /**
-   * Update the scale
+   * Update the scale element
    *
    * @param {object} options The options
    * @param {number} options.size The width.
@@ -252,14 +261,14 @@ class ScaleLine extends Control {
    * @param {boolean} options.showScale If `true` the resolution will be shown
    */
   updateScale(options) {
-    const scaleElements = document.getElementsByClassName('.ugis-ctrl-scale');
+    const scaleElements = document.getElementsByClassName(CSS_CLASS_SCALE);
     if (scaleElements.length === 0) { return; }
 
     const { size, resolution, showScale } = options;
 
-    const _scale = scaleElements[0];
-    _scale.style.left = size + 50;
-    _scale.innerHTML = (!showScale)
+    const scale = scaleElements[0];
+    scale.style.left = size + 50;
+    scale.innerHTML = (!showScale)
       ? ''
       : `M ${resolution}`;
   }
