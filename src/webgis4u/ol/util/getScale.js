@@ -29,26 +29,26 @@ import { EPSG31287_ID } from '../proj/austria';
  * ugis.ol.util.getScale(myMap);
  */
 export function getScale(map) {
-  let _pointRes;
-  let massstab;
+  let resolution;
+  let denominator;
   try {
     const mapSize = map.getSize();
     const mapView = map.getView();
     const mapViewProjection = mapView.getProjection();
 
-    _pointRes = getWidth(
+    resolution = getWidth(
       transformExtent(mapView.calculateExtent(mapSize), mapViewProjection, EPSG31287_ID),
     ) / mapSize[0];
     if (mapViewProjection.getUnits() === 'm') {
-      massstab = Math.round(72 / 0.0254 * _pointRes);
+      denominator = Math.round(72 / 0.0254 * resolution);
     }
   } catch (e) {
-    //console.log(e);
+    // console.log(e);
   }
 
   return {
-    resolution: _pointRes,
-    denominator: massstab,
-    formated: `1: ${formatNumber(massstab, 0)}`,
+    resolution,
+    denominator,
+    formated: `1: ${formatNumber(denominator, 0)}`,
   };
 }
