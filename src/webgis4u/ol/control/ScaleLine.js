@@ -15,7 +15,7 @@ import './ScaleLine/ScaleLine.scss';
  * Units for the scale line (at this time only internal ).
  * @enum {string}
  */
-const ScaleLineUnits = {
+export const ScaleLineUnitEnum = {
   METRIC: 'metric',
 };
 
@@ -24,9 +24,9 @@ const ScaleLineUnits = {
  * The root CSS class
  * @type {string}
  */
-const CSS_CLASS = `${CSS_CONTROL_PREFIX}-scaleline`;
-const CSS_CLASS_SCALE = `${CSS_CONTROL_PREFIX}-scale`;
-const CSS_CLASS_SCALEBAR = `${CSS_CONTROL_PREFIX}-scalebar`;
+export const CSS_CLASS = `${CSS_CONTROL_PREFIX}-scaleline`;
+export const CSS_CLASS_SCALE = `${CSS_CONTROL_PREFIX}-scale`;
+export const CSS_CLASS_SCALEBAR = `${CSS_CONTROL_PREFIX}-scalebar`;
 
 /**
  * @const
@@ -39,10 +39,16 @@ const LEADING_DIGITS = [1, 2, 5];
  */
 class ScaleLine extends Control {
   /**
-   * @type {ScaleLineUnits|undefined}
+   * If `true`, the scale is shown
+   * @type {boolean}
+   */
+  static SHOW_SCALE = true;
+
+  /**
+   * @type {ScaleLineUnitEnum|undefined}
    * @private
    */
-  units_ = ScaleLineUnits.METRIC;
+  units_ = ScaleLineUnitEnum.METRIC;
 
   /**
    * Stores the canvas
@@ -76,12 +82,12 @@ class ScaleLine extends Control {
   }
 
   /**
-   * @return {ScaleLineUnits|undefined} The units to use in the scale line.
+   * @return {ScaleLineUnitEnum|undefined} The units to use in the scale line.
    */
   getUnits() { return this.units_; }
 
   /**
-   * @param {ScaleLineUnits} value The units to use in the scale line.
+   * @param {ScaleLineUnitEnum} value The units to use in the scale line.
    */
   setUnits(value) { this.units_ = value; }
 
@@ -164,6 +170,7 @@ class ScaleLine extends Control {
 
     if (!element) { return; }
     element.setAttribute('data-visible', isVisible);
+    this.renderedVisible_ = isVisible;
   }
 
   /**
@@ -176,7 +183,6 @@ class ScaleLine extends Control {
     if (viewState === null) {
       if (this.renderedVisible_) {
         this.toggleElement(false);
-        this.renderedVisible_ = false;
       }
       return;
     }
@@ -184,11 +190,12 @@ class ScaleLine extends Control {
     const units = this.units_;
 
     const scale = getScale(this.getMap());
+    console.error('scale', scale);
     const { formated } = scale;
     let { resolution } = scale;
     const nominalCount = this.minWidth_ * resolution;// pointResolution;
     let unit = '';
-    if (units === ScaleLineUnits.METRIC) {
+    if (units === ScaleLineUnitEnum.METRIC) {
       const { unit: targetUnit } = convertUnitValue({
         value: nominalCount,
         units: [
@@ -209,38 +216,35 @@ class ScaleLine extends Control {
     let length;
     let size;
 
+    // Calculate the scale to use
     do {
       length = LEADING_DIGITS[i % 3]
               * (10 ** Math.floor(i / 3));
+      console.error('length', length);
       size = Math.round(length / resolution);
+      console.error('size', size);
 
       if (Number.isNaN(size)) {
         this.toggleElement(false);
-        this.renderedVisible_ = false;
         return;
       }
-      if (size >= this.minWidth_) { break; }
-      // eslint-disable-next-line no-plusplus
-      ++i;
-    } while (true);
+
+      i += 1;
+    } while (size < this.minWidth_);
 
     const html = length + unit;
-    console.error('this are the values', {
-      length, size, html,
-    });
+    console.error('html', html);
 
     // draw the scalebar
     if (this.renderedHTML_ !== html) {
       this.element.setAttribute('title', `Ma${String.fromCharCode(223)}stab ${formated}`);
-      // this.updateScale({ size, resolution: formated, showScale: ugis.ol.control.SHOW_SCALE });
-      this.updateScale({ size, resolution: formated, showScale: true });
+      this.updateScale({ size, resolution: formated, showScale: ScaleLine.SHOW_SCALE });
       this.renderedHTML_ = html;
     }
 
     this.draw({ unit, length, size, canvas: this.canvas_ });
     if (!this.renderedVisible_) {
       this.toggleElement(true);
-      this.renderedVisible_ = true;
     }
   }
 
@@ -249,7 +253,7 @@ class ScaleLine extends Control {
    * @returns The scale line as base 64 encoded image.
    */
   export() {
-    this.getCanvas().toDataURL('image/png');
+    return this.getCanvas().toDataURL('image/png');
   }
 
   /**
