@@ -2,8 +2,7 @@ import { formatUnitValue } from './formatUnitValue';
 
 describe('webgis4u/util/string/formatUnitValue', () => {
   const mockUnits = [
-    // TODO: Make code work with fraction units
-    // { abbreviation: 'mm', factor: 0.001, limit: 0.001 },
+    { abbreviation: 'mm', factor: 0.001, limit: 0.001 },
     { abbreviation: 'm', fallback: true },
     { abbreviation: 'hm', factor: 100 },
     { abbreviation: 'km', factor: 1000, limit: 1000 },
@@ -11,6 +10,7 @@ describe('webgis4u/util/string/formatUnitValue', () => {
 
   const testCases = [
     // Without decimals
+    ['1 mm', 0.001, 0],
     ['0 m', 0, 0],
     ['1 m', 1, 0],
     ['10 m', 10, 0],

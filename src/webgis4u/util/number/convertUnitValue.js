@@ -28,7 +28,7 @@
 
 /**
  * Formats a value according to the passed options
- * @param {convertUnitValue} options The options
+ * @param {ConvertUnitValueOptions} options The options
  *
  * @returns {ConvertUnitValueResult}
  */
@@ -38,15 +38,18 @@ export function convertUnitValue(options) {
   let fallbackUnit = units[0];
   let nearestUnit;
   let nearestUnitLimitDistance = Number.POSITIVE_INFINITY;
+  const absValue = Math.abs(value);
 
   // Find the unit to use
   units.forEach((u) => {
-    const { factor } = u;
-    let { limit } = u;
+    let { limit, factor } = u;
 
-    // Limit is the given limit or the factor
-    limit = u.limit || ((factor === undefined) ? 1 : factor);
-    const limitDistance = value - limit;
+    // Default factor to 1
+    factor = (factor === undefined) ? 1 : factor;
+    // Default limit to the value of factor
+    limit = u.limit || factor;
+
+    const limitDistance = absValue - limit;
     if (limitDistance >= 0 && limitDistance < nearestUnitLimitDistance) {
       nearestUnit = u;
       nearestUnitLimitDistance = limitDistance;
@@ -57,12 +60,11 @@ export function convertUnitValue(options) {
     }
   });
 
-  const unit = nearestUnit || fallbackUnit;
-  const { factor } = unit;
+  const unitToUse = nearestUnit || fallbackUnit;
   // Let the factor default to 1
-  const convertedValue = (factor !== undefined)
-    ? value / factor
-    : value;
+  const unit = { factor: 1, ...unitToUse };
+  const { factor } = unit;
+  const convertedValue = value / factor;
 
   return {
     value,
