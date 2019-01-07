@@ -12,9 +12,12 @@ All notable changes to this project will be documented in this file.
   * [`LegendVisibility`](./src/webgis4u/ol/control/LegendVisibility.js)
   * [`Measure`](./src/webgis4u/ol/control/Measure.js)
   * [`OverviewMap`](./src/webgis4u/ol/control/OverviewMap.js)
+  * [`ScaleLine`](./src/webgis4u/ol/control/ScaleLine.js)
 * Added utils:
   * [`function`](./src/webgis4u/util/function.js):
     * [`debounce`](./src/webgis4u/util/function/debounce.js):
+  * [`number`](./src/webgis4u/util/number.js):
+    * [`convertUnitValue`](./src/webgis4u/util/number/convertUnitValue.js):
   * [`ol`](./src/webgis4u/util/ol.js):
     * [`getMapChildElementByClassName`](./src/webgis4u/util/ol/getMapChildElementByClassName.js):
     * [`pan`](./src/webgis4u/util/o#l/pan.js):
