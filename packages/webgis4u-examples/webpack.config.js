@@ -22,7 +22,7 @@ const dirDist = path.resolve(__dirname, dirNames.build);
 /**
  * Directory to the library entry point
  */
-const dirLibSource = path.resolve(__dirname, '../src/webgis4u');
+const dirLibSource = path.resolve(__dirname, '../../src/webgis4u');
 const appEntry = path.resolve(dirSource, 'index.js');
 const appHtml = path.resolve(__dirname, dirNames.public, 'index.html');
 
@@ -43,7 +43,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, '../'),
+        include: path.resolve(__dirname, '../../'),
         exclude: /(node_modules|bower_components|build|coverage)/,
         use: {
           loader: 'babel-loader',

@@ -1,32 +1,14 @@
 {
-  "name": "webgis4u",
+  "name": "webgis4u-examples",
   "private": true,
   "version": "0.0.1-development",
   "main": "build/index.js",
   "scripts": {
-    "doc:generate": "node_modules/.bin/jsdoc -c jsdoc.config.js",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "start": "webpack --watch --mode development",
-    "start:all": "yarn start && lerna run start",
+    "start": "webpack-dev-server --open",
     "build": "webpack -p",
-    "build:all": "yarn build && lerna run build",
-    "lint": "eslint src/**",
-    "prepublishOnly": "yarn build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/environment-agency-austria/webgis4u.git"
+    "lint": "eslint src/**"
   },
   "license": "BSD-2-Clause",
-  "bugs": {
-    "url": "https://github.com/environment-agency-austria/webgis4u/issues"
-  },
-  "homepage": "https://github.com/environment-agency-austria/webgis4u#readme",
-  "workspaces": [
-    "packages/*"
-  ],
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.2.3",
@@ -35,11 +17,8 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
-    "coveralls": "^3.0.2",
     "css-loader": "^2.0.1",
     "eslint": "^5.4.0",
     "eslint-config-airbnb": "^17.0.0",
@@ -50,17 +29,16 @@
     "eslint-plugin-react": "^7.11.1",
     "html-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^23.6.0",
-    "jest-canvas-mock": "^1.1.0",
-    "jsdoc": "^3.5.5",
-    "lerna": "^3.9.0",
     "node-sass": "^4.11.0",
+    "prismjs": "^1.15.0",
+    "raw-loader": "^1.0.0",
     "resolve-url-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.23.1",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
     "ol": "^5.3.0",
