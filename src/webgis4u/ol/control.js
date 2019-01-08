@@ -9,3 +9,4 @@ export { default as LegendVisibility } from './control/LegendVisibility';
 export { default as Measure } from './control/Measure';
 export { default as OverviewMap } from './control/OverviewMap';
 export { default as PanBar } from './control/PanBar';
+export { default as ScaleLine } from './control/ScaleLine';

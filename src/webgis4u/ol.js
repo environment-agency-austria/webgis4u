@@ -6,3 +6,4 @@ export * from './ol/control';
 export * from './ol/proj';
 export * from './ol/source';
 export * from './ol/style';
+export * from './ol/util';
