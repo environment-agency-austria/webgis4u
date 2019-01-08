@@ -35,6 +35,25 @@ export const CSS_CLASS_SCALEBAR = `${CSS_CONTROL_PREFIX}-scalebar`;
 const LEADING_DIGITS = [1, 2, 5];
 
 /**
+ * Get the units for function `convertUnitValue`
+ *
+ * @param {ScaleLineUnitEnum} scaleLineUnit The scale line unit
+ *
+ * @returns {undefined|Array<module:webgis4u/util/number/convertUnitValue~Unit>}
+ */
+function getConvertUnitsForScaleLineUnit(scaleLineUnit) {
+  switch (scaleLineUnit) {
+    case ScaleLineUnitEnum.METRIC:
+      return [
+        { abbreviation: 'mm', factor: 0.001 },
+        { abbreviation: 'm', fallback: true },
+        { abbreviation: 'km', factor: 1000 },
+      ];
+    default: return undefined;
+  }
+}
+
+/**
  *
  */
 class ScaleLine extends Control {
@@ -194,19 +213,15 @@ class ScaleLine extends Control {
     let { resolution } = scale;
     const nominalCount = this.minWidth_ * resolution;// pointResolution;
     let unit = '';
-    if (units === ScaleLineUnitEnum.METRIC) {
+    // Get the converted value
+    const convertUnits = getConvertUnitsForScaleLineUnit(units);
+    if (convertUnits) {
       const { unit: targetUnit } = convertUnitValue({
         value: nominalCount,
-        units: [
-          { abbreviation: 'mm', factor: 0.001 },
-          { abbreviation: 'm', fallback: true },
-          { abbreviation: 'km', factor: 1000 },
-        ],
+        units: convertUnits,
       });
       unit = targetUnit.abbreviation;
       resolution /= targetUnit.factor;
-    } else {
-      console.log('Invalid units in scale line');
     }
 
     let i = 3 * Math.floor(
