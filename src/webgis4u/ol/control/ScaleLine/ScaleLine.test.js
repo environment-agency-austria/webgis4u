@@ -11,6 +11,7 @@ describe('webgis4u/ol/control/OverviewMap', () => {
   let layers;
 
   const spyOlUtilGetScale = jest.spyOn(moduleOlUtilGetScale, 'getScale');
+  const spyConvertUnitValue = jest.spyOn(moduleConvertUnitValue, 'convertUnitValue');
 
   const mockGetScaleResult = { resolution: 841.513895570164, denominator: 2385394, formated: '1: 2.385.394' };
   /**
@@ -24,6 +25,15 @@ describe('webgis4u/ol/control/OverviewMap', () => {
   beforeEach(() => {
     layers = createLayers({ count: 1 });
     map = createMap({ layers });
+    // Prepare mocks
+    spyConvertUnitValue.mockImplementation(({ value }) => {
+      const unit = { abbreviation: 'km', factor: 1000 };
+      return {
+        value,
+        unit,
+        convertedValue: value * unit.factor,
+      };
+    });
   });
 
   afterEach(() => {
@@ -31,6 +41,9 @@ describe('webgis4u/ol/control/OverviewMap', () => {
     map = null;
     control = null;
     document.getElementsByTagName('html')[0].innerHTML = '';
+    // Set back mocks
+    spyConvertUnitValue.mockClear();
+    spyOlUtilGetScale.mockClear();
   });
 
   describe('should contain control', () => {

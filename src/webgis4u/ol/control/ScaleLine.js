@@ -190,7 +190,6 @@ class ScaleLine extends Control {
     const units = this.units_;
 
     const scale = getScale(this.getMap());
-    console.error('scale', scale);
     const { formated } = scale;
     let { resolution } = scale;
     const nominalCount = this.minWidth_ * resolution;// pointResolution;
@@ -220,9 +219,7 @@ class ScaleLine extends Control {
     do {
       length = LEADING_DIGITS[i % 3]
               * (10 ** Math.floor(i / 3));
-      console.error('length', length);
       size = Math.round(length / resolution);
-      console.error('size', size);
 
       if (Number.isNaN(size)) {
         this.toggleElement(false);
@@ -233,7 +230,6 @@ class ScaleLine extends Control {
     } while (size < this.minWidth_);
 
     const html = length + unit;
-    console.error('html', html);
 
     // draw the scalebar
     if (this.renderedHTML_ !== html) {
