@@ -24,6 +24,8 @@ jobs:
           tags: true
     - stage: Docs
       name: "Generate docs"
+      # Only generate docs for branch master
+      if: branch = master
       script: "yarn doc:generate"
       deploy:
         provider: pages
