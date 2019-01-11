@@ -1,0 +1,46 @@
+/*
+    Created on : 05.01.2015, 10:05:09
+    Author     : hadrbolec
+*/
+
+.embedded-map {
+    max-width: 1200px;
+    min-width:960px;
+}
+
+.embedded-container {
+  .embedded-header {
+       border-top:5px solid #ccc;
+      padding:20px;
+      background-color: darkgray;
+  }
+
+  .embedded-nav {
+      vertical-align: top;
+      width:250px;
+      padding:20px;
+      background-color: lightgray;
+  }
+
+  .embedded-content {
+      vertical-align: top;
+      background-color: #ffffff;
+      min-height:600px;
+      left:250px;
+      right:250px;
+      padding:20px;
+  }
+  .embedded-aside {
+      vertical-align: top;
+      padding:20px;
+      width:250px;
+       background-color: lightgray;
+  }
+
+  .embedded-footer {
+      border-top:5px solid #ccc;
+      padding: 20px;
+      background-color: darkgrey;
+      font-size: smaller;
+  }
+}

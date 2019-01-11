@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.1-development",
   "main": "build/index.js",
+  "bin": "scripts/cli.js",
   "scripts": {
     "doc:generate": "node_modules/.bin/jsdoc -c jsdoc.config.js",
     "test": "jest",
@@ -11,8 +12,12 @@
     "test:ci": "yarn test:coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "start": "webpack --watch --mode development",
     "start:all": "yarn start && lerna run start",
-    "build": "webpack -p",
+    "build": "yarn build:module && yarn build:templates",
+    "build:module": "webpack -p",
+    "build:templates": "yarn cli -out ./build/templates",
     "build:all": "yarn build && lerna run build",
+    "templates:examples": "yarn cli -out ./build/templates_examples -templates ./src/html_fragment",
+    "cli": "node ./scripts/cli.js",
     "lint": "eslint src/**",
     "prepublishOnly": "yarn build"
   },
@@ -30,7 +35,9 @@
   ],
   "sideEffects": false,
   "files": [
-    "./build"
+    "./build",
+    "./scripts",
+    ".pug"
   ],
   "devDependencies": {
     "@babel/core": "^7.1.2",

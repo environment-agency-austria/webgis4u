@@ -1,0 +1,115 @@
+// Begin: u-gis large map template
+div(unselectable="on", class="webgis4u-large-map-template unselectable")
+  // Begin: large map header
+  div(class="webgis4u-header")
+    // Begin: custom application specific logo
+    div(class="webgis4u-logoLeft") U-GIS
+    // End: custom application specific logo
+
+    // Begin: optional search
+    div(class="webgis4u-control-search")
+      label(for="webgis4uSearchField") Suche:
+      input(name="webgis4uSearchField", type="text", maxlength="100", placeholder="Suche eingeben ...")
+    // End optional search
+    // Begin: optional card menu
+    div(class="webgis4u-card-menu")
+      nav
+      if card_menu
+        !=cardMenu
+    // End: optional card menu
+
+    // Begin: logo right
+    div(class="webgis4u-logoRight") Logo right
+    // End: logo right
+  // End: large map header
+
+  // Begin: large map
+  div#webgis4u-large-map(class="webgis4u-large-map", tabindex="0")
+    // Begin: toolswitcher container
+    div(class="webgis4u-toolswitcher-sliders")
+      button(class="webgis4u-toolswitcher-slider map") Karten
+      button(class="webgis4u-toolswitcher-slider functions") Funktionen
+    div(class="webgis4u-toolswitcher-content")
+      // Begin: display and hide map layer
+      div(class="webgis4u-toolswitcher-map-content", style="display: none")
+        // Begin: display and hide layer content
+        if tool_switcher_layers
+          !=tool_switcher_layers
+        // End: display and hide layer content
+      // Begin: select and deselect tools and display overview map
+      div(class="webgis4u-toolswitcher-functions-content")
+        ul
+          // Begin: show mouse coordinates
+          li
+            input(type="checkbox", name="webgis4uDisplayMousePosition", checked="checked")
+            label(for="webgis4uDisplayMousePosition") Koordinaten
+          // End: show mouse coordinates
+          // Begin: show sacle line
+          li
+            input(type="checkbox", name="webgis4uScaleLine", checked="checked")
+            label(for="webgis4uScaleLine") Ma&szlig;stab
+          // End: show scale line
+        ul
+          // Begin: custom tools
+          if tool_switcher_functions
+            !=tool_switcher_functions
+          // End: custom tools
+          // Begin: measure distance
+          li(class="webgis4u-ts-togglebutton")
+            input(type="radio", name="webgis4u-ts-toggle",  id="webgis4uMeasureDistance", value="measureDistance")
+            label(for="webgis4uMeasureDistance") Distanzmessung
+          // End: measure distance
+          // Begin: measure area
+          li(class="webgis4u-ts-togglebutton")
+            input(type="radio", name="webgis4u-ts-toggle", id="webgis4uMeasureArea", value="measureArea")
+            label(for="webgis4uMeasureArea") Fl&auml;chenberechnung
+          // End: measure area
+          // Begin: show overview map
+          li
+            div(class="webgis4u-ctrl-overviewmap")
+          // End: webgis4u overviewmap
+        // End: select and deselect tools and display overview map
+        // Begin closes the toolswitcher content
+      div(class="webgis4u-toolswitcher-close")
+        div(class="webgis4u-toolswitcher-hr")
+    // End: toolswitcher container
+
+    // Begin: link panel
+    div(class="webgis4u-linkpanel")
+      if link_panel
+        !=link_panel
+    // End: link panel
+
+    // Begin: copyright message
+    div(class="webgis4u-copyright")
+      if copyright
+        != copyright
+    // End: copyright message
+  // End: large map
+
+  // Begin: info panel
+  div(class="webgis4u-info-panel")
+    // Begin: info panel toggle
+    div(class="webgis4u-info-panel-toggle")
+      a(href="#", class="webgis4u-ctrl-info")
+    // End: info panel toggle
+    // Begin: info panel content
+    div(class="webgis4u-info-panel-content")
+      // Begin: info panel header
+      div(class="webgis4u-info-panel-header")
+        if info_panel_header
+          != info_panel_header
+      // End: info panel header
+      // Begin: info panel legend
+      div(class="webgis4u-legend")
+        if legend
+          != legend
+      // End: info panel legend
+      // Begin: info panel footer
+      div(class="webgis4u-info-panel-footer")
+        if info_panel_footer
+          != info_panel_footer
+      // End: info panel footer
+    // End: info panel content
+  // End: info panel
+// End: u-gis large map template

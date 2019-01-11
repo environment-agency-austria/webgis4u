@@ -1,0 +1,33 @@
+/*
+    Created on : 05.01.2015, 10:05:09
+    Author     : hadrbolec
+*/
+
+.large-container {
+  position: absolute;
+  top:30px;
+  left:30px;
+  bottom:20px;
+  right:20px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background: white;
+
+  .large-container-map {
+    position: absolute;
+    top:0;
+    left:0;
+    right:0px;
+    bottom:50px;
+    border: 1px solid gray;
+  }
+
+  .large-container-footer {
+    position: absolute;
+    height:50px;
+    left:0px;
+    bottom:0px;
+    right:0px;
+    border: 1px solid gray;
+  }
+}
