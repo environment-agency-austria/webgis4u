@@ -37,7 +37,7 @@
   "files": [
     "./build",
     "./scripts",
-    ".pug"
+    "./pug"
   ],
   "devDependencies": {
     "@babel/core": "^7.1.2",
