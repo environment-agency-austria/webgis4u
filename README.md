@@ -8,6 +8,26 @@
 `webgis4u` is a javascript client to visualise geographical maps based on [OpenLayers](https://openlayers.org/).
 
 
+## Usage
+### Install
+Use npm/yarn to install `webgis4u` as a dependency.
+```bash
+$> npm i webgis4u
+```
+or
+```bash
+$> yarn add webgis4u
+```
+
+### HTML Templates
+To use the features provided by `webgis4u`, the needed HTML can be created by using the command line
+```bash
+$> webgis4u -out <path> [-templates <path>]
+```
+Options:
+* `out` (required): Path where the generated `.html` files will be saved
+* `templates` (options): Path to a folder containing additional templates, that will be used in the template generation process. It looks for `.html` files names `copyright`, `card_menu`, `link_panel`, `tool_switcher_functions`, `tool_switcher_layers`, `info_panel_header`, `info_panel_footer`, `legend`
+
 
 ## Development
 ### API Documentation
