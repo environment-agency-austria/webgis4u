@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.1-development",
   "main": "build/index.js",
+  "bin": "scripts/cli.js",
   "scripts": {
     "doc:generate": "node_modules/.bin/jsdoc -c jsdoc.config.js",
     "test": "jest",
@@ -11,9 +12,13 @@
     "test:ci": "yarn test:coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "start": "webpack --watch --mode development",
     "start:all": "yarn start && lerna run start",
-    "build": "webpack -p",
+    "build": "yarn build:module && yarn build:templates",
+    "build:module": "webpack -p",
+    "build:templates": "yarn cli -out ./build/templates",
     "build:all": "yarn build && lerna run build",
-    "lint": "eslint src/**",
+    "templates:examples": "yarn cli -out ./build/templates_examples -templates ./src/html_fragment",
+    "cli": "node ./scripts/cli.js",
+    "lint": "eslint src/**/*.js",
     "prepublishOnly": "yarn build"
   },
   "repository": {
@@ -30,7 +35,9 @@
   ],
   "sideEffects": false,
   "files": [
-    "./build"
+    "./build",
+    "./scripts",
+    "./pug"
   ],
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -60,6 +67,7 @@
     "jsdoc": "^3.5.5",
     "lerna": "^3.9.0",
     "node-sass": "^4.11.0",
+    "pug": "^2.0.3",
     "resolve-url-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",

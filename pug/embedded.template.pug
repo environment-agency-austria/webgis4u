@@ -1,0 +1,32 @@
+// Begin: u-gis embedded map template
+div(unselectable="on", class="webgis4u-embedded-map-template unselectable")
+  // Begin: optional toolbar
+  div(class="webgis4u-toolbar")
+    // Begin: optional search
+    div(class="webgis4u-toolbar-entry webgis4u-control-search")
+      label(for="webgis4uSearchField") Suche:
+      input(name="webgis4uSearchField", type="text", maxlength="100", placeholder="Suche eingeben ...")
+    // End: optional search
+    // Begin: optional show large map
+    div(id="showLargeMap", class="webgis4u-toolbar-entry webgis4u-control-maximize-embedded")
+      span(title="Gro&szlig;ansicht", class="noUbaTooltip") Gro&szlig;ansicht
+    // End: optional show large map
+    // Begin: optional print
+    div(class="webgis4u-toolbar-entry webgis4u-control-print-embedded")
+      a(id="webgis4u-printEmbeddedMap", href="#")
+        span(title="Drucken", class="noUbaTooltip") Drucken
+    // End: optional print
+  // End: optional toolbar
+  // Begin: dom element for the embedded map
+  div#webgis4u-embedded-map(class="webgis4u-embedded-map", tabindex="0")
+  // End: dom element for the embedded map
+// End: embedded map container
+// Begin: optional legend
+div(class="webgis4u-embedded-map-template webgis4u-legend")
+  // Begin: Legend content
+  if legend
+    b Legende:
+    != legend
+  // End: Legend content
+//End: optional legend
+// End: u-gis embedded map template

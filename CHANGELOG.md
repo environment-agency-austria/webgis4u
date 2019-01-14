@@ -25,3 +25,4 @@ All notable changes to this project will be documented in this file.
     * [`formatNumber`](./src/webgis4u/util/string/formatNumber.js):
     * [`formatUnitValue`](./src/webgis4u/util/string/formatUnitValue.js):
     * [`formatText`](./src/webgis4u/util/string/formatText.js):
+* Added generation from templates using command line via `$> webgis4u -out <path> [-templates <path>]`
