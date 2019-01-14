@@ -53,7 +53,7 @@ const additionalParams = folder
 parseTemplates({
   files: templates,
   params: {
-    pretty: false,
+    pretty: true,
     ...additionalParams,
   },
   out,
