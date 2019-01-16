@@ -10,7 +10,7 @@ import PanBar from 'webgis4u/ol/control/PanBar';
  * Initializes the map
  */
 export function initialize(mapConfig) {
-  const map = new Map({
+  return new Map({
     ...mapConfig,
     controls: defaultControls().extend([
       new PanBar(),

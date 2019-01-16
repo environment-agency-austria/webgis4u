@@ -6,11 +6,13 @@ import OSM from 'ol/source/OSM';
 
 import OverviewMap from 'webgis4u/ol/control/OverviewMap';
 
+export const html = '<div class="webgis4u-control-overviewmap" />';
+
 /**
  * Initializes the map
  */
 export function initialize(mapConfig) {
-  const map = new Map({
+  return new Map({
     ...mapConfig,
     controls: defaultControls().extend([
       new OverviewMap(),

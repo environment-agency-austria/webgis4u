@@ -10,7 +10,7 @@ import Measure, { MeasurementTypeEnum } from 'webgis4u/ol/control/Measure';
  * Initializes the map
  */
 export function initialize(mapConfig) {
-  const map = new Map({
+  return new Map({
     ...mapConfig,
     controls: defaultControls().extend([
       new Measure({
