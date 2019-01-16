@@ -1,0 +1,25 @@
+@import '../common';
+
+.ol-mouse-position {
+  position: absolute;
+  top:auto;
+  bottom: 13px;
+  display: block;
+  font-family: Arial;
+  color: #e9f1ea;
+
+  text-shadow: 1px 2px 3px black, 0 0 1em gray, 0 0 0.2em gray;
+  white-space: nowrap;
+  z-index: 2001;
+
+  @include fadeToggleVisibility(opacity, 0, 1);
+
+  .#{$map-large} & {
+    left: 40%;
+    font-size: smaller;
+  }
+  .#{$map-embedded} & {
+    font-size: 12px;
+    right: 20px;
+  }
+}
