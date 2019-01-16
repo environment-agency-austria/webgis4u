@@ -34,14 +34,14 @@
   }
 
   /* Begin: embedded PanbarControl */
-  .ugis-embedded-map & {
+  .#{$map-embedded} & {
     left: 20px;
     top: 20px;
   }
   /* End: Map (embedded) */
 
   /* Begin: Map (large) */
-  .ugis-large-map & {
+  .#{$map-large} & {
     left: 50px;
     top: 60px;
     background: url("./panbar-large.png") no-repeat scroll left top;

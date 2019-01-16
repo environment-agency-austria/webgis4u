@@ -12,13 +12,5 @@
   display: block;
   z-index: 1002;
 
-  .#{$controlPrefix}-scalebar {
-    position: absolute;
-    height:30px;
-    top:0;
-  }
-
-  &[data-visible="false"] {
-    display: none;
-  }
+  @include fadeToggleVisibility(opacity, 0, 1);
 }
