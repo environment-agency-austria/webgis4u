@@ -1,0 +1,21 @@
+@import './attributes';
+
+/**
+ * Mixin used for animation
+ */
+@mixin animate($property, $duration: 200ms, $easing: ease) {
+  transition-property: #{$property};
+  transition-duration: $duration;
+  transition-timing-function: $easing;
+}
+
+@mixin fadeToggleVisibility($property, $hiddenValue, $visibleValue) {
+  @include animate($property);
+
+  @include styleHidden {
+    #{$property}: $hiddenValue;
+  }
+  @include styleVisible {
+    #{$property}: $visibleValue;
+  }
+}

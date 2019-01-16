@@ -14,6 +14,8 @@ All notable changes to this project will be documented in this file.
   * [`OverviewMap`](./src/webgis4u/ol/control/OverviewMap.js)
   * [`ScaleLine`](./src/webgis4u/ol/control/ScaleLine.js)
 * Added utils:
+  * [`dom`](./src/webgis4u/util/dom.js):
+    * [`toggleElement`](./src/webgis4u/util/dom/toggleElement.js)
   * [`function`](./src/webgis4u/util/function.js):
     * [`debounce`](./src/webgis4u/util/function/debounce.js):
   * [`number`](./src/webgis4u/util/number.js):
