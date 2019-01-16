@@ -1,0 +1,147 @@
+@import '../../common';
+
+.#{$prefix}-toolswitcher-sliders {
+  z-index: 1002;
+  position: absolute;
+  width:188px;
+  top:20px;
+  right:20px;
+
+  button  {
+    position:absolute;
+    left:0;
+    top:0;
+    box-sizing: border-box;
+    background:  url("./toolswitcher-button.png") no-repeat right top ;
+    background-color: #eaeaeb;
+    border: 1px solid #919191;
+    border-radius: 2px;
+    font-size: 11px;
+    font: Arial, sans-serif;
+    width:94px;
+    height: 25px;
+    padding: 3px 6px;
+    text-align: left;
+    color: #545454;
+
+    ~button {
+      border-left: 1px solid white;
+      left:94px;
+    }
+  }
+
+  .active  {
+    background-color:#fafafa;
+    border-bottom: 0;
+  }
+}
+
+.#{$prefix}-toolswitcher-content {
+  box-sizing: border-box;
+  border: 1px solid #919191;
+  color: #545454;
+  border-radius: 2px;
+  border-top: 0;
+  position: absolute;
+  z-index: 1003;
+  top:45px;
+  right:20px;
+  width:188px;
+  font: 11px Arial;
+  background:#fafafa;
+  overflow: auto;
+
+  .#{$prefix}-toolswitcher-close {
+    box-sizing: border-box;
+    background: url("./btn_ts_close.png") no-repeat scroll center center transparent;
+    background-color:  #eaeaeb;
+    float: left;
+    height: 20px;
+    width: 100%;
+    cursor: pointer;
+    border-top:1px white solid;
+    display: none;
+  }
+  &[data-expanded="true"] {
+    .webgis4u-toolswitcher-close {
+      display: block;
+    }
+  }
+  &[data-expanded="false"] {
+  }
+
+  [data-id] {
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding:0;
+    margin:0;
+    background-color:#fafafa;
+    border-bottom: 1px solid #d2d2d3;
+
+    ~ul {
+      background-color:  #eaeaeb;
+      border-top:solid 1px white;
+    }
+
+    li { padding: 3px 3px; }
+  }
+
+  .#{$prefix}-ts-togglebutton {
+    input {
+      display:none;
+
+      + label {
+        display:inline-block;
+        height:23px;
+        vertical-align:middle;
+        background:url("./ts-toggle-default.png") left top no-repeat;
+        cursor:pointer;
+        text-indent: 40px;
+      }
+
+      &:hover + label {
+        background:url("./ts-toggle-hover.png") left top no-repeat;
+      }
+
+      &:checked + label  {
+        background:url("./ts-toggle-active.png") left top no-repeat;
+      }
+    }
+  }
+}
+
+
+
+
+/* This is the propper way to add toogle button images */
+// #webgis4uMeasureDistance  + label  {
+//   background:url("./src/main/images/ts-toggle-distanceCalculation-default.png") left top no-repeat;
+// }
+// #webgis4uMeasureDistance:checked + label  {
+//   background:url("./src/main/images/ts-toggle-distanceCalculation-active.png") left top no-repeat;
+// }
+// #webgis4uMeasureArea  + label  {
+//   background:url("./src/main/images/ts-toggle-areaCalculation-default.png") left top no-repeat;
+// }
+// #webgis4uMeasureArea:checked + label  {
+//   background:url("./src/main/images/ts-toggle-areaCalculation-active.png") left top no-repeat;
+// }
+
+// #webgis4uAddPoint  + label  {
+//   background:url("./src/main/images/ts-toggle-addPoint-default.png") left top no-repeat;
+// }
+// #webgis4uAddPoint:checked + label  {
+//   background:url("./src/main/images/ts-toggle-addPoint-active.png") left top no-repeat;
+// }
+// #webgis4uAddPolygon + label    {
+//   background:url("./src/main/images/ts-toggle-addPolygon-default.png") left top no-repeat;
+// }
+// #webgis4uAddPolygon:checked + label  {
+//   background:url("./src/main/images/ts-toggle-addPolygon-active.png") left top no-repeat;
+// }
