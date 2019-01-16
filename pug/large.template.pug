@@ -23,6 +23,32 @@ div(unselectable="on", class="webgis4u-large-map-template unselectable")
     // End: logo right
   // End: large map header
 
+  // Begin: info panel
+  div(class="webgis4u-info-panel")
+    // Begin: info panel toggle
+    div(class="webgis4u-info-panel-toggle")
+      a(href="#", class="webgis4u-control-info")
+    // End: info panel toggle
+    // Begin: info panel content
+    div(class="webgis4u-info-panel-content")
+      // Begin: info panel header
+      div(class="webgis4u-info-panel-header")
+        if info_panel_header
+          != info_panel_header
+      // End: info panel header
+      // Begin: info panel legend
+      div(class="webgis4u-legend")
+        if legend
+          != legend
+      // End: info panel legend
+      // Begin: info panel footer
+      div(class="webgis4u-info-panel-footer")
+        if info_panel_footer
+          != info_panel_footer
+      // End: info panel footer
+    // End: info panel content
+  // End: info panel
+
   // Begin: large map
   div#webgis4u-large-map(class="webgis4u-large-map", tabindex="0")
     // Begin: toolswitcher container
@@ -66,7 +92,7 @@ div(unselectable="on", class="webgis4u-large-map-template unselectable")
           // End: measure area
           // Begin: show overview map
           li
-            div(class="webgis4u-ctrl-overviewmap")
+            div(class="webgis4u-control-overviewmap")
           // End: webgis4u overviewmap
         // End: select and deselect tools and display overview map
         // Begin closes the toolswitcher content
@@ -86,30 +112,4 @@ div(unselectable="on", class="webgis4u-large-map-template unselectable")
         != copyright
     // End: copyright message
   // End: large map
-
-  // Begin: info panel
-  div(class="webgis4u-info-panel")
-    // Begin: info panel toggle
-    div(class="webgis4u-info-panel-toggle")
-      a(href="#", class="webgis4u-ctrl-info")
-    // End: info panel toggle
-    // Begin: info panel content
-    div(class="webgis4u-info-panel-content")
-      // Begin: info panel header
-      div(class="webgis4u-info-panel-header")
-        if info_panel_header
-          != info_panel_header
-      // End: info panel header
-      // Begin: info panel legend
-      div(class="webgis4u-legend")
-        if legend
-          != legend
-      // End: info panel legend
-      // Begin: info panel footer
-      div(class="webgis4u-info-panel-footer")
-        if info_panel_footer
-          != info_panel_footer
-      // End: info panel footer
-    // End: info panel content
-  // End: info panel
 // End: u-gis large map template

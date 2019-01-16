@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 * Added projections for the austrian area - [`austria`](./src/webgis4u/ol/proj/austria.js)
 * Added [`basemap`](./src/webgis4u/ol/source/basemap.js) as a source - for more information, see [basemap.at](https://www.basemap.at/)
 * Added following controls:
+  * [`HtmlTemplate`](./src/webgis4u/ol/control/HtmlTemplate.js)
   * [`PanBar`](./src/webgis4u/ol/control/PanBar.js)
   * [`LayerCheckbox`](./src/webgis4u/ol/control/LayerCheckbox.js)
   * [`LayerRadioButton`](./src/webgis4u/ol/control/LayerRadioButton.js)
