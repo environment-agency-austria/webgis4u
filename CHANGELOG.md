@@ -20,7 +20,8 @@ All notable changes to this project will be documented in this file.
     * [`convertUnitValue`](./src/webgis4u/util/number/convertUnitValue.js):
   * [`ol`](./src/webgis4u/util/ol.js):
     * [`getMapChildElementByClassName`](./src/webgis4u/util/ol/getMapChildElementByClassName.js):
-    * [`pan`](./src/webgis4u/util/o#l/pan.js):
+    * [`getMapType`](./src/webgis4u/ol/util/getMapType.js)
+    * [`pan`](./src/webgis4u/util/ol/pan.js)
   * [`string`](./src/webgis4u/util/string.js):
     * [`formatNumber`](./src/webgis4u/util/string/formatNumber.js):
     * [`formatUnitValue`](./src/webgis4u/util/string/formatUnitValue.js):
