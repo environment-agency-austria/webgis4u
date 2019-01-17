@@ -1,6 +1,8 @@
 @import '../../common';
 
 .#{$prefix}-toolswitcher-sliders {
+  $background-color-active: #fafafa;
+
   z-index: 1002;
   position: absolute;
   width:188px;
@@ -32,7 +34,7 @@
   }
 
   .active {
-    background-color:#fafafa;
+    background-color: $background-color-active;
     border-bottom: 0;
   }
 }
@@ -40,7 +42,7 @@
 .#{$prefix}-toolswitcher-content {
   @extend %control-panel-bordered;
   border-top: 0;
-  background:#fafafa;
+  background: $background-color-active;
 
   position: absolute;
   z-index: 1003;
@@ -51,12 +53,13 @@
   .#{$prefix}-toolswitcher-close {
     box-sizing: border-box;
     background: url("./btn_ts_close.png") no-repeat scroll center center transparent;
-    background-color:  #eaeaeb;
+    background-color:  $control-button-background-color;
+    border-top: $control-separator-border-top;
+
     float: left;
     height: 20px;
     width: 100%;
     cursor: pointer;
-    border-top:1px white solid;
     display: none;
   }
   &[data-expanded="true"] {
@@ -78,12 +81,12 @@
     list-style: none;
     padding:0;
     margin:0;
-    background-color:#fafafa;
-    border-bottom: 1px solid #d2d2d3;
+    background-color: $background-color-active;
+    border-bottom: $control-separator-border-bottom;
 
     ~ul {
-      background-color:  #eaeaeb;
-      border-top:solid 1px white;
+      background-color: $control-button-background-color;
+      border-top: $control-separator-border-top;
     }
 
     li { padding: 3px 3px; }

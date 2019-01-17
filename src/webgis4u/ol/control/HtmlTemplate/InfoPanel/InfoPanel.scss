@@ -3,7 +3,6 @@
 .#{$prefix}-info-panel {
   $width: 231px;
   $borderRight: 1px solid #D5D5D5;
-  $item-border-bottom: 1px solid #d2d2d3;
 
   position: absolute;
   top: 0;
@@ -52,7 +51,7 @@
     flex-grow: 0;
 
     background-color: $control-button-background-color;
-    border-bottom: $item-border-bottom;
+    border-bottom: $control-separator-border-bottom;
 
     a {
       position: absolute;
@@ -79,15 +78,15 @@
     flex-grow: 1;
 
     .webgis4u-info-panel-header {
-      border-top: 1px solid #ffffff;
+      border-top: $control-separator-border-top;
       font-size: 12px;
       padding: 3px 10px;
     }
     .webgis4u-info-panel-legend {
-      border-bottom: $item-border-bottom;
+      border-bottom: $control-separator-border-bottom;
     }
     .webgis4u-info-panel-footer {
-      border-top: 1px solid #ffffff;
+      border-top: $control-separator-border-top;
       font-size: 10px;
       padding: 10px;
     }

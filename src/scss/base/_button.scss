@@ -1,6 +1,8 @@
 $control-button-background-color: #eaeaeb;
-$control-button-border: solid 1px #919191;
+$control-button-border: 1px solid #919191;
 $control-button-color: #545454;
+
+$control-separator-border-top: 1px solid white;
 
 %control-base {
   color: $control-button-color;
@@ -24,7 +26,7 @@ $control-button-color: #545454;
   box-sizing: border-box;
 
   &~& {
-    border-left: 1px solid white;
+    border-left: $control-separator-border-top;
   }
 }
 
