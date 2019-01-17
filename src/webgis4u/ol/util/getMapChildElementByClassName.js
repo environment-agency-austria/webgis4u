@@ -1,5 +1,5 @@
 /**
- * @module webgis4u/util/ol/getMapChildElementByClassName
+ * @module webgis4u/ol/util/getMapChildElementByClassName
  */
 
 /**

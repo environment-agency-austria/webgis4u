@@ -3,6 +3,7 @@
  */
 
 export * from './util/createImageFromMap';
+export * from './util/getMapChildElementByClassName';
 export * from './util/getMapType';
 export * from './util/getScale';
 export * from './util/pan';
