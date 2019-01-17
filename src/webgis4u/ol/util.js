@@ -6,3 +6,4 @@ export * from './util/getMapType';
 export * from './util/getScale';
 export * from './util/pan';
 export * from './util/zoomToExtent';
+export * from './util/zoomToLayerExtent';
