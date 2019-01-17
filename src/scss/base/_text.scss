@@ -1,0 +1,11 @@
+$font-base: Arial;
+$font-size-base: 11px;
+
+%text-base {
+  font-size: $font-size-base;
+}
+
+%text-default {
+  @extend %text-base;
+  font-family: $font-base;
+}

@@ -41,6 +41,8 @@
 
 .#{$prefix}-toolswitcher-content {
   @extend %control-panel-bordered;
+
+  $background-color-active: #fafafa;
   border-top: 0;
   background: $background-color-active;
 

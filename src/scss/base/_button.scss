@@ -1,12 +1,15 @@
+@import './text';
+
 $control-button-background-color: #eaeaeb;
 $control-button-border: 1px solid #919191;
 $control-button-color: #545454;
 
 $control-separator-border-top: 1px solid white;
+$control-separator-border-bottom: 1px solid #d2d2d3;
 
 %control-base {
+  @extend %text-base;
   color: $control-button-color;
-  font-size: 11px;
 }
 %control-base-bordered {
   @extend %control-base;
