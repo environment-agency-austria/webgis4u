@@ -4,3 +4,4 @@
 
 export * from './util/getMapType';
 export * from './util/getScale';
+export * from './util/pan';

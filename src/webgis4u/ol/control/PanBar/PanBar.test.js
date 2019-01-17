@@ -1,10 +1,10 @@
 import { disposeMap, createMap } from '../../../../../test/utils/ol';
-import { pan } from '../../../util/ol/pan';
+import { pan } from '../../util/pan';
 
 import { CSS_CONTROL_PREFIX } from '../common';
 import PanBar from '../PanBar';
 
-jest.mock('../../../util/ol/pan');
+jest.mock('../../util/pan');
 
 describe('webgis4u/ol/control/PanBar', () => {
   const CSS_CLASS = `.${CSS_CONTROL_PREFIX}-panbar`;
