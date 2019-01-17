@@ -34,11 +34,11 @@ describe('webgis4u/ol/util/createImagerFromMap', () => {
 
   it('shold throw error an image', () => {
     const callback = jest.fn();
-    mockRenderSync.mockImplementationOnce(() => {
-      throw new Error();
-    });
 
     expect(() => {
+      mockRenderSync.mockImplementationOnce(() => {
+        throw new Error();
+      });
       createImageFromMap(map, callback);
     }).toThrowError();
     expect(callback).not.toBeCalled();
