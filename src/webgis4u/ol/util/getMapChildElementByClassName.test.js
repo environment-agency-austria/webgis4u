@@ -1,7 +1,7 @@
 import { disposeMap, createMap, createLayers } from '../../../../test/utils/ol';
 import { getMapChildElementByClassName } from './getMapChildElementByClassName';
 
-describe('webgis4u/util/ol/getMapChildElementByClassName', () => {
+describe('webgis4u/ol/util/getMapChildElementByClassName', () => {
   let mapWrapper;
   let map;
 

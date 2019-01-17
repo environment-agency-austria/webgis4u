@@ -6,7 +6,7 @@ import { disposeMap, createMap } from '../../../../test/utils/ol';
 import { getScale } from './getScale';
 
 
-describe('webgis4u/ol/control/OverviewMap', () => {
+describe('webgis4u/ol/util/getScale', () => {
   const mockMapGetSize = jest.fn().mockReturnValue([1841, 300]);
   let map;
 
