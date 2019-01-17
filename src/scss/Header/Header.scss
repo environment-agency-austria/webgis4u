@@ -1,0 +1,83 @@
+@import '../common';
+
+.#{$prefix}-header {
+  box-sizing:border-box;
+  background: url("./bg_apptoolbar_full.png") repeat-x scroll left bottom;
+  border-bottom: 10px solid #6f9e3e;
+  height: 110px;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+
+  .#{$prefix}-logoLeft {
+    box-sizing: border-box;
+    background-color: white;
+
+    border-right: 1px solid #d5d5d5;
+    cursor: pointer;
+    display: inline-block;
+    height: 100px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 230px;
+  }
+  .#{$prefix}-logoRight {
+    box-sizing:border-box;
+    background-color: white;
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    border-left: 1px solid #d5d5d5;
+    cursor: pointer;
+    height: 100px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+
+.#{$prefix}-card-menu {
+  position: absolute;
+  left: 230px;
+  top: 70px;
+  width: 100%;
+  z-index: 1000;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    background-repeat: repeat-x;
+    background-position: left bottom;
+
+    &:first-child {
+      border-left: 1px solid #6f9e3e;
+    }
+
+    li {
+      list-style-type: none;
+      float: left;
+      display: block;
+      position: relative;
+
+      a {
+        display: block;
+        min-height: 20px;
+        text-decoration: none;
+        margin: 0;
+        padding: 7px 19px 3px 20px;
+        font-family: Arial,sans-serif;
+        font-weight: normal;
+        font-size: 13px;
+        color: #3A6419;
+        border-right: 1px solid #E5E5E5;
+      }
+
+      a:hover, .active {
+        background-color: #6f9e3e;
+        color: #FFF;
+      }
+    }
+  }
+}
