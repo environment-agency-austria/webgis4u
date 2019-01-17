@@ -1,0 +1,21 @@
+@import '../common';
+
+// TODO: Move to controls as it seems to be a control
+
+.#{$prefix}-control-activity {
+  background: url("./activity.gif") no-repeat scroll left top;
+  width:16px;
+  height: 16px;
+  position: absolute;
+  display: none;
+
+  .#{$map-embedded} {
+    top:40px;
+    left:36px;
+  }
+
+  .#{$map-large} {
+    top:85px;
+    left: 75px;
+  }
+}
