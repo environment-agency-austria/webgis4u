@@ -1,8 +1,8 @@
-@import './embeddedMap.scss';
-@import './largeMap.scss';
-
 @import './ol.controls/index.scss';
 @import './Activity/Activity.scss';
 @import './Header/Header.scss';
 @import './Legend/Legend.scss';
 @import './linkpanel.scss';
+
+@import './EmbeddedMap/EmbeddedMap.scss';
+@import './LargeMap/LargeMap.scss';

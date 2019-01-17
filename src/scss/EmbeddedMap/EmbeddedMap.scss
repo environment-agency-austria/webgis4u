@@ -1,0 +1,114 @@
+%map-embedded-control-button {
+  span {
+    color: #555;
+    cursor: pointer;
+    display: inline-block;
+    left: 14px;
+    padding-left: 25px;
+    top: 13px;
+    position: relative;
+  }
+}
+
+.#{$map-template-embedded} {
+  clear:both;
+  background-color: #f1f1f1;
+  position: relative;
+  width: 100%;
+
+  .#{$prefix}-toolbar {
+    border-bottom: 1px solid #d5d5d5;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 16px;
+    text-decoration: none;
+  }
+
+  .#{$prefix}-toolbar-entry {
+    float:left;
+    border-right: 1px solid #e9e9e9;
+    height:39px;
+    position: relative;
+
+    ~ .#{$prefix}-toolbar-entry {
+      border-left: 1px solid #fff;
+    }
+  }
+}
+
+.#{$map-embedded} {
+  clear:both;
+  width:100%;
+  height:330px;
+}
+
+.#{$map-embedded}-legend {
+  clear:both;
+  background-color: #eaeaeb;
+}
+
+.#{$prefix}-control-maximize-embedded {
+  @extend %map-embedded-control-button;
+  width: 120px;
+
+  span {
+    background: url("./icon_enlarge.png") no-repeat scroll left 1.5px;
+  }
+}
+
+.#{$prefix}-control-print-embedded {
+  @extend %map-embedded-control-button;
+  width: 96px;
+
+  span {
+    background: url("./icon_print.png") no-repeat scroll left 1.5px;
+    line-height: 16px;
+  }
+}
+
+
+
+
+// TODO: Find out where these rules may be needed
+.embedded-map {
+    max-width: 1200px;
+    min-width:960px;
+}
+
+.embedded-container {
+  .embedded-header {
+    border-top:5px solid #ccc;
+    padding:20px;
+    background-color: darkgray;
+  }
+
+  .embedded-nav {
+    vertical-align: top;
+    width:250px;
+    padding:20px;
+    background-color: lightgray;
+  }
+
+  .embedded-content {
+    vertical-align: top;
+    background-color: #ffffff;
+    min-height:600px;
+    left:250px;
+    right:250px;
+    padding:20px;
+  }
+  .embedded-aside {
+    vertical-align: top;
+    padding:20px;
+    width:250px;
+    background-color: lightgray;
+  }
+
+  .embedded-footer {
+    border-top:5px solid #ccc;
+    padding: 20px;
+    background-color: darkgrey;
+    font-size: smaller;
+  }
+}
