@@ -2,6 +2,7 @@
  * @module webgis4u/ol/control
  */
 
+export { default as HtmlTemplate } from './control/HtmlTemplate';
 export { default as LayerCheckbox } from './control/LayerCheckbox';
 export { default as LayerRadioButton } from './control/LayerRadioButton';
 export { default as LegendDisplayable } from './control/LegendDisplayable';

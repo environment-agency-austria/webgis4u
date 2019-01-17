@@ -1,0 +1,79 @@
+@import '../../common';
+
+.#{$prefix}-info-panel {
+  $width: 231px;
+  $borderRight: 1px solid #D5D5D5;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+
+
+  // TODO: Animate
+  // @include animate('opacity, width');
+  width: $width;
+  opacity: 1;
+  @include styleHidden() {
+    opacity: 0;
+    width: 0px;
+
+    ~ #{$map-selector} {
+      margin-left: 0px;
+    }
+  }
+  @include styleVisible() {
+    opacity: 1;
+    width: $width;
+
+    ~ #{$map-selector} {
+      margin-left: 231px;
+    }
+  }
+
+  > div {
+    border-right: $borderRight;
+    box-sizing: border-box;
+  }
+
+  &-toggle {
+    height: 42px;
+    flex-grow: 0;
+
+    background-color: #eaeaeb;
+    border-bottom: 1px solid #d2d2d3;
+
+    a {
+      position: absolute;
+      top:9px;
+      right:9px;
+      height: 25px;
+      width: 30px;
+    }
+  }
+
+  &-content {
+    flex-grow: 1;
+
+    color: #545454;
+    background-color: #eaeaeb;
+    font-family: Arial;
+    overflow: auto;
+    overflow-x:hidden;
+
+    .webgis4u-info-panel-header {
+      border-top: 1px solid #ffffff;
+      font-size: 12px;
+      padding: 3px 10px;
+    }
+    .webgis4u-info-panel-legend {
+      border-bottom: 1px solid #d2d2d3;
+    }
+    .webgis4u-info-panel-footer {
+      border-top: 1px solid #ffffff;
+      font-size: 10px;
+      padding: 10px;
+    }
+  }
+}

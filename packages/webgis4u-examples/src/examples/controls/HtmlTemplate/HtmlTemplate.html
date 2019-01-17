@@ -1,0 +1,161 @@
+
+<!-- Begin: u-gis large map template-->
+<div class="webgis4u-large-map-template unselectable" unselectable="on">
+  <!-- Begin: info panel-->
+  <div class="webgis4u-info-panel">
+    <!-- Begin: info panel toggle-->
+    <div class="webgis4u-info-panel-toggle"><a class="webgis4u-control-info" href="#"></a></div>
+    <!-- End: info panel toggle-->
+    <!-- Begin: info panel content-->
+    <div class="webgis4u-info-panel-content">
+      <!-- Begin: info panel header-->
+      <div class="webgis4u-info-panel-header">                <b>Lorem ipsum dolor</b><br/>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ...
+      </div>
+      <!-- End: info panel header-->
+      <!-- Begin: info panel legend-->
+      <div class="webgis4u-legend">    <ul>
+        <li></li>
+    </ul>
+      </div>
+      <!-- End: info panel legend-->
+      <!-- Begin: info panel footer-->
+      <div class="webgis4u-info-panel-footer">                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ...
+      </div>
+      <!-- End: info panel footer-->
+    </div>
+    <!-- End: info panel content-->
+  </div>
+  <!-- End: info panel-->
+  <!-- Begin: large map-->
+  <div class="webgis4u-large-map" id="webgis4u-large-map" tabindex="0">
+    <!-- Begin: toolswitcher container-->
+    <div class="webgis4u-toolswitcher-sliders">
+      <button data-id="map">Karten</button>
+      <button data-id="functions">Funktionen</button>
+    </div>
+    <div class="webgis4u-toolswitcher-content">
+      <!-- Begin: display and hide map layer-->
+      <div class="webgis4u-toolswitcher-content-item" data-id="map">
+        <!-- Begin: display and hide layer content-->                <ul>
+                    <li>
+                        <input type="radio" name="basemapRB"   value="basemapGray" checked="checked">
+                        <label for="ugis-layer-orthophoto">Basemap.at grau</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="basemapRB"  value="orthofoto">
+                        <label for="basemapColor">Basemap.at orthofoto 30cm</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="basemapRB"  value="basemapColor">
+                        <label for="basemapColor">Basemap.at bunt</label>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <input type="checkbox" name="pointLayerCB" checked="checked">
+                        <label for="pointLayerCB">Point layer</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="lineLayerCB" checked="checked">
+                        <label for="lineLayerCB">Line Layer</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="polygonLayerCB" checked="checked">
+                        <label for="polygonLayerCB">Polygon Layer</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="bevDkmLayerCB"  >
+                        <label for="polygonLayerCB">BEV DKM Layer</label>
+                    </li>
+                     <li>
+                        <input type="checkbox" name="clcLayerCB"  >
+                        <label for="polygonLayerCB">CLC Layer</label>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <input type="radio" value="none" name="additionalLayerRB" checked="checked">
+                        <label for="ugis-layer-nofach">Keine Begleitkarte anzeigen</label>
+                    </li>
+                    <li>
+                        <input type="radio" value="basemapOverlayLayer" name="additionalLayerRB">
+                        <label for="basemapOverlayLayer">Basemap overlay</label>
+                    </li>
+                </ul>
+        <!-- End: display and hide layer content-->
+      </div>
+      <!-- Begin: select and deselect tools and display overview map-->
+      <div class="webgis4u-toolswitcher-content-item" data-id="functions">
+        <ul>
+          <!-- Begin: show mouse coordinates-->
+          <li>
+            <input type="checkbox" name="webgis4uDisplayMousePosition" checked="checked"/>
+            <label for="webgis4uDisplayMousePosition">Koordinaten</label>
+          </li>
+          <!-- End: show mouse coordinates-->
+          <!-- Begin: show sacle line-->
+          <li>
+            <input type="checkbox" name="webgis4uScaleLine" checked="checked"/>
+            <label for="webgis4uScaleLine">Ma&szlig;stab</label>
+          </li>
+          <!-- End: show scale line-->
+        </ul>
+        <ul>
+          <!-- Begin: custom tools-->                    <!-- Begin: do something else -->
+                    <li class="ugis-ts-togglebutton"  >
+                        <input type="radio" name="ugis-ts-toggle"  id="ugisIdentify" value="identify"  />
+                        <label for="ugisIdentify">Identify</label>
+                    </li>
+                    <!-- End: do something else -->
+                    <!-- Begin: measure distance -->
+                    <li class="ugis-ts-togglebutton" >
+                        <input type="radio" name="ugis-ts-toggle"  id="ugisAddPoint"   value="addPoint"  />
+                        <label for="ugisAddPoint">Punkt hinzuf&uuml;gen</label>
+                    </li>
+                    <!-- End: measure distance -->
+                    <!-- Begin: measure area -->
+                    <li class="ugis-ts-togglebutton" >
+                        <input type="radio" name="ugis-ts-toggle"  id="ugisAddPolygon"  value="addPolygon" />
+                        <label for="ugisAddPolygon">Polygon hinzuf&uuml;gen</label>
+                    </li>
+          <!-- End: custom tools-->
+          <!-- Begin: measure distance-->
+          <li class="webgis4u-ts-togglebutton">
+            <input type="radio" name="webgis4u-ts-toggle" id="webgis4uMeasureDistance" value="measureDistance"/>
+            <label for="webgis4uMeasureDistance">Distanzmessung</label>
+          </li>
+          <!-- End: measure distance-->
+          <!-- Begin: measure area-->
+          <li class="webgis4u-ts-togglebutton">
+            <input type="radio" name="webgis4u-ts-toggle" id="webgis4uMeasureArea" value="measureArea"/>
+            <label for="webgis4uMeasureArea">Fl&auml;chenberechnung</label>
+          </li>
+          <!-- End: measure area-->
+          <!-- Begin: show overview map-->
+          <li>
+            <div class="webgis4u-control-overviewmap"></div>
+          </li>
+          <!-- End: webgis4u overviewmap-->
+        </ul>
+        <!-- End: select and deselect tools and display overview map-->
+        <!-- Begin closes the toolswitcher content-->
+      </div>
+      <div class="webgis4u-toolswitcher-close">
+        <div class="webgis4u-toolswitcher-hr"></div>
+      </div>
+    </div>
+    <!-- End: toolswitcher container-->
+    <!-- Begin: link panel-->
+    <div class="webgis4u-linkpanel">            <a  href="#">Link 1</a><a id="ugis-printLargeMap" href="#" >Link 2 (Print)</a><a href="#">Link 3</a>
+    </div>
+    <!-- End: link panel-->
+    <!-- Begin: copyright message-->
+    <div class="webgis4u-copyright">            Copyright &copy; 2014-2017: Umweltbundesamt, Alle Rechte vorbehalten
+    </div>
+    <!-- End: copyright message-->
+  </div>
+  <!-- End: large map-->
+</div>
+<!-- End: u-gis large map template-->

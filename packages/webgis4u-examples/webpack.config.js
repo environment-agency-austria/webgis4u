@@ -2,6 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+// const devMode = process.env.NODE_ENV !== 'production';
+const devMode = false;
 
 /**
  * Name of common used directories
@@ -34,6 +38,7 @@ const htmlTemplateParams = {
 };
 
 module.exports = {
+  mode: devMode ? 'development' : 'production',
   entry: [
     require.resolve('@babel/polyfill'),
     appEntry,
@@ -41,6 +46,12 @@ module.exports = {
   devtool: 'inline-source-map',
   module: {
     rules: [
+      {
+        test: /\.html$/,
+        include: dirSource,
+        exclude: /(index)\.html/,
+        use: { loader: 'html-loader' },
+      },
       {
         test: /\.js$/,
         include: path.resolve(__dirname, '../../'),
@@ -51,15 +62,12 @@ module.exports = {
       }, {
         // Transpile imported scss files
         test: /\.scss$/,
+        include: path.resolve(__dirname, '../../'),
         use: [
-          // creates style nodes from JS strings
-          { loader: 'style-loader' },
-          // translates CSS into CommonJS
-          { loader: 'css-loader' },
-          // resolve relative urls
-          { loader: 'resolve-url-loader' },
-          // compiles Sass to CSS
-          { loader: 'sass-loader' },
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'resolve-url-loader',
+          'sass-loader',
         ],
       }, {
         // Transpile imported image files
@@ -85,6 +93,9 @@ module.exports = {
     new CleanWebpackPlugin([`${dirNames.build}/*`]),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
+    }),
     new HtmlWebpackPlugin({
       title: 'Development',
       template: appHtml,

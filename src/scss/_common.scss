@@ -1,0 +1,10 @@
+// Prefix in general
+$prefix: "webgis4u";
+
+// Map identifiers
+$map-large: "#{$prefix}-large-map";
+$map-embedded: "#{$prefix}-embedded-map";
+// Map selector
+$map-selector: ".#{$map-large}, .#{$map-embedded}";
+
+@import './mixins';

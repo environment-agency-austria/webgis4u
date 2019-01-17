@@ -23,15 +23,9 @@
     margin: 0;
   }
 
-
-
-  @include animate(opacity);
-  opacity: 0;
-  &[data-visible="true"] {
-    opacity: $opacityVisible;
-  }
-
   &:empty {
     display: none;
   }
+
+  @include fadeToggleVisibility(opacity, 0, $opacityVisible);
 }

@@ -1,7 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+// const devMode = process.env.NODE_ENV !== 'production';
+const devMode = false;
 /**
  * Source directory
  */
@@ -13,6 +16,7 @@ const dirNameDist = 'build';
 const dirDist = path.resolve(__dirname, dirNameDist);
 
 module.exports = {
+  mode: devMode ? 'development' : 'production',
   entry: './src/index.js',
   devtool: 'source-map',
   output: {
@@ -32,15 +36,12 @@ module.exports = {
       }, {
         // Transpile imported scss files
         test: /\.scss$/,
+        include: dirSource,
         use: [
-          // creates style nodes from JS strings
-          { loader: 'style-loader' },
-          // translates CSS into CommonJS
-          { loader: 'css-loader' },
-          // resolve relative urls
-          { loader: 'resolve-url-loader' },
-          // compiles Sass to CSS
-          { loader: 'sass-loader' },
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          { loader: 'css-loader', options: { sourceMap: true } },
+          'resolve-url-loader',
+          { loader: 'sass-loader', options: { sourceMap: true } },
         ],
       }, {
         // Transpile imported image files
@@ -56,11 +57,11 @@ module.exports = {
       },
     ],
   },
-  resolve: {
-    extensions: ['.js', '.json'],
-  },
   plugins: [
     new CleanWebpackPlugin([`${dirNameDist}/*`]),
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
+    }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],

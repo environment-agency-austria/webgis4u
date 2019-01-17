@@ -10,7 +10,7 @@ import ScaleLine from 'webgis4u/ol/control/ScaleLine';
  * Initializes the map
  */
 export function initialize(mapConfig) {
-  const map = new Map({
+  return new Map({
     ...mapConfig,
     controls: defaultControls().extend([
       new ScaleLine(),

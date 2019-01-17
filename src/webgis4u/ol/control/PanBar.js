@@ -33,7 +33,7 @@ Object.freeze(PanDirectionEnum);
 /**
  * The root CSS class
  */
-const CSS_CLASS = `${CSS_CONTROL_PREFIX}-panbar`;
+export const CSS_CLASS = `${CSS_CONTROL_PREFIX}-panbar`;
 
 /**
  * Control for panning

@@ -1,0 +1,38 @@
+@import '../../common';
+
+.ol-zoomslider {
+  border-radius: 0;
+
+  .#{$map-large} & {
+    background: url("./zoomslider-large.png") no-repeat scroll left 2px;
+    width: 21px;
+    height: 155px;
+    left: 72px;
+    top: 158px;
+  }
+  .#{$map-embedded} & {
+    background: url("./zoomslider-embedded.png") no-repeat scroll left 2px;
+    width: 19px;
+    height: 125px;
+    top: 108px;
+    left: 39px;
+  }
+  .ol-zoomslider-thumb {
+    cursor: move;
+    margin-left: 0;
+    position: absolute;
+    left:0;
+
+    .#{$map-large} & {
+      background: url("./zoomslider-large-slider.png") no-repeat scroll left top;
+      height: 21px;
+      width: 21px;
+    }
+    .#{$map-embedded} & {
+      background: url("./zoomslider-embedded-slider.png") no-repeat scroll left top;
+      height: 19px;
+      width: 19px;
+    }
+  }
+}
+

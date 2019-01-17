@@ -4,3 +4,4 @@
  */
 
 export * from './dom/createElement';
+export * from './dom/toggleElement';

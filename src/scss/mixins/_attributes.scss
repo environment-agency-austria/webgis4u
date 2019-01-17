@@ -1,0 +1,10 @@
+@mixin styleHidden() {
+  &[data-visible="false"] {
+    @content;
+  }
+}
+@mixin styleVisible() {
+  &[data-visible="true"] {
+    @content;
+  }
+}

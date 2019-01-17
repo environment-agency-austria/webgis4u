@@ -1,0 +1,10 @@
+@import '../common';
+
+#{$map-selector} {
+  .ol-control {
+    background-color: transparent;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}

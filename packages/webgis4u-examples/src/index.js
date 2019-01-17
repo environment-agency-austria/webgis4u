@@ -2,16 +2,32 @@ import './style.scss';
 import Prism from 'prismjs';
 import ExampleMap from './ExampleMap';
 
+const mapId = 'map';
+let currentMap = null;
 /**
  * Callback that is called when the module is successfully loaded
  *
  * @param {ExampleModule} module The module that was loaded
  */
 function onExampleModuleLoaded(module) {
-  const mapConfig = {
-    target: 'map',
-  };
-  module.initialize(mapConfig);
+  if (currentMap) {
+    currentMap.dispose();
+  }
+
+  // First remove the old content
+  const mapElement = document.getElementById(mapId);
+  mapElement.innerHTML = '';
+
+  // Load module specific html if available
+  if (module.html) {
+    mapElement.innerHTML = module.html;
+  } else if (module.loadHtml) {
+    mapElement.innerHTML = module.loadHtml();
+  }
+
+  // initialize the new map
+  const mapConfig = { target: mapId };
+  currentMap = module.initialize(mapConfig);
 }
 
 /**
