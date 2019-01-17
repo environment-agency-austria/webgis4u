@@ -10,6 +10,7 @@ import {
   OL_CONTROL_ZOOM_CSS_CLASS_MOUSE_POSITION,
   OL_CONTROL_ZOOM_CSS_CLASS_ZOOM,
   OL_CONTROL_ZOOM_CSS_CLASS_ZOOMSLIDER,
+  CSS_PREFIX,
 } from './common';
 
 import { CSS_CLASS as PanBarCssClass } from './PanBar';
@@ -22,9 +23,14 @@ import './HtmlTemplate/HtmlTemplate.scss';
 import { createElement } from '../../util/dom/createElement';
 import { getMapType, MapTypeEnum } from '../util/getMapType';
 
-const MIN_NAVBAR_DISPLAYHEIGHT = 100;
-const MIN_NAVBAR_DISPLAYWIDTH = 100;
-const MIN_MAPFOOTER_DISPLAYHEIGHT = 1000;
+/**
+ * The css class for the element 'copy right'
+ */
+const CSS_CLASS_COPYRIGHT = `${CSS_PREFIX}-map-copyright`;
+/**
+ * The css class for the element 'footer'
+ */
+const CSS_CLASS_FOOTER = `${CSS_PREFIX}-map-footer`;
 
 /**
  * Toggles element visibility if the element exists
@@ -40,7 +46,22 @@ function secureToggleElement(element, toggle) {
  *
  * @extends {ol.control.Control}
  */
-class HtmlTempalte extends Control {
+class HtmlTemplate extends Control {
+  /**
+   * The minimum height needed to display the navbar
+   */
+  static MIN_NAVBAR_DISPLAYHEIGHT = 100;
+
+  /**
+   * The minimum width needed to display the navbar
+   */
+  static MIN_NAVBAR_DISPLAYWIDTH = 100;
+
+  /**
+   * The minimum height needed to display the footer
+   */
+  static MIN_MAPFOOTER_DISPLAYHEIGHT = 1000;
+
   /** @type {HTMLElement} */
   mapEl;
 
@@ -79,18 +100,16 @@ class HtmlTempalte extends Control {
   constructor(options) {
     /* creates the dom element */
     const element = document.createElement('div');
-    const elementFooter = createElement({ tag: 'div', cssClass: 'webgis4u-map-footer' });
+    const elementFooter = createElement({ tag: 'div', cssClass: CSS_CLASS_FOOTER });
     element.appendChild(elementFooter);
 
-    /**
-     * initialize the parent control.
-     */
     super({
       element,
       ...options,
     });
 
     this.mapFooter = elementFooter;
+    window.addEventListener('resize', this.updateControlsVisibility);
   }
 
   /**
@@ -122,7 +141,7 @@ class HtmlTempalte extends Control {
     this.scaleSlider = mapEl.querySelector(`.${OL_CONTROL_ZOOM_CSS_CLASS_ZOOMSLIDER}`);
 
     // Find map elements
-    this.mapCopyright = mapEl.querySelector('.ugis-map-copyright');
+    this.mapCopyright = mapEl.querySelector(`.${CSS_CLASS_COPYRIGHT}`);
 
     // enable display / not display mouse position
     if (this.mousePosCheckbox && this.mousePos) {
@@ -136,9 +155,6 @@ class HtmlTempalte extends Control {
 
     this.toolSwitcher.init(mapEl);
     this.infoPanel.init(map);
-
-    /* display or hide controls based on the available map size */
-    window.addEventListener('resize', this.updateControlsVisibility);
     this.updateControlsVisibility();
   }
 
@@ -157,12 +173,15 @@ class HtmlTempalte extends Control {
 
     const [width, height] = size;
 
-    const toggle = (height > MIN_NAVBAR_DISPLAYHEIGHT && width > MIN_NAVBAR_DISPLAYWIDTH);
+    const toggle = (
+      height > HtmlTemplate.MIN_NAVBAR_DISPLAYHEIGHT
+      && width > HtmlTemplate.MIN_NAVBAR_DISPLAYWIDTH
+    );
     secureToggleElement(this.scaleSlider, toggle);
     secureToggleElement(this.zoom, toggle);
     secureToggleElement(this.panBar, toggle);
 
-    const toggle2 = (height < MIN_MAPFOOTER_DISPLAYHEIGHT);
+    const toggle2 = (height > HtmlTemplate.MIN_MAPFOOTER_DISPLAYHEIGHT);
     secureToggleElement(this.mapFooter, toggle2);
     secureToggleElement(this.mousePos, toggle2);
     secureToggleElement(this.scaleLine, toggle2);
@@ -172,4 +191,4 @@ class HtmlTempalte extends Control {
   }
 }
 
-export default HtmlTempalte;
+export default HtmlTemplate;
