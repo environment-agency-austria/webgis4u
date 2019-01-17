@@ -7,7 +7,7 @@ import { listen } from 'ol/events';
 import EventType from 'ol/events/EventType';
 
 import { createElement } from '../../util/dom/createElement';
-import { pan } from '../../util/ol/pan';
+import { pan } from '../util/pan';
 
 import { CSS_CONTROL_UNSELECTABLE, CSS_CONTROL_PREFIX } from './common';
 import './PanBar/PanBar.scss';

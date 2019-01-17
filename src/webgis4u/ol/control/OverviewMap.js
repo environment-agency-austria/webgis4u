@@ -19,7 +19,7 @@ import * as extent from 'ol/extent';
 
 
 import { createElement } from '../../util/dom/createElement';
-import { getMapChildElementByClassName } from '../../util/ol/getMapChildElementByClassName';
+import { getMapChildElementByClassName } from '../util/getMapChildElementByClassName';
 import { EPSG31287_ID } from '../proj/austria';
 
 import { CSS_CONTROL_PREFIX } from './common';

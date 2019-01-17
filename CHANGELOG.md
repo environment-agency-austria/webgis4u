@@ -22,9 +22,14 @@ All notable changes to this project will be documented in this file.
   * [`number`](./src/webgis4u/util/number.js):
     * [`convertUnitValue`](./src/webgis4u/util/number/convertUnitValue.js):
   * [`ol`](./src/webgis4u/util/ol.js):
+    * [`createImageFromMap`](./src/webgis4u/ol/util/createImageFromMap.js)
     * [`getMapChildElementByClassName`](./src/webgis4u/util/ol/getMapChildElementByClassName.js):
     * [`getMapType`](./src/webgis4u/ol/util/getMapType.js)
-    * [`pan`](./src/webgis4u/util/ol/pan.js)
+    * [`getScale`](./src/webgis4u/ol/util/getScale.js)
+    * [`pan`](./src/webgis4u/ol/util/pan.js)
+    * [`print`](./src/webgis4u/ol/util/print.js)
+    * [`zoomToExtent`](./src/webgis4u/ol/util/zoomToExtent.js)
+    * [`zoomToLayerExtent`](./src/webgis4u/ol/util/zoomToLayerExtent.js)
   * [`string`](./src/webgis4u/util/string.js):
     * [`formatNumber`](./src/webgis4u/util/string/formatNumber.js):
     * [`formatUnitValue`](./src/webgis4u/util/string/formatUnitValue.js):
