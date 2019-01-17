@@ -7,6 +7,10 @@ $map-embedded: "#{$prefix}-embedded-map";
 // Map selector
 $map-selector: ".#{$map-large}, .#{$map-embedded}";
 
+// Map template identifiers
+$map-template-large: "#{$prefix}-large-map-template";
+$map-template-embedded: "#{$prefix}-embedded-map-template";
+
 
 // Overall used variables
 
