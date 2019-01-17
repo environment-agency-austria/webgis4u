@@ -3,6 +3,7 @@
 .#{$prefix}-info-panel {
   $width: 231px;
   $borderRight: 1px solid #D5D5D5;
+  $item-border-bottom: 1px solid #d2d2d3;
 
   position: absolute;
   top: 0;
@@ -30,6 +31,15 @@
     ~ #{$map-selector} {
       margin-left: 231px;
     }
+
+    &-toggle {
+      .#{$prefix}-control-info {
+        background-image: url("./info_panel_hide.png");
+        &:hover {
+            background-image: url("./info_panel_hide_hover.png");
+        }
+      }
+    }
   }
 
   > div {
@@ -41,8 +51,8 @@
     height: 42px;
     flex-grow: 0;
 
-    background-color: #eaeaeb;
-    border-bottom: 1px solid #d2d2d3;
+    background-color: $control-button-background-color;
+    border-bottom: $item-border-bottom;
 
     a {
       position: absolute;
@@ -51,16 +61,22 @@
       height: 25px;
       width: 30px;
     }
+
+    .#{$prefix}-control-info {
+      display: block;
+      background: url("./info_panel_show.png");
+      &:hover {
+        background: url("./info_panel_show_hover.png");
+      }
+    }
   }
 
   &-content {
-    flex-grow: 1;
+    @extend %control-panel;
+    background-color: $control-button-background-color;
+    overflow-x: hidden;
 
-    color: #545454;
-    background-color: #eaeaeb;
-    font-family: Arial;
-    overflow: auto;
-    overflow-x:hidden;
+    flex-grow: 1;
 
     .webgis4u-info-panel-header {
       border-top: 1px solid #ffffff;
@@ -68,7 +84,7 @@
       padding: 3px 10px;
     }
     .webgis4u-info-panel-legend {
-      border-bottom: 1px solid #d2d2d3;
+      border-bottom: $item-border-bottom;
     }
     .webgis4u-info-panel-footer {
       border-top: 1px solid #ffffff;

@@ -7,4 +7,10 @@ $map-embedded: "#{$prefix}-embedded-map";
 // Map selector
 $map-selector: ".#{$map-large}, .#{$map-embedded}";
 
+
+// Overall used variables
+$font-base: Arial;
+
+
 @import './mixins';
+@import './base';

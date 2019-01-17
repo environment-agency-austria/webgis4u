@@ -4,24 +4,17 @@
   border:0;
   position: absolute;
   bottom: 60px;
-  right:20px;
+  right: 20px;
   height: 25px;
   z-index: 1001;
 
   a {
-    border: solid 1px #919191;
-    border-radius: 2px;
+    @extend %control-button-group;
+
     top: 0;
     bottom:0;
-    color: #545454;
-    font-size: 11px;
     padding: 6px;
     text-decoration:none;
-    background-color: #eaeaeb;
-
-    ~a {
-      border-left: 1px solid #ffffff;
-    }
 
     &:hover {
       background-color: #d6d6d6;

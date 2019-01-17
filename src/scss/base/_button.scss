@@ -1,0 +1,42 @@
+$control-button-background-color: #eaeaeb;
+$control-button-border: solid 1px #919191;
+$control-button-color: #545454;
+
+%control-base {
+  color: $control-button-color;
+  font-size: 11px;
+}
+%control-base-bordered {
+  @extend %control-base;
+  border: $control-button-border;
+  border-radius: 2px;
+}
+
+%control-button {
+  @extend %control-base-bordered;
+
+  background-color: $control-button-background-color;
+}
+
+%control-button-group {
+  @extend %control-button;
+
+  box-sizing: border-box;
+
+  &~& {
+    border-left: 1px solid white;
+  }
+}
+
+
+%control-panel {
+  @extend %control-base;
+  box-sizing: border-box;
+  font-family: Arial;
+  overflow: auto;
+}
+
+%control-panel-bordered {
+  @extend %control-panel;
+  @extend %control-base-bordered;
+}

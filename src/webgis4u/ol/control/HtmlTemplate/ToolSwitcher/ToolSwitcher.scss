@@ -7,49 +7,46 @@
   top:20px;
   right:20px;
 
-  button  {
+  button {
+    @extend %control-button-group;
+
+    background: {
+      image: url("./toolswitcher-button.png");
+      repeat: no-repeat;
+      position: right top;
+    };
+
     position:absolute;
     left:0;
     top:0;
-    box-sizing: border-box;
-    background:  url("./toolswitcher-button.png") no-repeat right top ;
-    background-color: #eaeaeb;
-    border: 1px solid #919191;
-    border-radius: 2px;
-    font-size: 11px;
+
     font: Arial, sans-serif;
     width:94px;
     height: 25px;
     padding: 3px 6px;
     text-align: left;
-    color: #545454;
 
     ~button {
-      border-left: 1px solid white;
       left:94px;
     }
   }
 
-  .active  {
+  .active {
     background-color:#fafafa;
     border-bottom: 0;
   }
 }
 
 .#{$prefix}-toolswitcher-content {
-  box-sizing: border-box;
-  border: 1px solid #919191;
-  color: #545454;
-  border-radius: 2px;
+  @extend %control-panel-bordered;
   border-top: 0;
+  background:#fafafa;
+
   position: absolute;
   z-index: 1003;
   top:45px;
   right:20px;
   width:188px;
-  font: 11px Arial;
-  background:#fafafa;
-  overflow: auto;
 
   .#{$prefix}-toolswitcher-close {
     box-sizing: border-box;
