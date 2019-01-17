@@ -3,7 +3,7 @@
  */
 
 /**
- * Callback used by myFunction.
+ * Callback used by print.
  * @callback CreateImageFromMapCallback
  * @param {string} base64Image
  */
@@ -26,6 +26,6 @@ export function createImageFromMap(map2export, callback) {
     map2export.renderSync();
   } catch (e) {
     console.log(e);
-    throw new Error('Unable to export map.');
+    throw new Error('createImageFromMap: Unable to export map.');
   }
 }

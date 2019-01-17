@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file.
     * [`getMapType`](./src/webgis4u/ol/util/getMapType.js)
     * [`getScale`](./src/webgis4u/ol/util/getScale.js)
     * [`pan`](./src/webgis4u/ol/util/pan.js)
+    * [`print`](./src/webgis4u/ol/util/print.js)
     * [`zoomToExtent`](./src/webgis4u/ol/util/zoomToExtent.js)
     * [`zoomToLayerExtent`](./src/webgis4u/ol/util/zoomToLayerExtent.js)
   * [`string`](./src/webgis4u/util/string.js):
