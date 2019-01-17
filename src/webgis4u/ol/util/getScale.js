@@ -23,7 +23,7 @@ import { EPSG31287_ID } from '../proj/austria';
  *
  * Gets the map Scale
  * @param {ol.Map} map The map whose scale will be returned.
- * @returns {Scale} The scale.
+ * @returns {module:webgis4u/ol/util/getScale~Scale} The scale.
  * @example
  * // Get the map scale
  * ugis.ol.util.getScale(myMap);
