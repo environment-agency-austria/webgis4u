@@ -5,7 +5,7 @@
 import { OL_CLASS_VIEWPORT } from '../common';
 
 /**
- *
+ * Updates the map target
  * @param {HTMLElement} element The new element for the map
  * @param {ol.Map} map The map.
  */
