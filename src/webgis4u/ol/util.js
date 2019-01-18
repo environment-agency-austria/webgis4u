@@ -2,6 +2,7 @@
  * @module webgis4u/ol/util
  */
 
+export * from './util/changeMapTarget';
 export * from './util/createImageFromMap';
 export * from './util/getMapChildElementByClassName';
 export * from './util/getMapType';
