@@ -35,4 +35,7 @@ All notable changes to this project will be documented in this file.
     * [`formatNumber`](./src/webgis4u/util/string/formatNumber.js):
     * [`formatUnitValue`](./src/webgis4u/util/string/formatUnitValue.js):
     * [`formatText`](./src/webgis4u/util/string/formatText.js):
+  * [`web`](./src/webgis4u/util/web.js):
+    * [`encodeQueryData`](./src/webgis4u/util/web/encodeQueryData.js)
+    * [`sendRequest`](./src/webgis4u/util/web/sendRequest.js)
 * Added generation from templates using command line via `$> webgis4u -out <path> [-templates <path>]`

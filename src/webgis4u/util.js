@@ -6,3 +6,4 @@ export * from './util/dom';
 export * from './util/function';
 export * from './util/number';
 export * from './util/string';
+export * from './util/web';
