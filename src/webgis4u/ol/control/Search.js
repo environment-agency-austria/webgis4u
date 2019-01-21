@@ -140,23 +140,22 @@ const HTML_NAME_SEARCH_FIELD = 'webgisSearchField';
  * The service is always application specific and must therefore be provided
  * by the application that uses the webgis client.
  *
- *  @example //for  search response format (= just an empty array)
+ * @example //for  search response format (= just an empty array)
  * [
-  *   {
-  *     "value": "display value 1",
-  *     "data": {"type":"Feature","geometry":{"type":"Point","coordinates":[1187555.69,6019550.63]},"properties":{"lid":"layer0","fid":"fid0"}}
-  *   },
-  *   {
-  *     "value": "display value 2",
-  *     "data": {"type":"Feature","geometry":{"type":"Point","coordinates":[13555.69,6015650.63]},"properties":{"lid":"layer0","fid":"fid1"}}
-  *   },
-  *   {
-  *     "value": "display value n",
-  *     "data": {"type":"Feature","geometry":{"type":"Point","coordinates":[1087555.69,5419550.63]},"properties":{"lid":"layer1","fid":"fidn"}}
-  *   }
-  * ]
-  *
-  **/
+ *   {
+ *     "value": "display value 1",
+ *     "data": {"type":"Feature","geometry":{"type":"Point","coordinates":[1187555.69,6019550.63]},"properties":{"lid":"layer0","fid":"fid0"}}
+ *   },
+ *   {
+ *     "value": "display value 2",
+ *     "data": {"type":"Feature","geometry":{"type":"Point","coordinates":[13555.69,6015650.63]},"properties":{"lid":"layer0","fid":"fid1"}}
+ *   },
+ *   {
+ *     "value": "display value n",
+ *     "data": {"type":"Feature","geometry":{"type":"Point","coordinates":[1087555.69,5419550.63]},"properties":{"lid":"layer1","fid":"fidn"}}
+ *   }
+ * ]
+ * */
 class Search extends Control {
   /**
    * The dfeault nothing found message for the search control. Can be overriden with an individual message.
@@ -330,7 +329,10 @@ class Search extends Control {
     this.limit = valueOrDefault(options.limit, Search.limit);
     this.searchURL = valueOrDefault(options.searchURL, Search.URL);
     this.timeout = valueOrDefault(options.timeout, Search.timeout);
-    this.searchFieldSelector = valueOrDefault(options.searchField, `input[name="${HTML_NAME_SEARCH_FIELD}"]`);
+    this.searchFieldSelector = valueOrDefault(
+      options.searchField,
+      `input[name="${HTML_NAME_SEARCH_FIELD}"]`,
+    );
 
     // Default functions
     this.preprocessQuery = valueOrDefault(options.preprocessQuery, Search.preprocessQuery);
@@ -455,7 +457,7 @@ class Search extends Control {
           asyncCallback(json);
           this.showSearchResults(json);
         },
-        error: (xhr, status, error) => this.onError(xhr, status, error, layer, map),
+        error: (xhr, status, error) => this.onError(xhr, status, error, this._searchResult, map),
       });
     };
   }
