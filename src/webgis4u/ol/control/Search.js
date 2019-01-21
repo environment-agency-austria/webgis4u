@@ -68,19 +68,32 @@ function valueOrDefault(value, defaultValue) {
 }
 
 /**
+ * Convert the acquired feature data
+ * @param {any} featureData The feature to read
+ * @param {ol.ProjectionLike} projection Projection of the feature geometries created by the format reader.
+ * @param {ol.format.GeoJSON} geoJsonFormat
+ *
+ * @returns {ol.Feature}
+ */
+function toFeature(featureData, projection, geoJsonFormat) {
+  return geoJsonFormat.readFeature(
+    featureData, {
+      featureProjection: projection,
+    },
+  );
+}
+
+/**
  * @type {module:webgis4u/ol/control/Search~OnShowCallback}
  */
 function defaultOnShow(suggestions, layer, map, geoJsonFormat) {
   layer.getSource().clear();
+  const mapProj = map.getView().getProjection();
 
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < suggestions.length; i++) {
     layer.getSource().addFeature(
-      geoJsonFormat.readFeature(
-        suggestions[i].data, {
-          featureProjection: map.getView().getProjection(),
-        },
-      ),
+      toFeature(suggestions[i].data, mapProj, geoJsonFormat),
     );
   }
   zoomToLayerExtent(layer, map);
@@ -92,11 +105,7 @@ function defaultOnShow(suggestions, layer, map, geoJsonFormat) {
 function defaultOnHover(suggestion, layer, map, geoJsonFormat) {
   layer.getSource().clear();
   layer.getSource().addFeature(
-    geoJsonFormat.readFeature(
-      suggestion.data, {
-        featureProjection: map.getView().getProjection(),
-      },
-    ),
+    toFeature(suggestion.data, map.getView().getProjection(), geoJsonFormat),
   );
 }
 
@@ -107,11 +116,7 @@ function defaultOnSelect(suggestion, layer, map, geoJsonFormat) {
   const layeyrSource = layer.getSource();
   layeyrSource.clear();
   layeyrSource.addFeature(
-    geoJsonFormat.readFeature(
-      suggestion.data, {
-        featureProjection: map.getView().getProjection(),
-      },
-    ),
+    toFeature(suggestion.data, map.getView().getProjection(), geoJsonFormat),
   );
   zoomToLayerExtent(layer, map);
 }
@@ -295,7 +300,7 @@ class Search extends Control {
   /**
    * @type {ol.layer.Vector}
    */
-  _searchResult;
+  layerSearchResults;
 
   /**
    * The selector for the search field
@@ -354,12 +359,12 @@ class Search extends Control {
   getSearchOverlay() { return this._searchOverlay; }
 
   /**
-   * Gets the search result layer. Which is a vector layer on which the search result is visualized.
+   * Layer containing all search results
    * @returns {ol.layer.Vector}
    * @example
-   * mySerachOverlayLayer = mySearchControl.getSearchOverlay();
+   * mySerachOverlayLayer = mySearchControl.getSearchResult();
    */
-  getSearchResult() { return this._searchResult; }
+  getSearchResult() { return this.layerSearchResults; }
 
   /**
    * @returns {any} The suggestions
@@ -371,7 +376,7 @@ class Search extends Control {
    * @private
    */
   initLayers() {
-    this._searchResult = new VectorLayer({
+    this.layerSearchResults = new VectorLayer({
       map: this.map_,
       source: new VectorSource(),
       style: Search.selectStyle,
@@ -386,7 +391,7 @@ class Search extends Control {
   }
 
   /**
-   *
+   * @inheritdoc
    * @param {ol.Map} map
    */
   setMap(map) {
@@ -394,7 +399,7 @@ class Search extends Control {
 
     /* unbind everything an cleanup */
     if (this.map_) {
-      this.map_.removeLayer(this._searchResult);
+      this.map_.removeLayer(this.layerSearchResults);
       this.map_.removeLayer(this._searchOverlay);
     }
 
@@ -433,7 +438,7 @@ class Search extends Control {
     /* highlight and zoom to and clear the other selection */
     ).bind('typeahead:select', (ev, suggestion) => {
       this._searchOverlay.getSource().clear();
-      this.onSelect(suggestion, this._searchResult, map, this._geoJsonFormat);
+      this.onSelect(suggestion, this.layerSearchResults, map, this._geoJsonFormat);
     }).bind('typeahead:cursorchange', (ev, suggestion) => {
       this.onHover(suggestion, this._searchOverlay, map, this._geoJsonFormat);
     });
@@ -457,7 +462,9 @@ class Search extends Control {
           asyncCallback(json);
           this.showSearchResults(json);
         },
-        error: (xhr, status, error) => this.onError(xhr, status, error, this._searchResult, map),
+        error: (xhr, status, error) => {
+          this.onError(xhr, status, error, this.layerSearchResults, map);
+        },
       });
     };
   }
@@ -469,7 +476,7 @@ class Search extends Control {
   clearSearchResults() {
     // clear all existing search results.
     this._searchOverlay.getSource().clear();
-    this._searchResult.getSource().clear();
+    this.layerSearchResults.getSource().clear();
   }
 
   /**
@@ -482,7 +489,7 @@ class Search extends Control {
     // Get the elements from this
     const {
       _searchOverlay,
-      _searchResult,
+      layerSearchResults: _searchResult,
       map_,
       _mapEl,
       _geoJsonFormat,
