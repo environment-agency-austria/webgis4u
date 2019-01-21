@@ -37,7 +37,7 @@ export function sendRequest(options) {
     } else {
       error(request, request.statusText, request.statusText);
     }
-  }
+  };
   // Finally send the request
   request.send();
 }
