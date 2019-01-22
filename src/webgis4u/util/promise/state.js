@@ -13,6 +13,11 @@ export const PromiseStateEnum = {
 Object.freeze(PromiseStateEnum);
 
 /**
+ * Unique symbol used to identify the value returned by Promise.race
+ */
+const promiseStateSymbol = Symbol('promiseState');
+
+/**
  * Encodes a given object to use as a query string
  * @param {Promise} p The promise
  * @returns {string} The encoded query string
@@ -23,10 +28,9 @@ Object.freeze(PromiseStateEnum);
  * }
  */
 export function state(p) {
-  const t = {};
-  return Promise.race([p, t])
+  return Promise.race([p, promiseStateSymbol])
     .then(
-      v => ((v === t)
+      v => ((v === promiseStateSymbol)
         ? PromiseStateEnum.Pending
         : PromiseStateEnum.Fulfilled),
       () => PromiseStateEnum.Rejected,
