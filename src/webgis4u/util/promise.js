@@ -3,4 +3,5 @@
  * @module webgis4u/util/promise
  */
 
+export * from './promise/asyncDebounce';
 export * from './promise/state';
