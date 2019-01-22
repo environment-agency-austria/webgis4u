@@ -13,7 +13,7 @@ import { hasValue } from '../string/hasValue';
 /**
  * Util function to create a HTML element
  *
- * @param {CreateHtmlElementOptions} options
+ * @param {module:webgis4u/util/dom/createElement~CreateHtmlElementOptions} options
  * The options
  *
  * @returns {HTMLElement} An html element
