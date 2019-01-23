@@ -12,3 +12,5 @@ export { default as OverviewMap } from './control/OverviewMap';
 export { default as PanBar } from './control/PanBar';
 export { default as ScaleLine } from './control/ScaleLine';
 export { default as Search } from './control/Search';
+
+export * from './util';
