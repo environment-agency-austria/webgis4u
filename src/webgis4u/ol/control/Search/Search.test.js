@@ -125,7 +125,6 @@ describe('webgis4u/ol/control/Search', () => {
     });
 
     it('should resolve empty', async () => {
-      // const spyOnError = jest.spyOn(control, 'onError');
       spySendRequest.mockImplementationOnce((options) => {
         options.error([]);
       });

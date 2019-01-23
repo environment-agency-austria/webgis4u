@@ -219,4 +219,34 @@ describe('webgis4u/components/AutoComplete', () => {
       expect(control.filteredChoices.length).toBe(2);
     });
   });
+
+  describe('with 2 lists', () => {
+    let control2;
+    let element2;
+
+    const source = ['test1', 'test2', 'no-value'];
+
+    beforeEach(() => {
+      element2 = document.createElement('input');
+      element2.setAttribute('type', 'text');
+      document.body.appendChild(element2);
+
+      setupControl({
+        element: element2,
+        source,
+      });
+      control2 = control;
+
+      setupControl({
+        source,
+      });
+    });
+
+    it('should close one list', async () => {
+      // Simulate input event
+      await control.updateList('test');
+      element.parentNode.click();
+      expect(control).not.toBe(control2);
+    });
+  });
 });
