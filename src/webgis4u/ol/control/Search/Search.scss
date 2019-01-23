@@ -1,0 +1,169 @@
+@import '../common';
+
+
+
+.#{$controlPrefix}-search {
+  label {
+    color: #555;
+  }
+
+  input {
+    box-sizing: border-box;
+    position: relative;
+    background: linear-gradient(to bottom, #f7f7f8 0%,#ffffff 100%);
+    font-size: 12px;
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2) inset, 0 -1px 0 rgba(0,0,0,0.05) inset;
+
+    transition: all 0.2s linear;
+    padding:0 4px;
+  }
+
+  .#{$map-template-large} & {
+    font-size: 24px;
+    left: 231px;
+    position: absolute;
+    font-family: Arial;
+    top: 15px;
+
+    label {
+      font-size: 12px;
+      line-height: 16px;
+      padding-left: 33px;
+      padding-right: 16px;
+    }
+    input {
+      width: 400px;
+      height:28px;
+    }
+  }
+
+  .#{$map-template-embedded} & {
+    width: 260px;
+
+    label {
+      top: 12px;
+      left: 10px;
+      position:relative;
+      overflow: hidden;
+    }
+
+    input {
+      height: 20px;
+      width: 200px;
+      top: 9px;
+      left:10px;
+      overflow: hidden;
+    }
+  }
+}
+
+
+// TODO: CHECK - THIS MIGHT BE ONLY THE TYPEAHEAD STYLINGS
+
+.typeahead,
+.tt-query,
+.tt-hint {
+  width: 396px;
+  height: 30px;
+  padding: 8px 12px;
+  font-size: 24px;
+  line-height: 30px;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  outline: none;
+}
+
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-menu {
+  box-sizing: border-box;
+  background-color: #FFEFE5;
+  font-weight: normal;
+  color: #3399FF;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  max-height: 200px;
+  font-size: 11px;
+  overflow: auto;
+}
+
+.tt-suggestion {
+  box-sizing: border-box;
+  border-bottom: 1px dotted #999;
+  padding: 0;
+  margin: 0;
+  margin-left:5px;
+}
+
+.tt-suggestion:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #0097cf;
+}
+
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #FFCC99;
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+.gist {
+  font-size: 14px;
+}
+
+
+
+
+
+.#{$map-template-large} .tt-menu {
+  width:400px;
+}
+
+.#{$map-template-embedded} .tt-menu {
+  width:200px;
+  margin-top: 12px;
+  z-index: 1500;
+}
+
+/*
+Fix search field alignment for Firefox (1/2)
+override the Twitter inline style on the span element (typeahead.js 0.10.5 included in u-gis)
+CSS path div.#{$map-template-large}.unselectable div.ugis-header div.ugis-control-search span.twitter-typeahead
+*/
+.#{$controlPrefix}-search span.twitter-typeahead {
+  vertical-align: middle !important;
+}
+ 
+/*
+Fix search field alignment for Firefox (2/2)
+override the U-GIS style on ".#{$map-template-large} .ugis-control-search label"
+CSS path: div.#{$map-template-large}.unselectable div.ugis-header div.ugis-control-search label
+*/
+.#{$map-template-large}.unselectable .#{$prefix}-header .#{$controlPrefix}-search label {
+  vertical-align: middle;
+}
+
+
+
+
+
+
+

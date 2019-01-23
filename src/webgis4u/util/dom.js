@@ -5,3 +5,5 @@
 
 export * from './dom/createElement';
 export * from './dom/toggleElement';
+
+export { default as KeyCodeEnum } from './dom/KeyCodeEnum';
