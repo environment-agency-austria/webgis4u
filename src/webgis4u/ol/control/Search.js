@@ -8,7 +8,8 @@ import VectorLayer from 'ol/layer/Vector';
 import * as proj from 'ol/proj';
 import VectorSource from 'ol/source/Vector';
 
-import { debounce } from '../../util/function/debounce';
+import AutoComplete from '../../components/AutoComplete';
+import { asyncDebounce } from '../../util/promise/asyncDebounce';
 import { sendRequest } from '../../util/web/sendRequest';
 
 import { getIconStyle } from '../style/style';
@@ -126,19 +127,13 @@ function defaultOnSelect(suggestion, layer, map, geoJsonFormat) {
  */
 function defaultOnError(request, status, error, layer) {
   layer.getSource().clear();
-  if (status === 'timeout') {
-    // timeout -> reload the page and try again
-    console.log('timeout');
-  } else {
-    // another error occured
-    console.log('error: ', request, status, error);
-  }
+  console.log('error: ', request, status, error);
 }
 
 /**
  * The default name used for the search field
  */
-const HTML_NAME_SEARCH_FIELD = 'webgisSearchField';
+const HTML_NAME_SEARCH_FIELD = 'webgis4uSearchField';
 
 /**
  * Provides google like search capability for the map.
@@ -309,6 +304,12 @@ class Search extends Control {
   searchFieldSelector;
 
   /**
+   * The number of maximum shown result items
+   * @type {number}
+   */
+  limit;
+
+  /**
    * Constructor
    *
    * @param {object} [options]  The following properties are supported.
@@ -343,7 +344,7 @@ class Search extends Control {
     this.preprocessQuery = valueOrDefault(options.preprocessQuery, Search.preprocessQuery);
     this.onError = valueOrDefault(options.onError, Search.onError);
     this.onHover = valueOrDefault(options.onHover, Search.onHover);
-    this.onShow = valueOrDefault(options.onHover, Search.onShow);
+    this.onShow = valueOrDefault(options.onShow, Search.onShow);
     this.onSelect = valueOrDefault(options.onSelect, Search.onSelect);
 
     this.initLayers();
@@ -411,62 +412,63 @@ class Search extends Control {
 
     // Find the new map target
     this._mapEl = map.getTargetElement();
-    this._searchField = this._mapEl.parentElement().querySelector(this.searchFieldSelector);
+    this._searchField = this._mapEl.parentElement.querySelector(this.searchFieldSelector);
     // Only proceed if the search field exists
     if (!this._searchField) { return; }
 
     this.initLayers();
 
-    // TODO: REPLACE TYPEAHEAD IMPLEMENTATION
-    this._searchField.addClass("typeahead");
-    $(this._searchField).typeahead({
-      highlight: false,
-      hint: false,
+    // Create a debounced version of getFiltered list
+    const getSource = asyncDebounce(
+      query => this.getFilterdList(this.searchURL, map, query),
+      500,
+    );
+
+    this.autoComplete = new AutoComplete({
+      element: this._searchField,
       minLength: this.minLength,
-    }, {
-      name: 'ugisSearch',
-      display: result => result.value,
-      //  workaround due to typeahead bug limit: options.limit
-      limit: 'Infinity',
-      source: debounce(() => this.getTypeAheadSource(this.searchURL, map), this.limit),
-      async: true,
-      templates: {
+      messages: {
         notFound: Search.MESSAGE_NOTHING_FOUND,
         pending: Search.MESSAGE_PENDING,
       },
-    },
-    /* highlight and zoom to and clear the other selection */
-    ).bind('typeahead:select', (ev, suggestion) => {
-      this._searchOverlay.getSource().clear();
-      this.onSelect(suggestion, this.layerSearchResults, map, this._geoJsonFormat);
-    }).bind('typeahead:cursorchange', (ev, suggestion) => {
-      this.onHover(suggestion, this._searchOverlay, map, this._geoJsonFormat);
+      source: getSource,
+      getChoiceText: result => result.value,
+      onListUpdated: choices => this.showSearchResults(choices),
+      onItemSelected: (ev, suggestion) => {
+        this._searchOverlay.getSource().clear();
+        this.onSelect(suggestion, this.layerSearchResults, map, this._geoJsonFormat);
+      },
+      onItemHover: (ev, suggestion) => {
+        this.onHover(suggestion, this._searchOverlay, map, this._geoJsonFormat);
+      },
     });
   }
 
   /**
-   * Gets a typeahead source based on the URL.
-   * @param {type} url the datasource url.
-   * @param {type} map the map.
-   *
+   * Retrieve a list of filtered items
+   * @param {string} url The url
+   * @param {ol.Map} map The map
+   * @param {string} query The query
+   * @returns {Promise} The result
    * @private
    */
-  getTypeAheadSource(url, map) {
-    return (query, syncCallback, asyncCallback) => {
+  async getFilterdList(url, map, query) {
+    return new Promise((resolve, reject) => {
       sendRequest({
         url,
         type: 'GET',
         data: this.preprocessQuery(query, map),
         timeout: this.timeout,
         success: (json) => {
-          asyncCallback(json);
-          this.showSearchResults(json);
+          resolve(json);
         },
         error: (xhr, status, error) => {
+          resolve([]);
+          // reject();
           this.onError(xhr, status, error, this.layerSearchResults, map);
         },
       });
-    };
+    });
   }
 
   /**
@@ -481,6 +483,7 @@ class Search extends Control {
 
   /**
    * shows the search resuls.
+   * @param {Array} suggestions The found suggestions
    * @private
    */
   showSearchResults(suggestions) {
@@ -488,29 +491,13 @@ class Search extends Control {
 
     // Get the elements from this
     const {
-      _searchOverlay,
-      layerSearchResults: _searchResult,
+      layerSearchResults,
       map_,
-      _mapEl,
       _geoJsonFormat,
     } = this;
 
-    const mapParent = _mapEl.parentElement;
-    // Style the menu
-    const typeAheadMenu = mapParent.querySelector('.tt-menu');
-    typeAheadMenu.style['z-index'] = 2000;
-
-    // Handle the elements
-    const suggestionEntries = mapParent.querySelectorAll('.tt-suggestion');
-    suggestionEntries.forEach((element, i) => {
-      if (i > this.limit) { return; }
-
-      element.addEventListener('mouseover', () => {
-        this.onHover(suggestions[i], _searchOverlay, map_, _geoJsonFormat);
-      });
-    });
-
-    this.onShow(suggestions, _searchResult, map_, _geoJsonFormat);
+    this._suggestions = suggestions;
+    this.onShow(suggestions, layerSearchResults, map_, _geoJsonFormat);
   }
 }
 
