@@ -55,7 +55,7 @@
     "clean-webpack-plugin": "^1.0.0",
     "coveralls": "^3.0.2",
     "css-loader": "^2.0.1",
-    "eslint": "^5.4.0",
+    "eslint": "^6.0.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-oceanjs": "^0.1.0",
     "eslint-plugin-babel": "^5.1.0",
