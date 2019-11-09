@@ -9908,6 +9908,11 @@ wcwidth@^1.0.0:
   dependencies:
     defaults "^1.0.3"
 
+webgis4u@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/webgis4u/-/webgis4u-0.0.1.tgz#620ddb9683ad6f49f8b8dd9081fc675a627d18ca"
+  integrity sha512-coTcdTR0sJKQEs3Bzw83KZTg+U+yxe3bvLCEK+xqaFCkwZZaV81IqN6QZbQCOqHxu+pVJ71dfYAliPUWbbsA0w==
+
 webidl-conversions@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-4.0.2.tgz#a855980b1f0b6b359ba1d5d9fb39ae941faa63ad"
