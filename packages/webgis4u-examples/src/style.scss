@@ -1,6 +1,8 @@
 @import '~prismjs/themes/prism-tomorrow.css';
-@import '../../../build/style.css';
-// @import '~webgis4u/build/style.scss';
+@import '~ol/ol.css';
+@import '../../webgis4u/build/style.css';
+// @import '../../webgis4u/src/scss/style.css';
+// @import '~webgis4u/build/style.css';
 
 .content {
   margin: 10px;

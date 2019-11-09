@@ -1,8 +1,10 @@
 language: node_js
 node_js:
-  - "8"
+  - "10"
 cache:
   yarn: true
+  directories:
+    - "node_modules"
 
 jobs:
   include:
@@ -12,26 +14,25 @@ jobs:
     - script: yarn test:ci
       name: "Produce coverage"
     - stage: Build
-      node_js: "8"
+      node_js: "10"
       name: "Webpack build"
-      script: "yarn build"
+      script: yarn build:ci
       deploy:
-        provider: npm
-        email: $NPM_DEPLOY_EMAIL
-        api_key: $NPM_API_KEY
+        provider: script
+        script: yarn deploy:ci
         skip_cleanup: true
         on:
-          tags: true
+          branch: master
     - stage: Docs
       name: "Generate docs"
       # Only generate docs for branch master
       if: branch = master
-      script: "yarn doc:generate"
+      script: yarn doc:generate
       deploy:
         provider: pages
         skip-cleanup: true
         github-token: $GITHUB_TOKEN_GHPAGES
-        local-dir: doc
+        local-dir: packages/webgis4u/doc
         on:
           branch: master
 
