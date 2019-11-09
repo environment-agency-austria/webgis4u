@@ -9,8 +9,8 @@
     "start": "lerna run start --stream --parallel",
     "build": "lerna run build --stream --parallel",
     "lint": "lerna run lint --stream --parallel",
-    "before_deploy:test": "lerna version --conventional-commits --yes",
-    "before_deploy:ci": "lerna version --conventional-commits --yes --create-release github"
+    "before_deploy:test": "lerna version --yes",
+    "before_deploy:ci": "lerna version --yes --create-release github"
   },
   "repository": {
     "type": "git",
