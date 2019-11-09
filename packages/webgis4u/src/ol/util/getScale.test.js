@@ -1,7 +1,7 @@
 import View from 'ol/View';
 import { EPSG31287_ID } from '../proj/austria';
 
-import { disposeMap, createMap } from '../../../../test/utils/ol';
+import { disposeMap, createMap } from '../../../test/utils/ol';
 
 import { getScale } from './getScale';
 

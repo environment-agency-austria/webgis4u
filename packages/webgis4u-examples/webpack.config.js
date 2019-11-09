@@ -26,7 +26,7 @@ const dirDist = path.resolve(__dirname, dirNames.build);
 /**
  * Directory to the library entry point
  */
-const dirLibSource = path.resolve(__dirname, '../../src/webgis4u');
+const dirLibSource = path.resolve(__dirname, '../webgis4u/src');
 const appEntry = path.resolve(dirSource, 'index.js');
 const appHtml = path.resolve(__dirname, dirNames.public, 'index.html');
 

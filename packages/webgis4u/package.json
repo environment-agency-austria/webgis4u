@@ -1,45 +1,23 @@
 {
-  "private": true,
+  "name": "webgis4u",
+  "version": "0.0.1-development",
+  "module": "src/index.js",
+  "main": "build/index.js",
   "scripts": {
-    "lerna": "lerna",
-    "test": "lerna run test --stream --parallel",
-    "test:watch": "lerna run test:watch",
-    "test:coverage": "lerna run test:coverage",
-    "test:ci": "yarn test:coverage && cat ./packages/webgis4u/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "start": "lerna run start --stream --parallel",
-    "build": "lerna run build --stream --parallel",
-    "lint": "lerna run lint --stream --parallel",
-    "before_deploy:test": "lerna version --conventional-commits --yes",
-    "before_deploy:ci": "lerna version --conventional-commits --yes --create-release github"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/environment-agency-austria/webgis4u.git"
-  },
-  "license": "BSD-2-Clause",
-  "bugs": {
-    "url": "https://github.com/environment-agency-austria/webgis4u/issues"
-  },
-  "homepage": "https://github.com/environment-agency-austria/webgis4u#readme",
-  "workspaces": [
-    "packages/*"
-  ],
-  "husky": {
-    "hooks": {
-      "post-merge": "yarnhook",
-      "post-checkout": "yarnhook",
-      "post-rewrite": "yarnhook",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "start": "webpack --watch --mode development",
+    "build": "webpack -p",
+    "build:docs": "node_modules/.bin/jsdoc -c jsdoc.config.js",
+    "lint": "eslint src/**/*.js"
   },
   "sideEffects": [
     "*.scss"
   ],
   "files": [
     "./build",
-    "./src",
-    "./scripts",
-    "./pug"
+    "./src"
   ],
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -81,8 +59,14 @@
     "webpack-cli": "^3.1.2",
     "yarnhook": "^0.4.3"
   },
-  "dependencies": {
-    "ol": "^5.3.0",
-    "proj4": "^2.5.0"
+  "license": "BSD-2-Clause",
+  "homepage": "https://github.com/environment-agency-austria/webgis4u#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/environment-agency-austria/webgis4u.git",
+    "directory": "packages/webgis4u"
+  },
+  "bugs": {
+    "url": "https://github.com/environment-agency-austria/webgis4u/issues"
   }
 }

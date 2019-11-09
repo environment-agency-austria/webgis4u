@@ -1,4 +1,4 @@
-import { disposeMap, createMap } from '../../../../../test/utils/ol';
+import { disposeMap, createMap } from '../../../../test/utils/ol';
 import AutoComplete from '../../../components/AutoComplete';
 import * as moduleAsyncDebounce from '../../../util/promise/asyncDebounce';
 import * as moduleSendRequest from '../../../util/web/sendRequest';

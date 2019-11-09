@@ -1,4 +1,4 @@
-import { disposeMap, createMap, createLayers } from '../../../../test/utils/ol';
+import { disposeMap, createMap, createLayers } from '../../../test/utils/ol';
 import { getMapChildElementByClassName } from './getMapChildElementByClassName';
 
 describe('webgis4u/ol/util/getMapChildElementByClassName', () => {

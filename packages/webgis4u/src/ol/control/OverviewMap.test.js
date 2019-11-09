@@ -1,6 +1,6 @@
 import * as proj from 'ol/proj';
 
-import { disposeMap, createMap, createLayers } from '../../../../test/utils/ol';
+import { disposeMap, createMap, createLayers } from '../../../test/utils/ol';
 
 import OverviewMap, { CSS_CLASS as OverviewMapCssClass } from './OverviewMap';
 

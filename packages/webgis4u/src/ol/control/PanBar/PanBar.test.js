@@ -1,4 +1,4 @@
-import { disposeMap, createMap } from '../../../../../test/utils/ol';
+import { disposeMap, createMap } from '../../../../test/utils/ol';
 import { pan } from '../../util/pan';
 
 import { CSS_CONTROL_PREFIX } from '../common';

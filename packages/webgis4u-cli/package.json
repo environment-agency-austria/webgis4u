@@ -1,0 +1,33 @@
+{
+  "name": "webgis4u-cli",
+  "version": "0.0.1-development",
+  "description": "",
+  "main": "./src/cli.js",
+  "bin": "./src/cli.js",
+  "files": [
+    "./build",
+    "./html_fragment",
+    "./pug",
+    "./src"
+  ],
+  "scripts": {
+    "templates:examples": "yarn cli -out ./build/templates_examples -templates ./html_fragment",
+    "cli": "node .",
+    "build": "yarn cli -out ./build/templates",
+    "lint": "eslint src/**/*.js"
+  },
+  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "pug": "^2.0.4"
+  },
+  "license": "BSD-2-Clause",
+  "homepage": "https://github.com/environment-agency-austria/webgis4u#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/environment-agency-austria/webgis4u.git",
+    "directory": "packages/webgis4u-cli"
+  },
+  "bugs": {
+    "url": "https://github.com/environment-agency-austria/webgis4u/issues"
+  }
+}

@@ -1,4 +1,4 @@
-import { disposeMap, createMap } from '../../../../test/utils/ol';
+import { disposeMap, createMap } from '../../../test/utils/ol';
 
 import { getMapType, MapTypeEnum } from './getMapType';
 

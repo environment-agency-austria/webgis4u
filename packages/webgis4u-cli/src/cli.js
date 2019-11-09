@@ -11,7 +11,7 @@ console.log('webgis4u cli');
 function exitWithUsage(message) {
   console.error(message);
   console.log('usage: webgis4u -out <path> -templates <path>');
-  process.exitCode(1);
+  process.exit(1);
 }
 
 // ================================================================================================

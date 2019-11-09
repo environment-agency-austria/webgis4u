@@ -1,7 +1,7 @@
 import LineString from 'ol/geom/LineString';
 import Polygon from 'ol/geom/Polygon';
 
-import { disposeMap, createMap, createLayers } from '../../../../test/utils/ol';
+import { disposeMap, createMap, createLayers } from '../../../test/utils/ol';
 
 import Measure, { MeasurementTypeEnum } from './Measure';
 

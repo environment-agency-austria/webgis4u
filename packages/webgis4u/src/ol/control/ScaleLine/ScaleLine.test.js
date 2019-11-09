@@ -1,4 +1,4 @@
-import { disposeMap, createMap, createLayers } from '../../../../../test/utils/ol';
+import { disposeMap, createMap, createLayers } from '../../../../test/utils/ol';
 
 import ScaleLine, { ScaleLineUnitEnum, CSS_CLASS_SCALE } from '../ScaleLine';
 

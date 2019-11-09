@@ -34,7 +34,7 @@ jobs:
         provider: pages
         skip-cleanup: true
         github-token: $GITHUB_TOKEN_GHPAGES
-        local-dir: doc
+        local-dir: packages/webgis4u/doc
         on:
           branch: master
 

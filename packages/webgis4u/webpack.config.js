@@ -17,7 +17,7 @@ const dirDist = path.resolve(__dirname, dirNameDist);
 
 module.exports = {
   mode: devMode ? 'development' : 'production',
-  entry: './src/index.js',
+  entry: './index.js',
   devtool: 'source-map',
   output: {
     path: dirDist,
