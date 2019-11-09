@@ -5,16 +5,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.0.1-development.0 (2019-11-09)
 
-**Note:** Version bump only for package webgis4u
-
-
-
-
-
-# Changelog
-All notable changes to this project will be documented in this file.
-
-## Unreleased changes
 * Added projections for the austrian area - [`austria`](./src/webgis4u/ol/proj/austria.js)
 * Added [`basemap`](./src/webgis4u/ol/source/basemap.js) as a source - for more information, see [basemap.at](https://www.basemap.at/)
 * Added following controls:
