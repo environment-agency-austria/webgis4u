@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.1-development",
   "main": "build/index.js",
+  "module": "src/webgis4u/index.js",
   "bin": "scripts/cli.js",
   "scripts": {
     "doc:generate": "node_modules/.bin/jsdoc -c jsdoc.config.js",
@@ -38,6 +39,7 @@
   ],
   "files": [
     "./build",
+    "./src",
     "./scripts",
     "./pug"
   ],
