@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-development.1](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u@0.0.1-development.0...webgis4u@0.0.1-development.1) (2019-11-09)
+
+**Note:** Version bump only for package webgis4u
+
+
+
+
+
 ## 0.0.1-development.0 (2019-11-09)
 
 * Added projections for the austrian area - [`austria`](./src/webgis4u/ol/proj/austria.js)
