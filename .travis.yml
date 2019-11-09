@@ -16,7 +16,7 @@ jobs:
     - stage: Build
       node_js: "10"
       name: "Webpack build"
-      script: "yarn build"
+      script: yarn build:ci
       # before_deploy: "yarn before_deploy:ci"
       deploy:
         #provider: npm

@@ -8,6 +8,7 @@
     "test:ci": "yarn test:coverage && cat ./packages/webgis4u/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "start": "lerna run start --stream --parallel",
     "build": "lerna run build --stream --parallel",
+    "build:ci": "lerna run build:ci --stream --parallel",
     "lint": "lerna run lint --stream --parallel",
     "before_deploy:test": "lerna version --yes",
     "before_deploy:ci": "lerna version --yes --create-release github",
