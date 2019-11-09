@@ -20,7 +20,8 @@
     "templates:examples": "yarn cli -out ./build/templates_examples -templates ./src/html_fragment",
     "cli": "node ./scripts/cli.js",
     "lint": "eslint src/**/*.js",
-    "prepublishOnly": "yarn build"
+    "before_deploy:test": "lerna version --conventional-commits --no-verify-access --yes",
+    "before_deploy:ci": "lerna version --conventional-commits --no-verify-access --yes --create-release github"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,14 @@
   "workspaces": [
     "packages/*"
   ],
+  "husky": {
+    "hooks": {
+      "post-merge": "yarnhook",
+      "post-checkout": "yarnhook",
+      "post-rewrite": "yarnhook",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "sideEffects": [
     "*.scss"
   ],
@@ -50,6 +59,8 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
@@ -65,6 +76,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^3.0.9",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
     "jest-canvas-mock": "^1.1.0",
@@ -78,7 +90,8 @@
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.23.1",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "yarnhook": "^0.4.3"
   },
   "dependencies": {
     "ol": "^5.3.0",

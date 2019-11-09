@@ -1,8 +1,10 @@
 language: node_js
 node_js:
-  - "8"
+  - "10"
 cache:
   yarn: true
+  directories:
+    - "node_modules"
 
 jobs:
   include:
@@ -12,9 +14,10 @@ jobs:
     - script: yarn test:ci
       name: "Produce coverage"
     - stage: Build
-      node_js: "8"
+      node_js: "10"
       name: "Webpack build"
       script: "yarn build"
+      before_deploy: "yarn before_deploy:ci"
       deploy:
         provider: npm
         email: $NPM_DEPLOY_EMAIL
