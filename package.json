@@ -10,7 +10,8 @@
     "build": "lerna run build --stream --parallel",
     "lint": "lerna run lint --stream --parallel",
     "before_deploy:test": "lerna version --yes",
-    "before_deploy:ci": "lerna version --yes --create-release github"
+    "before_deploy:ci": "lerna version --yes --create-release github",
+    "deploy:ci": "lerna publish --yes --create-release github"
   },
   "repository": {
     "type": "git",

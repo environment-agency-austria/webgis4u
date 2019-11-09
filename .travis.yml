@@ -17,14 +17,16 @@ jobs:
       node_js: "10"
       name: "Webpack build"
       script: "yarn build"
-      before_deploy: "yarn before_deploy:ci"
+      # before_deploy: "yarn before_deploy:ci"
       deploy:
-        provider: npm
-        email: $NPM_DEPLOY_EMAIL
-        api_key: $NPM_API_KEY
+        #provider: npm
+        #email: $NPM_DEPLOY_EMAIL
+        #api_key: $NPM_API_KEY
+        provider: script
+        script: yarn deploy:ci
         skip_cleanup: true
-        on:
-          tags: true
+        # on:
+          # tags: true
     - stage: Docs
       name: "Generate docs"
       # Only generate docs for branch master
