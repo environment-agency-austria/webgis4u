@@ -2,8 +2,8 @@
   "name": "webgis4u-cli",
   "version": "0.0.1-development.0",
   "description": "",
-  "main": "./src/cli.js",
-  "bin": "./src/cli.js",
+  "main": "./src/main.js",
+  "bin": "./src/main.js",
   "files": [
     "./build",
     "./html_fragment",
