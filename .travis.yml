@@ -18,9 +18,11 @@ jobs:
       name: "Webpack build"
       script: yarn build:ci
       before_deploy:
+        - git status
         - git checkout master
         - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
         - git remote add pub https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+        - git status
       deploy:
         provider: script
         # script: yarn deploy:ci --git-remote pub
