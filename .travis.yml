@@ -17,6 +17,7 @@ jobs:
       node_js: "10"
       name: "Webpack build"
       script: yarn build:ci
+      before_deploy: echo "//registry.npmjs.org/:_authToken=$NPM_API_KEY" > "$HOME/.npmrc"
       deploy:
         provider: script
         script: yarn deploy:ci
