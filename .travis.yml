@@ -19,7 +19,7 @@ jobs:
       script: yarn build:ci
       before_deploy:
         - git status
-        - cat packages/webgis4u-cli/src/main.js
+        - git reset packages/webgis4u-cli/src/main.js
         - git checkout master
         - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
         - git remote add pub https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
