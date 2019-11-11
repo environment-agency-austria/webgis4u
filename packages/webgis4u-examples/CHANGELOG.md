@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0 (2019-11-11)
+
+
+### Features
+
+* scss transpiled on module transpilation ([1ca2493](https://github.com/environment-agency-austria/webgis4u/commit/1ca24939c2fb13f2606af240c7f2077019f2c5a7))
+
+
+
+
+
 ## [0.0.10](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u-examples@0.0.9...webgis4u-examples@0.0.10) (2019-11-11)
 
 **Note:** Version bump only for package webgis4u-examples

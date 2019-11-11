@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-development.6 (2019-11-11)
+
+
+### Features
+
+* improved main entry point ([8989909](https://github.com/environment-agency-austria/webgis4u/commit/8989909eb36331f54de4b53a762cfb47b10e447c))
+
+
+
+
+
 # [0.1.0-development.5](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u@0.1.0-development.4...webgis4u@0.1.0-development.5) (2019-11-11)
 
 **Note:** Version bump only for package webgis4u
