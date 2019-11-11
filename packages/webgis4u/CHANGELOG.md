@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-development.7](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u@0.1.0-development.6...webgis4u@0.1.0-development.7) (2019-11-11)
+
+
+### Bug Fixes
+
+* improve docs ([0ff4d5e](https://github.com/environment-agency-austria/webgis4u/commit/0ff4d5e6105b20753453752ccac9cf6fac017f56))
+
+
+
+
+
 # 0.1.0-development.6 (2019-11-11)
 
 
