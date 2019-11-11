@@ -21,7 +21,7 @@ jobs:
         - git checkout -- packages/webgis4u-cli/src/main.js
         - git checkout master
         - echo "//registry.npmjs.org/:_authToken=${NPM_API_KEY}" > ~/.npmrc
-        - git remote add pub https://${GITHUB_TOKEN_GHPAGES}@github.com/${TRAVIS_REPO_SLUG}.git
+        - git remote add pub https://christophka:${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
       deploy:
         provider: script
         script: yarn deploy:ci --git-remote pub
