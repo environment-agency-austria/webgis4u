@@ -1,6 +1,6 @@
 {
   "name": "webgis4u-cli",
-  "version": "0.0.1-development.5",
+  "version": "0.0.1-development.6",
   "description": "",
   "main": "./src/main.js",
   "bin": "./src/main.js",

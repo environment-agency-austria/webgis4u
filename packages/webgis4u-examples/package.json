@@ -1,7 +1,7 @@
 {
   "name": "webgis4u-examples",
   "private": true,
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "build/index.js",
   "scripts": {
     "start": "webpack-dev-server --open",
@@ -19,6 +19,6 @@
   "dependencies": {
     "ol": "^5.3.0",
     "proj4": "^2.5.0",
-    "webgis4u": "^0.1.0-development.4"
+    "webgis4u": "^0.1.0-development.5"
   }
 }
