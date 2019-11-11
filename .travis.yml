@@ -35,7 +35,7 @@ jobs:
       name: "Generate docs"
       # Only generate docs for branch master
       if: branch = master
-      script: yarn doc:generate
+      script: yarn build:docs
       deploy:
         provider: pages
         skip-cleanup: true
