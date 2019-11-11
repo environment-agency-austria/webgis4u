@@ -1,5 +1,6 @@
 {
   "name": "webgis4u-examples",
+  "description": "Contains a selection of examples for webgis4u",
   "private": true,
   "version": "0.0.10",
   "main": "build/index.js",

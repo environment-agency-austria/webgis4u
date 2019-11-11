@@ -25,21 +25,12 @@ jobs:
         - git remote set-url origin "https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git" > /dev/null 2>&1
         - git checkout master
         - echo "//registry.npmjs.org/:_authToken=\${NPM_API_KEY}" >> $HOME/.npmrc 2> /dev/null
-      #before_deploy:
-        #- git checkout -- packages/webgis4u-cli/src/main.js
-        #- git checkout master
-        #- echo "//registry.npmjs.org/:_authToken=${NPM_API_KEY}" > ~/.npmrc
-        #- git remote add pub https://christophka:${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
       deploy:
         provider: script
-        # script: yarn deploy:ci --git-remote pub
         script: yarn deploy:ci
         skip_cleanup: true
         on:
           branch: master
-          #all_branches: true
-          # this is how lerna sets up the branches (including versions with a preid)
-          #condition: $TRAVIS_TAG =~ ^webgis4u(-.*)?@\d.\d.\d(-.*\.\d)?$
     - stage: Docs
       name: "Generate docs"
       # Only generate docs for branch master
