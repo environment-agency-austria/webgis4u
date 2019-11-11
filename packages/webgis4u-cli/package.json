@@ -5,10 +5,10 @@
   "main": "./src/main.js",
   "bin": "./src/main.js",
   "files": [
-    "./build",
-    "./html_fragment",
-    "./pug",
-    "./src"
+    "build/*",
+    "html_fragment/*",
+    "pug/*",
+    "src/*"
   ],
   "scripts": {
     "templates:examples": "yarn cli -out ./build/templates_examples -templates ./html_fragment",

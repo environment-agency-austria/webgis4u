@@ -1,11 +1,11 @@
 # webgis4u
+`webgis4u` is a javascript client to visualise geographical maps based on [OpenLayers](https://openlayers.org/).
+
 [![npm](https://img.shields.io/npm/v/webgis4u.svg)](https://www.npmjs.com/package/webgis4u)
 [![GitHub license](https://img.shields.io/github/license/environment-agency-austria/webgis4u.svg)](https://github.com/environment-agency-austria/webgis4u/blob/master/LICENSE)
 [![travis](https://travis-ci.com/environment-agency-austria/webgis4u.svg?branch=master)](https://travis-ci.com/environment-agency-austria/webgis4u)
 [![Greenkeeper badge](https://badges.greenkeeper.io/environment-agency-austria/webgis4u.svg)](https://greenkeeper.io/)
 [![Coverage Status](https://coveralls.io/repos/github/environment-agency-austria/webgis4u/badge.svg?branch=master)](https://coveralls.io/github/environment-agency-austria/webgis4u?branch=master)
-
-`webgis4u` is a javascript client to visualise geographical maps based on [OpenLayers](https://openlayers.org/).
 
 
 ## Usage

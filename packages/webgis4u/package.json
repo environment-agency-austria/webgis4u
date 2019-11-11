@@ -17,8 +17,9 @@
     "*.scss"
   ],
   "files": [
-    "./build",
-    "./src"
+    "build/*",
+    "src/*",
+    "!src/**/*.test.js"
   ],
   "devDependencies": {
     "@babel/core": "^7.1.2",
