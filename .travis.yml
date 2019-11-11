@@ -18,6 +18,8 @@ jobs:
       name: "Webpack build"
       script: yarn build:ci
       before_deploy:
+        # somehow this file get's some changes...
+        - git checkout -- packages/webgis4u-cli/src/main.js
         - git config --global user.email eaa@github.com
         - git config --global user.name eaa-deploy-bot
         - git remote set-url origin "https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git" > /dev/null 2>&1
