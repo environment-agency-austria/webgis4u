@@ -26,8 +26,8 @@ jobs:
         - git status
       deploy:
         provider: script
-        # script: yarn deploy:ci --git-remote pub
-        script: yarn deploy:ci
+        script: yarn deploy:ci --git-remote pub
+        # script: yarn deploy:ci
         skip_cleanup: true
         on:
           branch: master
