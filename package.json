@@ -11,8 +11,7 @@
     "build:ci": "lerna run build:ci --stream --parallel",
     "build:docs": "lerna run build:docs --stream --parallel",
     "lint": "lerna run lint --stream --parallel",
-    "before_deploy:test": "lerna version --yes",
-    "before_deploy:ci": "lerna version --yes --create-release github",
+    "before_deploy:ci": "lerna run before_deploy:ci --stream --parallel",
     "deploy:ci": "lerna publish --loglevel silly --yes --create-release github"
   },
   "repository": {
@@ -35,15 +34,6 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
-  "sideEffects": [
-    "*.scss"
-  ],
-  "files": [
-    "./build",
-    "./src",
-    "./scripts",
-    "./pug"
-  ],
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.2.3",

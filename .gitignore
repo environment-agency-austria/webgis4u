@@ -8,5 +8,8 @@
 /**/yarn-error.log*
 /**/lerna-debug.log*
 
+# the content of the src folder is copied in the lib folder
+packages/*/lib
+
 # The npmrc file is created via the CI and it contains the token
 .npmrc

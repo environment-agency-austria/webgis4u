@@ -1,7 +1,7 @@
 {
   "name": "webgis4u",
   "version": "0.1.0-development.7",
-  "module": "src/index.js",
+  "module": "lib/index.js",
   "main": "build/index.js",
   "scripts": {
     "test": "jest",
@@ -11,15 +11,16 @@
     "build": "webpack -p",
     "build:ci": "yarn build",
     "build:docs": "node_modules/.bin/jsdoc -c jsdoc.config.js",
-    "lint": "eslint src/**/*.js"
+    "lint": "eslint src/**/*.js",
+    "before_deploy:ci": "cp -r ./src/ ./lib"
   },
   "sideEffects": [
     "*.scss"
   ],
   "files": [
     "build/*",
-    "src/*",
-    "!src/**/*.test.js"
+    "lib/*",
+    "!lib/**/*.test.js"
   ],
   "devDependencies": {
     "@babel/core": "^7.1.2",
