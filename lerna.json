@@ -7,7 +7,7 @@
   "useWorkspaces": true,
   "command": {
     "version": {
-      "message": "chore(release): publish [skip ci]",
+      "message": "chore(release): publish %s",
       "conventionalCommits": true
     }
   }
