@@ -1,8 +1,13 @@
+#!/usr/bin/env node
+
+"use strict";
+
 const fs = require('fs');
 const { parseTemplates } = require('./parseTemplate');
 const { getTemplatesFromFolder } = require('./getTemplatesFromFolder');
+const packageJson = require('../package.json');
 
-console.log('webgis4u cli');
+console.log(`webgis cli ${packageJson.version}`);
 
 /**
  * Prints message, usage and exists the process
