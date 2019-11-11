@@ -7,3 +7,6 @@
 /**/yarn-debug.log*
 /**/yarn-error.log*
 /**/lerna-debug.log*
+
+# The npmrc file is created via the CI and it contains the token
+.npmrc
