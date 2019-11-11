@@ -1,6 +1,6 @@
 {
   "name": "webgis4u",
-  "version": "0.1.0-development.0",
+  "version": "0.1.0-development.1",
   "module": "src/index.js",
   "main": "build/index.js",
   "scripts": {
