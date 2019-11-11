@@ -29,6 +29,7 @@ jobs:
         skip_cleanup: true
         #if: tag =~ ^webgis4u(-.*)?@\d.\d.\d(-.*\.\d)?$
         on:
+          all_branches: true
           #branch: master
           # this is how lerna sets up the branches (including versions with a preid)
           condition: $TRAVIS_TAG =~ ^webgis4u(-.*)?@\d.\d.\d(-.*\.\d)?$
