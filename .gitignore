@@ -8,6 +8,9 @@
 /**/yarn-error.log*
 /**/lerna-debug.log*
 
+#
+.DS_Store
+
 # the content of the src folder is copied in the lib folder
 packages/*/lib
 
