@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-development.10](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u-cli@0.0.1-development.9...webgis4u-cli@0.0.1-development.10) (2019-11-11)
+
+
+### Bug Fixes
+
+* linting errors ([984af0a](https://github.com/environment-agency-austria/webgis4u/commit/984af0aa5141e4c9c2af5f271ff74bde8990a31f))
+* make cli executable on unix ([f1ac772](https://github.com/environment-agency-austria/webgis4u/commit/f1ac772186b7c5b4e8a1d14755e80bf0e729b035))
+
+
+
+
+
 ## [0.0.1-development.9](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u-cli@0.0.1-development.8...webgis4u-cli@0.0.1-development.9) (2019-11-11)
 
 **Note:** Version bump only for package webgis4u-cli
