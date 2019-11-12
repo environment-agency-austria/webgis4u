@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-development.11](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u-cli@0.0.1-development.10...webgis4u-cli@0.0.1-development.11) (2019-11-12)
+
+
+### Bug Fixes
+
+* dependency issues ([7015bbb](https://github.com/environment-agency-austria/webgis4u/commit/7015bbbd2c751fa8c56f7ad354803a0f6ac4eb53))
+
+
+
+
+
 ## [0.0.1-development.10](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u-cli@0.0.1-development.9...webgis4u-cli@0.0.1-development.10) (2019-11-11)
 
 

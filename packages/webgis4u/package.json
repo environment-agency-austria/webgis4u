@@ -1,6 +1,6 @@
 {
   "name": "webgis4u",
-  "version": "0.1.0-development.10",
+  "version": "0.1.0-development.11",
   "module": "lib/index.js",
   "main": "build/index.js",
   "scripts": {
@@ -22,7 +22,6 @@
     "lib/*",
     "!lib/**/*.test.js"
   ],
-  "devDependencies": {},
   "license": "BSD-2-Clause",
   "homepage": "https://github.com/environment-agency-austria/webgis4u#readme",
   "repository": {
