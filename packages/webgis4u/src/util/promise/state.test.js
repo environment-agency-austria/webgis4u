@@ -1,14 +1,6 @@
 import { state, PromiseStateEnum } from './state';
 
 describe('webgis4u/util/promise/state', () => {
-  it('with non async', () => {
-    /** */
-    const x = async () => 10;
-
-    const P = x();
-    return expect(state(P)).resolves.toBe(PromiseStateEnum.Fulfilled);
-  });
-
   describe('with async promise', () => {
     let P;
     let promiseResolve;
