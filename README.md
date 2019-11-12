@@ -20,10 +20,20 @@ $> yarn add webgis4u
 ```
 
 ### HTML Templates
-To use the features provided by `webgis4u`, the needed HTML can be created by using the command line
+To help you get started with the HTML structure for `webgis4u`, the `webgis4u-cli` is provided.
+```bash
+$> npm i webgis4u-cli
+```
+or
+```bash
+$> yarn add webgis4u-cli
+```
+
+This tool can be used to generate templates for maps by using the command line
 ```bash
 $> webgis4u-cli -out <path> [-templates <path>]
 ```
+
 Options:
 * `out` (required): Path where the generated `.html` files will be saved
 * `templates` (options): Path to a folder containing additional templates, that will be used in the template generation process. It looks for `.html` files names `copyright`, `card_menu`, `link_panel`, `tool_switcher_functions`, `tool_switcher_layers`, `info_panel_header`, `info_panel_footer`, `legend`

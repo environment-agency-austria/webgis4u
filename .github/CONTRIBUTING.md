@@ -6,11 +6,12 @@ This tools are configured so that they can be used on your locale machine.
 
 Tool | Configuration | Website
 ---- | ------------- | -------
-Babel 7.1 | [babel.config.js](./babel.config.js) | https://babeljs.io
-Webpack 4 | [webpack.config.js](./webpack.config.js) | https://webpack.js.org/
-Jest 23.6 | [jest.config.js](./jest.config.js) | https://jestjs.io/
+Babel | [babel.config.js](./babel.config.js) | https://babeljs.io
+Webpack | [webpack.config.js](./webpack.config.js) | https://webpack.js.org/
+Jest | [jest.config.js](./jest.config.js) | https://jestjs.io/
 JSDoc | [jsdoc.config.js](./jsdoc.config.js) | http://usejsdoc.org/
 ESlint | [.eslintrc.json](./.eslintrc.json) | https://eslint.org/
+Lerna | [lerna.json](./lerna.json) | https://lerna.js.org/
 
 ## CI/CD Tools
 Furthermore there are tools that are running online that should help out with different things.
@@ -24,6 +25,13 @@ Keeps track of the code coverage in the project. The data shown is provided by t
 ### [Greenkeeper](https://badges.greenkeeper.io/environment-agency-austria/webgis4u.svg)
 Automatically tests dependency updates inside the valid version range based on package.json and creates GitHub issues if any errors occur.
 
+## Commit messages and Versioning
+We use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) to highlight the intend of a certain commit. Be sure to follow the convention when contributing to the repo. To make this easy, we activated linting of commit messages. So be sure to check your commit message, if committing fails.
+
+## Deploy a new version
+Only the maintainers of the repo can deploy a new version.
+Versions are automatically deployed when changes are pushed to the master branch. This triggers `travis` to run and deploy a new version to npm, a GitHub release and Git Tags. The actual semver to use is determined by looking at the commit messages.
+
 ## Useful commands
 * `$> yarn build` - creates a production build
 * `$> yarn start` - starts webpack in watch mode. Automatically recompiles when changes in the source are detected.
@@ -31,24 +39,6 @@ Automatically tests dependency updates inside the valid version range based on p
 * `$> yarn test:watch` - starts jest in watch mode. Runs the affected unit tests when changes in the source are detected.
 * `$> yarn test:coverage` - runs the unit tests and reports the code coverage in the console window and in coverage/lcov-report/index.html
 * `$> yarn lint` - manually runs the linter
-
-## Deploy a new version
-Only the maintainers of the repo can deploy a new version
-
-### Deploy a regular release
-1. Make sure that you are on the `master` branch
-2. Figure out what the `<new-version-number>` will be
-3. Update the [changelog](./CHANGELOG.md) so that all the yet unreleased changes are grouped under the `<new-version-number>`
-4. Run: `$> git commit -m "doc: updated changelog"`
-5. Run: `$> yarn version --new-version <new-version-number>"`
-6. Run: `$> git push`
-7. Run: `$> git push --tags`
-8. Go to the GitHub Releases and create a new release from the pushed tag and with the `<new-version-number>` and include the changes from the changelog
-
-### Deploy a tagged npm release
-This is useful if you would like to create a `next` or `beta` release.
-
-1. Run: `$> yarn publish . --tag <tag-name>`
 
 ## Recommended development setup
 1. Prepare your local devtools.
