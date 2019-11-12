@@ -10,7 +10,7 @@
     "start": "webpack --watch --mode development",
     "build": "webpack -p",
     "build:ci": "yarn build",
-    "build:docs": "node_modules/.bin/jsdoc -c jsdoc.config.js",
+    "build:docs": "jsdoc -c jsdoc.config.js",
     "lint": "eslint src/**/*.js",
     "before_deploy:ci": "cp -r ./src/ ./lib"
   },
