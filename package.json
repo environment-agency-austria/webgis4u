@@ -12,7 +12,7 @@
     "build:docs": "lerna run build:docs --stream --parallel",
     "lint": "lerna run lint --stream --parallel",
     "before_deploy:ci": "lerna run before_deploy:ci --stream --parallel",
-    "deploy:ci": "lerna publish --loglevel silly --yes --create-release github"
+    "deploy:ci": "lerna publish --loglevel verbose --yes --create-release github"
   },
   "repository": {
     "type": "git",
