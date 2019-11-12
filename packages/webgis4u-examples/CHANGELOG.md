@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u-examples@0.1.6...webgis4u-examples@1.0.0) (2019-11-12)
+
+**Note:** Version bump only for package webgis4u-examples
+
+
+
+
+
 ## [0.1.6](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u-examples@0.1.5...webgis4u-examples@0.1.6) (2019-11-12)
 
 **Note:** Version bump only for package webgis4u-examples
