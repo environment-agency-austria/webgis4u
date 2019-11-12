@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-development.12](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u@0.1.0-development.11...webgis4u@0.1.0-development.12) (2019-11-12)
+
+
+### Bug Fixes
+
+* removed filepath to jsdoc bin ([fd0cb36](https://github.com/environment-agency-austria/webgis4u/commit/fd0cb3689fb1f7aed848e663e5afe53fdaf50893))
+
+
+
+
+
 # [0.1.0-development.11](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u@0.1.0-development.10...webgis4u@0.1.0-development.11) (2019-11-12)
 
 
