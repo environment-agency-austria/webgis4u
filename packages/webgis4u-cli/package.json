@@ -1,6 +1,6 @@
 {
   "name": "webgis4u-cli",
-  "version": "0.0.1-development.11",
+  "version": "0.0.1-development.12",
   "description": "The webgis4u CLI for creating html templates",
   "main": "./src/cli.js",
   "bin": "./src/cli.js",
