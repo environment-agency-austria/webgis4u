@@ -17,6 +17,7 @@ const dirDist = path.resolve(__dirname, dirNameDist);
 
 module.exports = {
   mode: devMode ? 'development' : 'production',
+  // This is just the entry point for webpack, not the one for submodule imports
   entry: './index.js',
   devtool: 'source-map',
   output: {
