@@ -22,7 +22,7 @@ $> yarn add webgis4u
 ### HTML Templates
 To use the features provided by `webgis4u`, the needed HTML can be created by using the command line
 ```bash
-$> webgis4u -out <path> [-templates <path>]
+$> webgis4u-cli -out <path> [-templates <path>]
 ```
 Options:
 * `out` (required): Path where the generated `.html` files will be saved
