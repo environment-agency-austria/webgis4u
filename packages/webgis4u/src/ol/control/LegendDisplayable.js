@@ -4,6 +4,7 @@
 
 import { createElement } from '../../util/dom/createElement';
 import AbstractLayerRelatedControl from './AbstractLayerRelatedControl';
+import { isDisplayable } from '../layer/isDisplayable';
 
 /**
  * @typedef LegendDisplayableOptions
@@ -130,12 +131,12 @@ class LegendDisplayable extends AbstractLayerRelatedControl {
    * Sets the style to be like when the corresponding layer is displayable or not
    *
    * @param {HTMLElement} element The element
-   * @param {boolean} isDisplayable If true, the layer is displayable
+   * @param {boolean} displayable If true, the layer is displayable
    *
    * @private
    */
-  setIsDisplayable(element, isDisplayable) {
-    const options = isDisplayable
+  setIsDisplayable(element, displayable) {
+    const options = displayable
       ? this.styleIsDisplayable
       : this.styleIsNotDisplayable;
 
@@ -161,11 +162,7 @@ class LegendDisplayable extends AbstractLayerRelatedControl {
    * @private
    */
   isLayerAvailable(layer, view) {
-    const viewR = view.getResolution();
-    return (
-      (layer.getMinResolution() <= viewR)
-      && (viewR <= layer.getMaxResolution())
-    );
+    return isDisplayable(layer, view.getResolution());
   }
 }
 
