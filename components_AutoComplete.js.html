@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/AutoComplete.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/AutoComplete.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module webgis4u/components/AutoComplete
+ */
+import { createElement } from '../util/dom/createElement';
+import KeyCodeEnum from '../util/dom/KeyCodeEnum';
+import { PromiseStateEnum, state as promiseState } from '../util/promise/state';
+
+import './AutoComplete/AutoComplete.scss';
+
+/**
+ * @callback OnItemHoverCallback
+ * @param {Event} The original event
+ * @param {any} choice The choice that was hovered
+ */
+
+/**
+ * @callback OnItemSelectCallback
+ * @param {Event} event The original event
+ * @param {any} choice The choice that was hovered
+ */
+
+/**
+ * @callback OnListUpdatedCallback
+ * @param {Event} event The original event
+ * @param {Array&lt;any>} choices The choices
+ */
+
+const CSS_CLASS = 'autocomplete';
+const CSS_CLASS_ACTIVE = `${CSS_CLASS}-active`;
+const CSS_CLASS_LIST = `${CSS_CLASS}-items`;
+
+/**
+ * close all autocomplete lists in the document
+ * except the one passed as an argument
+ *
+ * @param {*} element The element that should not be closed
+ */
+function closeAllLists(element) {
+  // Convert 'live' list to array and loop it
+  [...document.getElementsByClassName(CSS_CLASS_LIST)].forEach((e) => {
+    if (element !== e &amp;&amp; element !== e.parentNode) {
+      e.parentNode.removeChild(e);
+    }
+  });
+}
+
+// execute a function when someone clicks in the document
+document.addEventListener('click', (e) => {
+  closeAllLists(e.target);
+});
+
+/**
+ * @typedef Options
+ * @type {object}
+ * @property {HTMLElement} element
+ * @property {number} [minLength=0] The minimum length at which the search is executed
+ * @property {string} [placeholder] The placeholder text
+ * @property {Function} [getChoiceText] Function that is executed with one list item and returns the text
+ * @property {module:webgis4u/components/AutoComplete~OnItemHoverCallback} [onItemHover]
+ * @property {module:webgis4u/components/AutoComplete~OnItemSelectCallback} [onItemSelected]
+ */
+
+/**
+ * Creates an auto complete able input element
+ */
+class AutoComplete {
+  /**
+   * @type {HTMLInputElement}
+   * The input element
+   */
+  element;
+
+  /**
+   * @type {HTMLElement|null}
+   * The list element that will contain the items (values)
+   */
+  list = null;
+
+  /**
+   * @type {number}
+   * The currently focused
+   */
+  currentFocus;
+
+  /**
+   * @type {Array}
+   */
+  choices = [];
+
+  /**
+   * @type {Array&lt;any>}
+   * Array containing the choices that were filtered
+   */
+  filteredChoices = [];
+
+  /**
+   * @type {Function|null}
+   */
+  _getChoiceText = null;
+
+  /**
+   * @type {null|module:webgis4u/components/AutoComplete~OnItemSelectCallback}
+   * Callback for on Select
+   */
+  onItemSelected = null;
+
+  /**
+   * @type {null|module:webgis4u/components/AutoComplete~OnItemHoverCallback}
+   * Callback for on hover
+   */
+  onItemHover = null;
+
+  /**
+   * @type {null|module:webgis4u/components/AutoComplete~OnListUpdatedCallback}
+   * Callback for on hover
+   */
+  _onListUpdated = null
+
+  /**
+   * @type {string}
+   * Message that is shown when no search results are found
+   */
+  messageNotFound = '';
+
+  /**
+   * @type {string}
+   * Message that is shown while search is pending
+   */
+  messagePending = '';
+
+  /**
+   * @type {Array&lt;any>|Function}
+   * The source to provide the choices.
+   * Can be an array or a function
+   */
+  source;
+
+  /**
+   * @type {number|null}
+   */
+  limit = null;
+
+  /**
+   * Constructor
+   * @param {Options}
+   */
+  constructor(options) {
+    this.element = options.element;
+
+    this.minLength = options.minLength || 0;
+    this.limit = options.limit || null;
+    this.placeholder = options.placeholder;
+
+    this.source = options.source;
+    this._getChoiceText = options.getChoiceText || null;
+    this.onItemSelected = options.onItemSelected || null;
+    this.onItemHover = options.onItemHover || null;
+    this._onListUpdated = options.onListUpdated || null;
+
+    // Set up the messages
+    const { notFound, pending } = options.messages || {};
+    this.messageNotFound = notFound || '';
+    this.messagePending = pending || '';
+
+    this.init();
+  }
+
+  init() {
+    this.initWrapper();
+    this.initElement();
+  }
+
+  initWrapper() {
+    this.wrapper = createElement({
+      tag: 'span',
+      cssClass: CSS_CLASS,
+    });
+
+    const {
+      element,
+      element: {
+        parentNode,
+      },
+    } = this;
+
+    parentNode.insertBefore(this.wrapper, element);
+    this.element = this.wrapper.insertBefore(element, null);
+  }
+
+  /**
+   * Initializes the element
+   * @private
+   */
+  initElement() {
+    const {
+      element,
+    } = this;
+    let {
+      placeholder,
+    } = this;
+
+    // Read values from element
+    placeholder = placeholder || element.getAttribute('placeholder');
+
+    // Set element values
+    element.setAttribute('type', 'text');
+    element.setAttribute('placeholder', placeholder);
+    element.addEventListener('input', this.handleOnInput);
+    element.addEventListener('keydown', this.handleOnKeydown);
+  }
+
+  /**
+   * @param {any} choice The choice
+   * @returns {string} The text for the choice
+   * @private
+   */
+  getChoiceText(choice) {
+    return (this._getChoiceText)
+      ? this._getChoiceText(choice)
+      : choice;
+  }
+
+  /**
+   * Acquires the data
+   * @param {string} query The entered query
+   * @private
+   */
+  async getSource(query) {
+    if (Array.isArray(this.source)) {
+      const regex = new RegExp(query, 'i');
+
+      return this.source.filter(choice => regex.test(this.getChoiceText(choice)));
+    }
+
+    if (typeof (this.source) === 'function') {
+      return this.source(query);
+    }
+
+    throw new TypeError('Source must be an array or an function');
+  }
+
+  /**
+   * Set the current element in the list active
+   *
+   * @param {HTMLCollection} listItems
+   * @private
+   */
+  addActive(listItems) {
+    this.removeActive(listItems);
+    if (this.currentFocus >= listItems.length) this.currentFocus = 0;
+    if (this.currentFocus &lt; 0) this.currentFocus = (listItems.length - 1);
+
+    const element = listItems[this.currentFocus];
+    element.classList.add(CSS_CLASS_ACTIVE);
+    const choice = this.filteredChoices[this.currentFocus];
+
+    if (this.onItemHover) {
+      this.onItemHover(null, choice);
+    }
+  }
+
+  /**
+   * a function to remove the "active" class from all autocomplete items
+   *
+   * @param {HTMLCollection} listItems
+   * @private
+   */
+  removeActive(listItems) {
+    [...listItems].forEach((e) => {
+      e.classList.remove(CSS_CLASS_ACTIVE);
+    });
+  }
+
+  /**
+   * Creates the list item for the given choice
+   * @param {any} choice The choice for which the list item should be creates
+   * @returns {HTMLElement}
+   * @private
+   */
+  createListItem(choice) {
+    const choiceValue = this.getChoiceText(choice);
+    const b = document.createElement('div');
+    b.setAttribute('data-value', choiceValue);
+    b.innerText = choiceValue;
+    // execute a function when someone clicks on the item value (DIV element)
+    b.addEventListener('click', (event) => {
+      this.onListItemClicked(event, choice, choiceValue);
+    });
+    b.addEventListener('mouseover', (event) => {
+      this.onItemHover(event, choice);
+    });
+
+    return b;
+  }
+
+  /**
+   * Creates the element that shows the pending state
+   * @returns {HTMLElement}
+   * @private
+   */
+  createPending() {
+    const b = document.createElement('div');
+    const text = this.messagePending || '...';
+    b.innerHTML = `&lt;i>${text}&lt;/i>`;
+    return b;
+  }
+
+  /**
+   * Event for the onClick event on a specific list item
+   * @param {Event} event The triggered event
+   * @param {any} choice The choice that was clicked
+   * @param {string} choiceValue The value shown as text for the choice
+   * @private
+   */
+  onListItemClicked = (event, choice, choiceValue) => {
+    // insert the value for the autocomplete text field
+    this.element.value = choiceValue;
+
+    if (this.onItemSelected) {
+      this.onItemSelected(event, choice);
+    }
+    // close the list of autocompleted values,
+    // (or any other open lists of autocompleted values
+    closeAllLists();
+  }
+
+  /**
+   * Triggers the onListUpdate callback
+   * @param {Array} choices The choices shown in the list
+   * @private
+   */
+  onListUpdated(choices) {
+    if (this._onListUpdated) {
+      this._onListUpdated(choices);
+    }
+  }
+
+  /**
+   * Updates the list
+   * @param {string} value
+   */
+  async updateList(value) {
+    // If value does not have any value, do nothing
+    if (!value) { return; }
+
+    const { element } = this;
+
+    this.currentFocus = -1;
+    // Create list and store local reference
+    this.list = createElement({
+      tag: 'div',
+      cssClass: CSS_CLASS_LIST,
+    });
+
+    // append the DIV element as a child of the autocomplete container
+    element.parentNode.appendChild(this.list);
+
+    // Acquire the data
+    const MaybeResolved = this.getSource(value);
+    if (await promiseState(MaybeResolved) === PromiseStateEnum.Pending) {
+      this.list.appendChild(
+        this.createPending(),
+      );
+    }
+
+    // Wait for the data
+    this.filteredChoices = await MaybeResolved;
+    this.list.innerHTML = '';
+
+    // Add the not found if there are no choices
+    if (this.filteredChoices.length === 0) {
+      const notFoundElement = document.createElement('div');
+      notFoundElement.innerHTML = this.messageNotFound;
+      this.list.appendChild(notFoundElement);
+      this.onListUpdated(this.filteredChoices);
+      return;
+    }
+
+    // Limit the list of results
+    if (this.limit !== null) {
+      this.filteredChoices = this.filteredChoices.filter(
+        (o, index) => index &lt; this.limit,
+      );
+    }
+
+    // And finally add the found choices
+    this.filteredChoices.forEach((choice) => {
+      this.list.appendChild(
+        this.createListItem(choice),
+      );
+    });
+
+    // Finally notify for list update
+    this.onListUpdated(this.filteredChoices);
+  }
+
+  /**
+   * Event listener for the input changed event
+   * @private
+   */
+  handleOnInput = () => {
+    const {
+      element: {
+        value,
+      },
+    } = this;
+
+    // close any already open lists of autocompleted values
+    closeAllLists();
+    this.updateList(value);
+  }
+
+  /**
+   * Event listener for the input keydown event
+   * @private
+   */
+  handleOnKeydown = (e) => {
+    const { filteredChoices, list } = this;
+    if (!filteredChoices || filteredChoices.length === 0) { return; }
+    if (!list) { return; }
+    const listItems = list.getElementsByTagName('div');
+    if (listItems.length === 0) { return; }
+
+    // Everything we need is available
+
+    const { keyCode } = e;
+    if (keyCode === KeyCodeEnum.ARROW_DOWN) {
+      // Focus next item
+      this.currentFocus += 1;
+      this.addActive(listItems);
+    } else if (keyCode === KeyCodeEnum.ARROW_UP) {
+      // Focus previous item
+      this.currentFocus -= 1;
+      this.addActive(listItems);
+    } else if (keyCode === KeyCodeEnum.ENTER) {
+      // Prevent forms from being submitted
+      e.preventDefault();
+      if (this.currentFocus > -1) {
+        // Simulate click on the active element
+        listItems[this.currentFocus].click();
+      }
+    }
+  }
+}
+
+export default AutoComplete;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-webgis4u.html">webgis4u</a></li><li><a href="module-webgis4u_components.html">webgis4u/components</a></li><li><a href="module-webgis4u_components_AutoComplete.html">webgis4u/components/AutoComplete</a></li><li><a href="module-webgis4u_ol.html">webgis4u/ol</a></li><li><a href="module-webgis4u_ol_common.html">webgis4u/ol/common</a></li><li><a href="module-webgis4u_ol_control.html">webgis4u/ol/control</a></li><li><a href="module-webgis4u_ol_control_AbstractLayerRelatedControl.html">webgis4u/ol/control/AbstractLayerRelatedControl</a></li><li><a href="module-webgis4u_ol_control_AbstractLayerRelatedElementControl.html">webgis4u/ol/control/AbstractLayerRelatedElementControl</a></li><li><a href="module-webgis4u_ol_control_common.html">webgis4u/ol/control/common</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate.html">webgis4u/ol/control/HtmlTemplate</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate_InfoPanel.html">webgis4u/ol/control/HtmlTemplate/InfoPanel</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate_ToolSwitcher.html">webgis4u/ol/control/HtmlTemplate/ToolSwitcher</a></li><li><a href="module-webgis4u_ol_control_LayerCheckbox.html">webgis4u/ol/control/LayerCheckbox</a></li><li><a href="module-webgis4u_ol_control_LayerRadioButton.html">webgis4u/ol/control/LayerRadioButton</a></li><li><a href="module-webgis4u_ol_control_LegendDisplayable.html">webgis4u/ol/control/LegendDisplayable</a></li><li><a href="module-webgis4u_ol_control_LegendVisibility.html">webgis4u/ol/control/LegendVisibility</a></li><li><a href="module-webgis4u_ol_control_Measure.html">webgis4u/ol/control/Measure</a></li><li><a href="module-webgis4u_ol_control_OverviewMap.html">webgis4u/ol/control/OverviewMap</a></li><li><a href="module-webgis4u_ol_control_PanBar.html">webgis4u/ol/control/PanBar</a></li><li><a href="module-webgis4u_ol_control_ScaleLine.html">webgis4u/ol/control/ScaleLine</a></li><li><a href="module-webgis4u_ol_control_Search.html">webgis4u/ol/control/Search</a></li><li><a href="module-webgis4u_ol_control_util.html">webgis4u/ol/control/util</a></li><li><a href="module-webgis4u_ol_proj.html">webgis4u/ol/proj</a></li><li><a href="module-webgis4u_ol_proj_austria.html">webgis4u/ol/proj/austria</a></li><li><a href="module-webgis4u_ol_proj_reproject.html">webgis4u/ol/proj/reproject</a></li><li><a href="module-webgis4u_ol_source.html">webgis4u/ol/source</a></li><li><a href="module-webgis4u_ol_source_basemap.html">webgis4u/ol/source/basemap</a></li><li><a href="module-webgis4u_ol_source_basemap_common.html">webgis4u/ol/source/basemap/common</a></li><li><a href="module-webgis4u_ol_style.html">webgis4u/ol/style</a></li><li><a href="module-webgis4u_ol_style_color.html">webgis4u/ol/style/color</a></li><li><a href="module-webgis4u_ol_style_style.html">webgis4u/ol/style/style</a></li><li><a href="module-webgis4u_ol_util.html">webgis4u/ol/util</a></li><li><a href="module-webgis4u_ol_util_changeMapTarget.html">webgis4u/ol/util/changeMapTarget</a></li><li><a href="module-webgis4u_ol_util_createImageFromMap.html">webgis4u/ol/util/createImageFromMap</a></li><li><a href="module-webgis4u_ol_util_getMapChildElementByClassName.html">webgis4u/ol/util/getMapChildElementByClassName</a></li><li><a href="module-webgis4u_ol_util_getMapType.html">webgis4u/ol/util/getMapType</a></li><li><a href="module-webgis4u_ol_util_getScale.html">webgis4u/ol/util/getScale</a></li><li><a href="module-webgis4u_ol_util_pan.html">webgis4u/ol/util/pan</a></li><li><a href="module-webgis4u_ol_util_print.html">webgis4u/ol/util/print</a></li><li><a href="module-webgis4u_ol_util_zoomToExtent.html">webgis4u/ol/util/zoomToExtent</a></li><li><a href="module-webgis4u_ol_util_zoomToLayerExtent.html">webgis4u/ol/util/zoomToLayerExtent</a></li><li><a href="module-webgis4u_util.html">webgis4u/util</a></li><li><a href="module-webgis4u_util_dom.html">webgis4u/util/dom</a></li><li><a href="module-webgis4u_util_dom_createElement.html">webgis4u/util/dom/createElement</a></li><li><a href="module-webgis4u_util_dom_KeyCodeEnum.html">webgis4u/util/dom/KeyCodeEnum</a></li><li><a href="module-webgis4u_util_dom_toggleElement.html">webgis4u/util/dom/toggleElement</a></li><li><a href="module-webgis4u_util_function.html">webgis4u/util/function</a></li><li><a href="module-webgis4u_util_function_debounce.html">webgis4u/util/function/debounce</a></li><li><a href="module-webgis4u_util_number.html">webgis4u/util/number</a></li><li><a href="module-webgis4u_util_number_convertUnitValue.html">webgis4u/util/number/convertUnitValue</a></li><li><a href="module-webgis4u_util_promise.html">webgis4u/util/promise</a></li><li><a href="module-webgis4u_util_promise_asyncDebounce.html">webgis4u/util/promise/asyncDebounce</a></li><li><a href="module-webgis4u_util_promise_state.html">webgis4u/util/promise/state</a></li><li><a href="module-webgis4u_util_string.html">webgis4u/util/string</a></li><li><a href="module-webgis4u_util_string_formatNumber.html">webgis4u/util/string/formatNumber</a></li><li><a href="module-webgis4u_util_string_formatText.html">webgis4u/util/string/formatText</a></li><li><a href="module-webgis4u_util_string_formatUnitValue.html">webgis4u/util/string/formatUnitValue</a></li><li><a href="module-webgis4u_util_string_hasValue.html">webgis4u/util/string/hasValue</a></li><li><a href="module-webgis4u_util_web.html">webgis4u/util/web</a></li><li><a href="module-webgis4u_util_web_encodeQueryData.html">webgis4u/util/web/encodeQueryData</a></li><li><a href="module-webgis4u_util_web_sendRequest.html">webgis4u/util/web/sendRequest</a></li></ul><h3>Classes</h3><ul><li><a href="ClusterZoom.html">ClusterZoom</a></li><li><a href="module-webgis4u_components_AutoComplete-AutoComplete.html">AutoComplete</a></li><li><a href="module-webgis4u_ol_control_AbstractLayerRelatedControl-AbstractLayerRelatedControl.html">AbstractLayerRelatedControl</a></li><li><a href="module-webgis4u_ol_control_AbstractLayerRelatedElementControl-AbstractLayerRelatedElementControl.html">AbstractLayerRelatedElementControl</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate_InfoPanel-InfoPanel.html">InfoPanel</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate_ToolSwitcher-ToolSwitcher.html">ToolSwitcher</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate-HtmlTemplate.html">HtmlTemplate</a></li><li><a href="module-webgis4u_ol_control_LayerCheckbox-LayerCheckbox.html">LayerCheckbox</a></li><li><a href="module-webgis4u_ol_control_LayerRadioButton-LayerRadioButton.html">LayerRadioButton</a></li><li><a href="module-webgis4u_ol_control_LegendDisplayable-LegendDisplayable.html">LegendDisplayable</a></li><li><a href="module-webgis4u_ol_control_LegendVisibility-LegendVisibility.html">LegendVisibility</a></li><li><a href="module-webgis4u_ol_control_Measure-Measure.html">Measure</a></li><li><a href="module-webgis4u_ol_control_OverviewMap-OverviewMap.html">OverviewMap</a></li><li><a href="module-webgis4u_ol_control_PanBar-PanBar.html">PanBar</a></li><li><a href="module-webgis4u_ol_control_ScaleLine-ScaleLine.html">ScaleLine</a></li><li><a href="module-webgis4u_ol_control_Search-Search.html">Search</a></li><li><a href="module-webgis4u_ol_source_basemap.Color.html">Color</a></li><li><a href="module-webgis4u_ol_source_basemap.Gray.html">Gray</a></li><li><a href="module-webgis4u_ol_source_basemap.Orthofoto.html">Orthofoto</a></li><li><a href="module-webgis4u_ol_source_basemap.Overlay.html">Overlay</a></li></ul><h3>Global</h3><ul><li><a href="global.html#fromExtents">fromExtents</a></li><li><a href="global.html#fromFeatures">fromFeatures</a></li><li><a href="global.html#fromPixel">fromPixel</a></li><li><a href="global.html#getFeaturesAtPixel">getFeaturesAtPixel</a></li><li><a href="global.html#getFeaturesFromClusterFeature">getFeaturesFromClusterFeature</a></li><li><a href="global.html#getPseudoCenter">getPseudoCenter</a></li><li><a href="global.html#isDisplayable">isDisplayable</a></li><li><a href="global.html#isVisible">isVisible</a></li><li><a href="global.html#isVisibleForMap">isVisibleForMap</a></li><li><a href="global.html#isVisibleInView">isVisibleInView</a></li><li><a href="global.html#toggleInteraction">toggleInteraction</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Dec 30 2019 11:39:34 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

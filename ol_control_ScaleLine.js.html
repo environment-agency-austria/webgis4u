@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: ol/control/ScaleLine.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: ol/control/ScaleLine.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module webgis4u/ol/control/ScaleLine
+ */
+
+import Control from 'ol/control/Control';
+
+import { createElement } from '../../util/dom/createElement';
+import { convertUnitValue } from '../../util/number/convertUnitValue';
+import { getScale } from '../util/getScale';
+import { CSS_CONTROL_PREFIX } from './common';
+
+import './ScaleLine/ScaleLine.scss';
+
+/**
+ * Units for the scale line (at this time only internal ).
+ * @enum {string}
+ */
+export const ScaleLineUnitEnum = {
+  METRIC: 'metric',
+};
+
+
+/**
+ * The root CSS class
+ * @type {string}
+ */
+export const CSS_CLASS = `${CSS_CONTROL_PREFIX}-scaleline`;
+export const CSS_CLASS_SCALE = `${CSS_CONTROL_PREFIX}-scale`;
+export const CSS_CLASS_SCALEBAR = `${CSS_CONTROL_PREFIX}-scalebar`;
+
+/**
+ * @const
+ * @type {Array.&lt;number>}
+ */
+const LEADING_DIGITS = [1, 2, 5];
+
+/**
+ * Get the units for function `convertUnitValue`
+ *
+ * @param {ScaleLineUnitEnum} scaleLineUnit The scale line unit
+ *
+ * @returns {undefined|Array&lt;module:webgis4u/util/number/convertUnitValue~Unit>}
+ */
+function getConvertUnitsForScaleLineUnit(scaleLineUnit) {
+  switch (scaleLineUnit) {
+    case ScaleLineUnitEnum.METRIC:
+      return [
+        { abbreviation: 'mm', factor: 0.001 },
+        { abbreviation: 'm', fallback: true },
+        { abbreviation: 'km', factor: 1000 },
+      ];
+    default: return undefined;
+  }
+}
+
+/**
+ *
+ */
+class ScaleLine extends Control {
+  /**
+   * If `true`, the scale is shown
+   * @type {boolean}
+   */
+  static SHOW_SCALE = true;
+
+  /**
+   * @type {ScaleLineUnitEnum|undefined}
+   * @private
+   */
+  units_ = ScaleLineUnitEnum.METRIC;
+
+  /**
+   * Stores the canvas
+   * @type {HTMLCanvasElement|null}
+   */
+  canvas_ = null;
+
+  /**
+   * @type {number}
+   */
+  minWidth_ = 64;
+
+  constructor(options) {
+    const element = createElement({
+      tag: 'div',
+      cssClass: `${CSS_CLASS} noUbaTooltip`,
+    });
+
+    const canvas = createElement({
+      tag: 'canvas',
+      cssClass: CSS_CLASS_SCALEBAR,
+    });
+    element.appendChild(canvas);
+
+    super({
+      element,
+      ...options,
+    });
+
+    this.canvas_ = canvas;
+  }
+
+  /**
+   * @return {ScaleLineUnitEnum|undefined} The units to use in the scale line.
+   */
+  getUnits() { return this.units_; }
+
+  /**
+   * @param {ScaleLineUnitEnum} value The units to use in the scale line.
+   */
+  setUnits(value) { this.units_ = value; }
+
+  /**
+   * @return {HTMLCanvasElement|null} The canvas element
+   */
+  getCanvas() { return this.canvas_; }
+
+  /**
+   * @inheritdoc
+   */
+  setMap(map) {
+    super.setMap(map);
+    // Do nothing else if map is not set
+    if (!map) { return; }
+
+    map.getView().on('propertychange', this.updateElement);
+    this.updateElement();
+  }
+
+  /**
+   * Draws the scalbar in the canvas
+   *
+   * @param {object} options The draw options
+   * @param {string} options.unit The unit.
+   * @param {number} options.length The length.
+   * @param {number} options.size The size in pixel.
+   * @param {HTMLCanvasElement} options.canvas The canvas to draw on.
+   *
+   * @private
+   */
+  draw(options) {
+    const { unit, length, size, canvas } = options;
+
+    const height = 30;
+    const fontSize = height / 3;
+    const sp = 20;
+    const st = 10;
+    const sm = 14;
+    const sb = 18;
+    const bh = sb - sm;
+    const tb = height;
+    const ctx = canvas.getContext('2d');
+
+    // first clear for redrawing
+    ctx.beginPath();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.width = size + 2 * sp;
+    canvas.height = height;
+
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i &lt; 2; i++) {
+      ctx.moveTo(i * size + sp, st);
+      ctx.lineTo(i * size + sp, sb);
+    }
+    ctx.strokeStyle = 'black';
+    ctx.fillRect(sp, sm, size, bh);
+    ctx.fillStyle = 'white';
+    ctx.fillRect(sp, sm, size / 4, bh);
+    ctx.fillRect(sp + size / 2, sm, size / 4, bh);
+    ctx.rect(sp, sm, size, bh);
+    ctx.fillStyle = 'fff';
+    ctx.stroke();
+    ctx.textAlign = 'center';
+    ctx.font = '10px Arial';
+    ctx.fillText(unit, sp + size / 2, fontSize);
+    ctx.fillText('0', sp, tb);
+    ctx.fillText(length / 2, sp + size / 2, tb);
+    ctx.fillText(length, sp + size, tb);
+  }
+
+  /**
+   * Toggles the elements visibility
+   * @param {boolean} isVisible If `true`, the element will be displayed
+   *
+   * @private
+   */
+  toggleElement(isVisible) {
+    const { element } = this;
+
+    if (!element) { return; }
+    element.setAttribute('data-visible', isVisible);
+    this.renderedVisible_ = isVisible;
+  }
+
+  /**
+   * Updates the element
+   *
+   * @private
+   */
+  updateElement = () => {
+    const viewState = this.getMap().getView();
+    if (viewState === null) {
+      if (this.renderedVisible_) {
+        this.toggleElement(false);
+      }
+      return;
+    }
+
+    const units = this.units_;
+
+    const scale = getScale(this.getMap());
+    const { formated } = scale;
+    let { resolution } = scale;
+    const nominalCount = this.minWidth_ * resolution;// pointResolution;
+    let unit = '';
+    // Get the converted value
+    const convertUnits = getConvertUnitsForScaleLineUnit(units);
+    if (convertUnits) {
+      const { unit: targetUnit } = convertUnitValue({
+        value: nominalCount,
+        units: convertUnits,
+      });
+      unit = targetUnit.abbreviation;
+      resolution /= targetUnit.factor;
+    }
+
+    let i = 3 * Math.floor(
+      Math.log(this.minWidth_ * resolution) / Math.log(10),
+    );
+    let length;
+    let size;
+
+    // Calculate the scale to use
+    do {
+      length = LEADING_DIGITS[i % 3]
+              * (10 ** Math.floor(i / 3));
+      size = Math.round(length / resolution);
+
+      if (Number.isNaN(size)) {
+        this.toggleElement(false);
+        return;
+      }
+
+      i += 1;
+    } while (size &lt; this.minWidth_);
+
+    const html = length + unit;
+
+    // draw the scalebar
+    if (this.renderedHTML_ !== html) {
+      this.element.setAttribute('title', `Ma${String.fromCharCode(223)}stab ${formated}`);
+      this.updateScale({ size, resolution: formated, showScale: ScaleLine.SHOW_SCALE });
+      this.renderedHTML_ = html;
+    }
+
+    this.draw({ unit, length, size, canvas: this.canvas_ });
+    if (!this.renderedVisible_) {
+      this.toggleElement(true);
+    }
+  }
+
+  /**
+   * Gets the scale line as base 64 encoded image.
+   * @returns The scale line as base 64 encoded image.
+   */
+  export() {
+    return this.getCanvas().toDataURL('image/png');
+  }
+
+  /**
+   * Update the scale element
+   *
+   * @param {object} options The options
+   * @param {number} options.size The width.
+   * @param {string} options.resolution The resolution
+   * @param {boolean} options.showScale If `true` the resolution will be shown
+   */
+  updateScale(options) {
+    const scaleElements = document.getElementsByClassName(CSS_CLASS_SCALE);
+    if (scaleElements.length === 0) { return; }
+
+    const { size, resolution, showScale } = options;
+
+    const scale = scaleElements[0];
+    scale.style.left = size + 50;
+    scale.innerHTML = (!showScale)
+      ? ''
+      : `M ${resolution}`;
+  }
+}
+
+export default ScaleLine;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-webgis4u.html">webgis4u</a></li><li><a href="module-webgis4u_components.html">webgis4u/components</a></li><li><a href="module-webgis4u_components_AutoComplete.html">webgis4u/components/AutoComplete</a></li><li><a href="module-webgis4u_ol.html">webgis4u/ol</a></li><li><a href="module-webgis4u_ol_common.html">webgis4u/ol/common</a></li><li><a href="module-webgis4u_ol_control.html">webgis4u/ol/control</a></li><li><a href="module-webgis4u_ol_control_AbstractLayerRelatedControl.html">webgis4u/ol/control/AbstractLayerRelatedControl</a></li><li><a href="module-webgis4u_ol_control_AbstractLayerRelatedElementControl.html">webgis4u/ol/control/AbstractLayerRelatedElementControl</a></li><li><a href="module-webgis4u_ol_control_common.html">webgis4u/ol/control/common</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate.html">webgis4u/ol/control/HtmlTemplate</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate_InfoPanel.html">webgis4u/ol/control/HtmlTemplate/InfoPanel</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate_ToolSwitcher.html">webgis4u/ol/control/HtmlTemplate/ToolSwitcher</a></li><li><a href="module-webgis4u_ol_control_LayerCheckbox.html">webgis4u/ol/control/LayerCheckbox</a></li><li><a href="module-webgis4u_ol_control_LayerRadioButton.html">webgis4u/ol/control/LayerRadioButton</a></li><li><a href="module-webgis4u_ol_control_LegendDisplayable.html">webgis4u/ol/control/LegendDisplayable</a></li><li><a href="module-webgis4u_ol_control_LegendVisibility.html">webgis4u/ol/control/LegendVisibility</a></li><li><a href="module-webgis4u_ol_control_Measure.html">webgis4u/ol/control/Measure</a></li><li><a href="module-webgis4u_ol_control_OverviewMap.html">webgis4u/ol/control/OverviewMap</a></li><li><a href="module-webgis4u_ol_control_PanBar.html">webgis4u/ol/control/PanBar</a></li><li><a href="module-webgis4u_ol_control_ScaleLine.html">webgis4u/ol/control/ScaleLine</a></li><li><a href="module-webgis4u_ol_control_Search.html">webgis4u/ol/control/Search</a></li><li><a href="module-webgis4u_ol_control_util.html">webgis4u/ol/control/util</a></li><li><a href="module-webgis4u_ol_proj.html">webgis4u/ol/proj</a></li><li><a href="module-webgis4u_ol_proj_austria.html">webgis4u/ol/proj/austria</a></li><li><a href="module-webgis4u_ol_proj_reproject.html">webgis4u/ol/proj/reproject</a></li><li><a href="module-webgis4u_ol_source.html">webgis4u/ol/source</a></li><li><a href="module-webgis4u_ol_source_basemap.html">webgis4u/ol/source/basemap</a></li><li><a href="module-webgis4u_ol_source_basemap_common.html">webgis4u/ol/source/basemap/common</a></li><li><a href="module-webgis4u_ol_style.html">webgis4u/ol/style</a></li><li><a href="module-webgis4u_ol_style_color.html">webgis4u/ol/style/color</a></li><li><a href="module-webgis4u_ol_style_style.html">webgis4u/ol/style/style</a></li><li><a href="module-webgis4u_ol_util.html">webgis4u/ol/util</a></li><li><a href="module-webgis4u_ol_util_changeMapTarget.html">webgis4u/ol/util/changeMapTarget</a></li><li><a href="module-webgis4u_ol_util_createImageFromMap.html">webgis4u/ol/util/createImageFromMap</a></li><li><a href="module-webgis4u_ol_util_getMapChildElementByClassName.html">webgis4u/ol/util/getMapChildElementByClassName</a></li><li><a href="module-webgis4u_ol_util_getMapType.html">webgis4u/ol/util/getMapType</a></li><li><a href="module-webgis4u_ol_util_getScale.html">webgis4u/ol/util/getScale</a></li><li><a href="module-webgis4u_ol_util_pan.html">webgis4u/ol/util/pan</a></li><li><a href="module-webgis4u_ol_util_print.html">webgis4u/ol/util/print</a></li><li><a href="module-webgis4u_ol_util_zoomToExtent.html">webgis4u/ol/util/zoomToExtent</a></li><li><a href="module-webgis4u_ol_util_zoomToLayerExtent.html">webgis4u/ol/util/zoomToLayerExtent</a></li><li><a href="module-webgis4u_util.html">webgis4u/util</a></li><li><a href="module-webgis4u_util_dom.html">webgis4u/util/dom</a></li><li><a href="module-webgis4u_util_dom_createElement.html">webgis4u/util/dom/createElement</a></li><li><a href="module-webgis4u_util_dom_KeyCodeEnum.html">webgis4u/util/dom/KeyCodeEnum</a></li><li><a href="module-webgis4u_util_dom_toggleElement.html">webgis4u/util/dom/toggleElement</a></li><li><a href="module-webgis4u_util_function.html">webgis4u/util/function</a></li><li><a href="module-webgis4u_util_function_debounce.html">webgis4u/util/function/debounce</a></li><li><a href="module-webgis4u_util_number.html">webgis4u/util/number</a></li><li><a href="module-webgis4u_util_number_convertUnitValue.html">webgis4u/util/number/convertUnitValue</a></li><li><a href="module-webgis4u_util_promise.html">webgis4u/util/promise</a></li><li><a href="module-webgis4u_util_promise_asyncDebounce.html">webgis4u/util/promise/asyncDebounce</a></li><li><a href="module-webgis4u_util_promise_state.html">webgis4u/util/promise/state</a></li><li><a href="module-webgis4u_util_string.html">webgis4u/util/string</a></li><li><a href="module-webgis4u_util_string_formatNumber.html">webgis4u/util/string/formatNumber</a></li><li><a href="module-webgis4u_util_string_formatText.html">webgis4u/util/string/formatText</a></li><li><a href="module-webgis4u_util_string_formatUnitValue.html">webgis4u/util/string/formatUnitValue</a></li><li><a href="module-webgis4u_util_string_hasValue.html">webgis4u/util/string/hasValue</a></li><li><a href="module-webgis4u_util_web.html">webgis4u/util/web</a></li><li><a href="module-webgis4u_util_web_encodeQueryData.html">webgis4u/util/web/encodeQueryData</a></li><li><a href="module-webgis4u_util_web_sendRequest.html">webgis4u/util/web/sendRequest</a></li></ul><h3>Classes</h3><ul><li><a href="ClusterZoom.html">ClusterZoom</a></li><li><a href="module-webgis4u_components_AutoComplete-AutoComplete.html">AutoComplete</a></li><li><a href="module-webgis4u_ol_control_AbstractLayerRelatedControl-AbstractLayerRelatedControl.html">AbstractLayerRelatedControl</a></li><li><a href="module-webgis4u_ol_control_AbstractLayerRelatedElementControl-AbstractLayerRelatedElementControl.html">AbstractLayerRelatedElementControl</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate_InfoPanel-InfoPanel.html">InfoPanel</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate_ToolSwitcher-ToolSwitcher.html">ToolSwitcher</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate-HtmlTemplate.html">HtmlTemplate</a></li><li><a href="module-webgis4u_ol_control_LayerCheckbox-LayerCheckbox.html">LayerCheckbox</a></li><li><a href="module-webgis4u_ol_control_LayerRadioButton-LayerRadioButton.html">LayerRadioButton</a></li><li><a href="module-webgis4u_ol_control_LegendDisplayable-LegendDisplayable.html">LegendDisplayable</a></li><li><a href="module-webgis4u_ol_control_LegendVisibility-LegendVisibility.html">LegendVisibility</a></li><li><a href="module-webgis4u_ol_control_Measure-Measure.html">Measure</a></li><li><a href="module-webgis4u_ol_control_OverviewMap-OverviewMap.html">OverviewMap</a></li><li><a href="module-webgis4u_ol_control_PanBar-PanBar.html">PanBar</a></li><li><a href="module-webgis4u_ol_control_ScaleLine-ScaleLine.html">ScaleLine</a></li><li><a href="module-webgis4u_ol_control_Search-Search.html">Search</a></li><li><a href="module-webgis4u_ol_source_basemap.Color.html">Color</a></li><li><a href="module-webgis4u_ol_source_basemap.Gray.html">Gray</a></li><li><a href="module-webgis4u_ol_source_basemap.Orthofoto.html">Orthofoto</a></li><li><a href="module-webgis4u_ol_source_basemap.Overlay.html">Overlay</a></li></ul><h3>Global</h3><ul><li><a href="global.html#fromExtents">fromExtents</a></li><li><a href="global.html#fromFeatures">fromFeatures</a></li><li><a href="global.html#fromPixel">fromPixel</a></li><li><a href="global.html#getFeaturesAtPixel">getFeaturesAtPixel</a></li><li><a href="global.html#getFeaturesFromClusterFeature">getFeaturesFromClusterFeature</a></li><li><a href="global.html#getPseudoCenter">getPseudoCenter</a></li><li><a href="global.html#isDisplayable">isDisplayable</a></li><li><a href="global.html#isVisible">isVisible</a></li><li><a href="global.html#isVisibleForMap">isVisibleForMap</a></li><li><a href="global.html#isVisibleInView">isVisibleInView</a></li><li><a href="global.html#toggleInteraction">toggleInteraction</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Dec 30 2019 11:39:34 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

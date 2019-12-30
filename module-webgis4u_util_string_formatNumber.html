@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: webgis4u/util/string/formatNumber</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: webgis4u/util/string/formatNumber</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~rgx"><span class="type-signature">(inner, constant) </span>rgx<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Regex to test for a digit followed by 3 more digits
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="util_string_formatNumber.js.html">util/string/formatNumber.js</a>, <a href="util_string_formatNumber.js.html#line8">line 8</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".formatNumber"><span class="type-signature">(static) </span>formatNumber<span class="signature">(number, decimals<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Formats a number. In the case no number is provided 'NaN' is returned.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>number</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The number to format.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>decimals</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">decimals</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The optional number of decimals.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="util_string_formatNumber.js.html">util/string/formatNumber.js</a>, <a href="util_string_formatNumber.js.html#line33">line 33</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The formated number as text.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~groupNumber"><span class="type-signature">(inner) </span>groupNumber<span class="signature">(number)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Groups a number
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>number</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number to group</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="util_string_formatNumber.js.html">util/string/formatNumber.js</a>, <a href="util_string_formatNumber.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-webgis4u.html">webgis4u</a></li><li><a href="module-webgis4u_components.html">webgis4u/components</a></li><li><a href="module-webgis4u_components_AutoComplete.html">webgis4u/components/AutoComplete</a></li><li><a href="module-webgis4u_ol.html">webgis4u/ol</a></li><li><a href="module-webgis4u_ol_common.html">webgis4u/ol/common</a></li><li><a href="module-webgis4u_ol_control.html">webgis4u/ol/control</a></li><li><a href="module-webgis4u_ol_control_AbstractLayerRelatedControl.html">webgis4u/ol/control/AbstractLayerRelatedControl</a></li><li><a href="module-webgis4u_ol_control_AbstractLayerRelatedElementControl.html">webgis4u/ol/control/AbstractLayerRelatedElementControl</a></li><li><a href="module-webgis4u_ol_control_common.html">webgis4u/ol/control/common</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate.html">webgis4u/ol/control/HtmlTemplate</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate_InfoPanel.html">webgis4u/ol/control/HtmlTemplate/InfoPanel</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate_ToolSwitcher.html">webgis4u/ol/control/HtmlTemplate/ToolSwitcher</a></li><li><a href="module-webgis4u_ol_control_LayerCheckbox.html">webgis4u/ol/control/LayerCheckbox</a></li><li><a href="module-webgis4u_ol_control_LayerRadioButton.html">webgis4u/ol/control/LayerRadioButton</a></li><li><a href="module-webgis4u_ol_control_LegendDisplayable.html">webgis4u/ol/control/LegendDisplayable</a></li><li><a href="module-webgis4u_ol_control_LegendVisibility.html">webgis4u/ol/control/LegendVisibility</a></li><li><a href="module-webgis4u_ol_control_Measure.html">webgis4u/ol/control/Measure</a></li><li><a href="module-webgis4u_ol_control_OverviewMap.html">webgis4u/ol/control/OverviewMap</a></li><li><a href="module-webgis4u_ol_control_PanBar.html">webgis4u/ol/control/PanBar</a></li><li><a href="module-webgis4u_ol_control_ScaleLine.html">webgis4u/ol/control/ScaleLine</a></li><li><a href="module-webgis4u_ol_control_Search.html">webgis4u/ol/control/Search</a></li><li><a href="module-webgis4u_ol_control_util.html">webgis4u/ol/control/util</a></li><li><a href="module-webgis4u_ol_proj.html">webgis4u/ol/proj</a></li><li><a href="module-webgis4u_ol_proj_austria.html">webgis4u/ol/proj/austria</a></li><li><a href="module-webgis4u_ol_proj_reproject.html">webgis4u/ol/proj/reproject</a></li><li><a href="module-webgis4u_ol_source.html">webgis4u/ol/source</a></li><li><a href="module-webgis4u_ol_source_basemap.html">webgis4u/ol/source/basemap</a></li><li><a href="module-webgis4u_ol_source_basemap_common.html">webgis4u/ol/source/basemap/common</a></li><li><a href="module-webgis4u_ol_style.html">webgis4u/ol/style</a></li><li><a href="module-webgis4u_ol_style_color.html">webgis4u/ol/style/color</a></li><li><a href="module-webgis4u_ol_style_style.html">webgis4u/ol/style/style</a></li><li><a href="module-webgis4u_ol_util.html">webgis4u/ol/util</a></li><li><a href="module-webgis4u_ol_util_changeMapTarget.html">webgis4u/ol/util/changeMapTarget</a></li><li><a href="module-webgis4u_ol_util_createImageFromMap.html">webgis4u/ol/util/createImageFromMap</a></li><li><a href="module-webgis4u_ol_util_getMapChildElementByClassName.html">webgis4u/ol/util/getMapChildElementByClassName</a></li><li><a href="module-webgis4u_ol_util_getMapType.html">webgis4u/ol/util/getMapType</a></li><li><a href="module-webgis4u_ol_util_getScale.html">webgis4u/ol/util/getScale</a></li><li><a href="module-webgis4u_ol_util_pan.html">webgis4u/ol/util/pan</a></li><li><a href="module-webgis4u_ol_util_print.html">webgis4u/ol/util/print</a></li><li><a href="module-webgis4u_ol_util_zoomToExtent.html">webgis4u/ol/util/zoomToExtent</a></li><li><a href="module-webgis4u_ol_util_zoomToLayerExtent.html">webgis4u/ol/util/zoomToLayerExtent</a></li><li><a href="module-webgis4u_util.html">webgis4u/util</a></li><li><a href="module-webgis4u_util_dom.html">webgis4u/util/dom</a></li><li><a href="module-webgis4u_util_dom_createElement.html">webgis4u/util/dom/createElement</a></li><li><a href="module-webgis4u_util_dom_KeyCodeEnum.html">webgis4u/util/dom/KeyCodeEnum</a></li><li><a href="module-webgis4u_util_dom_toggleElement.html">webgis4u/util/dom/toggleElement</a></li><li><a href="module-webgis4u_util_function.html">webgis4u/util/function</a></li><li><a href="module-webgis4u_util_function_debounce.html">webgis4u/util/function/debounce</a></li><li><a href="module-webgis4u_util_number.html">webgis4u/util/number</a></li><li><a href="module-webgis4u_util_number_convertUnitValue.html">webgis4u/util/number/convertUnitValue</a></li><li><a href="module-webgis4u_util_promise.html">webgis4u/util/promise</a></li><li><a href="module-webgis4u_util_promise_asyncDebounce.html">webgis4u/util/promise/asyncDebounce</a></li><li><a href="module-webgis4u_util_promise_state.html">webgis4u/util/promise/state</a></li><li><a href="module-webgis4u_util_string.html">webgis4u/util/string</a></li><li><a href="module-webgis4u_util_string_formatNumber.html">webgis4u/util/string/formatNumber</a></li><li><a href="module-webgis4u_util_string_formatText.html">webgis4u/util/string/formatText</a></li><li><a href="module-webgis4u_util_string_formatUnitValue.html">webgis4u/util/string/formatUnitValue</a></li><li><a href="module-webgis4u_util_string_hasValue.html">webgis4u/util/string/hasValue</a></li><li><a href="module-webgis4u_util_web.html">webgis4u/util/web</a></li><li><a href="module-webgis4u_util_web_encodeQueryData.html">webgis4u/util/web/encodeQueryData</a></li><li><a href="module-webgis4u_util_web_sendRequest.html">webgis4u/util/web/sendRequest</a></li></ul><h3>Classes</h3><ul><li><a href="ClusterZoom.html">ClusterZoom</a></li><li><a href="module-webgis4u_components_AutoComplete-AutoComplete.html">AutoComplete</a></li><li><a href="module-webgis4u_ol_control_AbstractLayerRelatedControl-AbstractLayerRelatedControl.html">AbstractLayerRelatedControl</a></li><li><a href="module-webgis4u_ol_control_AbstractLayerRelatedElementControl-AbstractLayerRelatedElementControl.html">AbstractLayerRelatedElementControl</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate_InfoPanel-InfoPanel.html">InfoPanel</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate_ToolSwitcher-ToolSwitcher.html">ToolSwitcher</a></li><li><a href="module-webgis4u_ol_control_HtmlTemplate-HtmlTemplate.html">HtmlTemplate</a></li><li><a href="module-webgis4u_ol_control_LayerCheckbox-LayerCheckbox.html">LayerCheckbox</a></li><li><a href="module-webgis4u_ol_control_LayerRadioButton-LayerRadioButton.html">LayerRadioButton</a></li><li><a href="module-webgis4u_ol_control_LegendDisplayable-LegendDisplayable.html">LegendDisplayable</a></li><li><a href="module-webgis4u_ol_control_LegendVisibility-LegendVisibility.html">LegendVisibility</a></li><li><a href="module-webgis4u_ol_control_Measure-Measure.html">Measure</a></li><li><a href="module-webgis4u_ol_control_OverviewMap-OverviewMap.html">OverviewMap</a></li><li><a href="module-webgis4u_ol_control_PanBar-PanBar.html">PanBar</a></li><li><a href="module-webgis4u_ol_control_ScaleLine-ScaleLine.html">ScaleLine</a></li><li><a href="module-webgis4u_ol_control_Search-Search.html">Search</a></li><li><a href="module-webgis4u_ol_source_basemap.Color.html">Color</a></li><li><a href="module-webgis4u_ol_source_basemap.Gray.html">Gray</a></li><li><a href="module-webgis4u_ol_source_basemap.Orthofoto.html">Orthofoto</a></li><li><a href="module-webgis4u_ol_source_basemap.Overlay.html">Overlay</a></li></ul><h3>Global</h3><ul><li><a href="global.html#fromExtents">fromExtents</a></li><li><a href="global.html#fromFeatures">fromFeatures</a></li><li><a href="global.html#fromPixel">fromPixel</a></li><li><a href="global.html#getFeaturesAtPixel">getFeaturesAtPixel</a></li><li><a href="global.html#getFeaturesFromClusterFeature">getFeaturesFromClusterFeature</a></li><li><a href="global.html#getPseudoCenter">getPseudoCenter</a></li><li><a href="global.html#isDisplayable">isDisplayable</a></li><li><a href="global.html#isVisible">isVisible</a></li><li><a href="global.html#isVisibleForMap">isVisibleForMap</a></li><li><a href="global.html#isVisibleInView">isVisibleInView</a></li><li><a href="global.html#toggleInteraction">toggleInteraction</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Dec 30 2019 11:39:35 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
