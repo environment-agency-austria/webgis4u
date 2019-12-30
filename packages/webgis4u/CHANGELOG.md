@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u@1.1.0...webgis4u@1.2.0) (2019-12-30)
+
+
+### Bug Fixes
+
+* add export for module ol/extent ([f60e5e7](https://github.com/environment-agency-austria/webgis4u/commit/f60e5e7b2381fd7c6b5a14e414da251d3ec91e39))
+* import of submodule ([8e9848f](https://github.com/environment-agency-austria/webgis4u/commit/8e9848f4030a5f630e7c4b7e5559fe76e81295f2))
+
+
+### Features
+
+* added geom util getPseudoCenter ([d21b8cb](https://github.com/environment-agency-austria/webgis4u/commit/d21b8cb3a71eebef14699187f6fce9e97d08fdd8))
+
+
+
+
+
 # [1.1.0](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u@1.0.1...webgis4u@1.1.0) (2019-12-30)
 
 
