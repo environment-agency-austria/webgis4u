@@ -1,1 +1,1 @@
-export * from './geometry/getPseudoCenter';
+export * from './geom/getPseudoCenter';
