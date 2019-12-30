@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u@1.3.0...webgis4u@1.4.0) (2019-12-30)
+
+
+### Features
+
+* added ClusterZoom interaction and util ([618c9df](https://github.com/environment-agency-austria/webgis4u/commit/618c9df36ae3bb80e353814e6965d883507d6168))
+
+
+
+
+
 # [1.3.0](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u@1.2.0...webgis4u@1.3.0) (2019-12-30)
 
 
