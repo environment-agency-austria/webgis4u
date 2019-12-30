@@ -1,7 +1,7 @@
 import { createEmpty, extend } from 'ol/extent';
 
 /**
- * @typedef {import('ol/extent').Extent} Extent
+ * @typedef {module:ol/extent~Extent} Extent
  */
 
 /**
