@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u@1.0.1...webgis4u@1.1.0) (2019-12-30)
+
+
+### Features
+
+* added extent utils ([ce2d2fa](https://github.com/environment-agency-austria/webgis4u/commit/ce2d2faabe139572b91ffa6ccadcaef0f6453a12))
+
+
+
+
+
 ## [1.0.1](https://github.com/environment-agency-austria/webgis4u/compare/webgis4u@1.0.0...webgis4u@1.0.1) (2019-11-12)
 
 
