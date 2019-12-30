@@ -12,3 +12,4 @@
 
 export * from './basemap';
 export * from './controls';
+export * from './interactions';
