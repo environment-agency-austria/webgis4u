@@ -5,6 +5,7 @@
 export { default as Settings } from './ol/Settings';
 
 export * from './ol/control';
+export * from './ol/extent';
 export * from './ol/geom';
 export * from './ol/proj';
 export * from './ol/source';
