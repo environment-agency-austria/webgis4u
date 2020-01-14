@@ -225,6 +225,8 @@ class Search extends Control {
    */
   static preprocessQuery = query => ({ query });
 
+  static postProcess = result => result;
+
 
   /**
    * @type {module:webgis4u/ol/control/Search~OnErrorCallback}
@@ -317,6 +319,7 @@ class Search extends Control {
    * @param {int} [options.limit] The number of displayed hits.
    * @param {string} [options.url] The search URL.
    * @param {string} [options.preprocessQuery] The search preprocessing function.
+   * @param {(result: any) => } [options.postProcess] Post processing function that is called after async results are received.
    * @param {string} [options.searchField] The search Field as jQuery selector.
    * @param {string} [options.timeout] The timeout in ms for the search Ajax Request.
    */
@@ -342,6 +345,7 @@ class Search extends Control {
 
     // Default functions
     this.preprocessQuery = valueOrDefault(options.preprocessQuery, Search.preprocessQuery);
+    this.postProcess = valueOrDefault(options.postProcess, Search.postProcess);
     this.onError = valueOrDefault(options.onError, Search.onError);
     this.onHover = valueOrDefault(options.onHover, Search.onHover);
     this.onShow = valueOrDefault(options.onShow, Search.onShow);
@@ -460,7 +464,8 @@ class Search extends Control {
         data: this.preprocessQuery(query, map),
         timeout: this.timeout,
         success: (json) => {
-          resolve(json);
+          const processedResult = this.postProcess(json);
+          resolve(processedResult);
         },
         error: (xhr, status, error) => {
           resolve([]);
