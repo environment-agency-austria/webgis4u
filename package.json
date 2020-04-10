@@ -49,7 +49,7 @@
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
     "coveralls": "^3.0.2",
-    "css-loader": "^3.0.0",
+    "css-loader": "^3.5.2",
     "eslint": "^5.4.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-oceanjs": "^0.1.0",
